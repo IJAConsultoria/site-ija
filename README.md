@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Instituto João Alves — Site Institucional
 
-## Getting Started
+Site do **Instituto João Alves (IJA)**, consultoria especializada em estruturar restaurantes e food service para expansão.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework:** Next.js 16 (App Router)
+- **Linguagem:** TypeScript
+- **Estilo:** Tailwind CSS v4
+- **Animações:** Framer Motion
+- **CMS/Auth:** Supabase
+- **Editor:** Tiptap (rich text)
+- **Deploy:** Vercel
+
+## Estrutura
+
+```
+src/
+├── app/
+│   ├── (public)/          # Páginas do site
+│   │   ├── page.tsx       # Home
+│   │   ├── sobre/         # Sobre o IJA
+│   │   ├── metodo/        # Método Tripé da Expansão
+│   │   ├── segmentos/     # Segmentos atendidos
+│   │   ├── solucoes/      # 4 soluções de consultoria
+│   │   ├── cases/         # Cases de sucesso
+│   │   ├── eventos/       # Lives, webinars, workshops
+│   │   ├── blog/          # Blog (artigos do Supabase)
+│   │   ├── contato/       # Página de contato
+│   │   └── diagnostico/   # Diagnóstico gratuito
+│   ├── acesso/            # Admin CMS (protegido)
+│   │   ├── page.tsx       # Login
+│   │   ├── painel/        # Dashboard
+│   │   └── artigos/       # CRUD de artigos
+│   └── layout.tsx         # Layout raiz
+├── components/
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── WhatsAppButton.tsx
+│   ├── animations.tsx
+│   └── admin/             # Componentes do CMS
+│       ├── Sidebar.tsx
+│       ├── TiptapEditor.tsx
+│       └── ArticleEditor.tsx
+├── lib/
+│   ├── constants.ts       # Dados centrais (segmentos, soluções, eventos, cases)
+│   ├── seo.ts             # Helpers de SEO e Schema.org
+│   ├── tracking.ts        # Tracking helpers
+│   ├── queries/blog.ts    # CRUD artigos (Supabase)
+│   └── supabase/          # Clients Supabase (browser, server, middleware)
+└── docs/
+    └── SUPABASE-MIGRATION.sql  # SQL para criar tabelas
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Instalar dependências
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Configurar variáveis de ambiente
+cp .env.local.example .env.local
+# Preencher NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-## Learn More
+# Rodar em desenvolvimento
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Crie um projeto em [supabase.com](https://supabase.com)
+2. Execute o SQL de `docs/SUPABASE-MIGRATION.sql` no SQL Editor
+3. Crie um usuário admin em **Authentication > Users**
+4. Copie a URL e anon key para `.env.local`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+O projeto faz deploy automático na Vercel a cada push na branch `main`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Variáveis de ambiente necessárias na Vercel:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Sobre o IJA
+
+- **Fundador:** João Pedro Alves
+- **Experiência:** 14 anos em consultoria para food service
+- **Método:** Tripé da Expansão (Padronização + Universidade Corporativa + Controle de Qualidade)
+- **Resultados:** +120 negócios transformados, +R$ 40M em lucratividade gerada
+- **Localização:** Cabo Frio/RJ — Atende RJ, SP, ES e RS
