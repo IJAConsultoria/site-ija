@@ -1,0 +1,91 @@
+import { createClient } from "@/lib/supabase/client";
+
+export type Article = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  cover_url: string | null;
+  category: string;
+  tags: string[];
+  status: "draft" | "published";
+  author: string;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+  meta_title: string | null;
+  meta_description: string | null;
+};
+
+export async function getArticles(status?: "draft" | "published") {
+  const supabase = createClient();
+  let query = supabase
+    .from("articles")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (status) {
+    query = query.eq("status", status);
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+  return data as Article[];
+}
+
+export async function getArticle(id: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+  return data as Article;
+}
+
+export async function createArticle(article: Partial<Article>) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .insert(article)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as Article;
+}
+
+export async function updateArticle(id: string, article: Partial<Article>) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .update({ ...article, updated_at: new Date().toISOString() })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as Article;
+}
+
+export async function deleteArticle(id: string) {
+  const supabase = createClient();
+  const { error } = await supabase.from("articles").delete().eq("id", id);
+  if (error) throw error;
+}
+
+export async function getArticleStats() {
+  const supabase = createClient();
+  const { data, error } = await supabase.from("articles").select("status");
+
+  if (error) throw error;
+
+  const total = data.length;
+  const published = data.filter((a) => a.status === "published").length;
+  const drafts = data.filter((a) => a.status === "draft").length;
+
+  return { total, published, drafts };
+}
