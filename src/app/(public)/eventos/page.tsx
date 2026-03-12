@@ -166,9 +166,9 @@ export default function EventosPage() {
                             <span className="font-medium text-navy-700">{event.speaker}</span>{" "}
                             — {event.speakerRole.split("—")[0]}
                           </p>
-                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent opacity-0 transition-opacity group-hover:opacity-100">
+                          <span className="inline-flex items-center gap-2 rounded-xl bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-all group-hover:bg-accent group-hover:text-white">
                             Ver detalhes
-                            <ChevronRight size={14} />
+                            <ArrowRight size={14} />
                           </span>
                         </div>
                       </div>
