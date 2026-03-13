@@ -10,6 +10,8 @@ import {
   Wine,
   Coffee,
   Store,
+  ShoppingBag,
+  TreePalm,
   TrendingUp,
   BarChart3,
   Users,
@@ -62,6 +64,8 @@ const segmentIcons: Record<string, React.ElementType> = {
   bares: Wine,
   cafeterias: Coffee,
   "food-service": Store,
+  varejo: ShoppingBag,
+  turismo: TreePalm,
 };
 
 const solutionIcons: Record<string, React.ElementType> = {
@@ -263,6 +267,66 @@ const segmentContent: Record<
       { label: "Custos descentralizados", value: 80 },
       { label: "Escala sem qualidade", value: 72 },
       { label: "Gestão informal", value: 78 },
+    ],
+  },
+  varejo: {
+    headline: "Sua loja fatura bem mas o lucro não aparece? Falta gestão estruturada",
+    subheadline:
+      "O varejo brasileiro movimenta trilhões por ano, mas a maioria dos donos de loja opera sem processos, sem controle de margem e sem plano de expansão.",
+    problems: [
+      { text: "Estoque descontrolado — capital parado em prateleira", stat: "82%" },
+      { text: "Não sabe a margem real por produto ou categoria", stat: "78%" },
+      { text: "Equipe de vendas sem treinamento e sem metas claras", stat: "70%" },
+      { text: "Quer abrir filial ou franquear mas não tem processos" },
+      { text: "Decisões de compra baseadas em feeling, não em dados" },
+    ],
+    benefits: [
+      "Gestão de estoque otimizada — giro correto e capital liberado",
+      "Margem por produto, categoria e loja — visibilidade total",
+      "Equipe treinada com metas, scripts e avaliação de desempenho",
+      "Processos documentados e replicáveis para expansão",
+      "Dashboard financeiro que substitui planilha e caderno",
+    ],
+    marketStats: [
+      { value: "1.5", label: "Trilhões de mercado varejista/ano", suffix: "T" },
+      { value: "78", label: "Não controlam margem por produto", suffix: "%" },
+      { value: "120", label: "Negócios transformados pelo IJA", suffix: "+" },
+    ],
+    painBars: [
+      { label: "Estoque descontrolado", value: 82 },
+      { label: "Margem desconhecida", value: 78 },
+      { label: "Equipe sem treinamento", value: 70 },
+      { label: "Processos informais", value: 85 },
+    ],
+  },
+  turismo: {
+    headline: "Hotéis, pousadas e negócios turísticos — estruture para a alta e a baixa temporada",
+    subheadline:
+      "O turismo brasileiro cresce ano a ano, mas negócios sazonais precisam de gestão inteligente para lucrar o ano inteiro. Estruturamos seu negócio para alta performance em qualquer época.",
+    problems: [
+      { text: "Faturamento concentrado na alta temporada — baixa = prejuízo", stat: "85%" },
+      { text: "Equipe sazonal sem treinamento — experiência inconsistente", stat: "80%" },
+      { text: "Não sabe o custo real por diária/serviço/hóspede", stat: "75%" },
+      { text: "Precificação por temporada feita por intuição" },
+      { text: "Quer expandir (nova unidade, franquia) mas não tem processos" },
+    ],
+    benefits: [
+      "Gestão financeira que garante lucro na baixa e na alta temporada",
+      "Processos de atendimento padronizados — experiência 5 estrelas sempre",
+      "Precificação dinâmica baseada em dados reais de custo e demanda",
+      "Equipe treinada pela Universidade Corporativa — mesmo os sazonais",
+      "Modelo escalável para novas unidades ou franquias",
+    ],
+    marketStats: [
+      { value: "9", label: "Do PIB brasileiro vem do turismo", suffix: "%" },
+      { value: "85", label: "Dependem da alta temporada", suffix: "%" },
+      { value: "14", label: "Anos de experiência do IJA" },
+    ],
+    painBars: [
+      { label: "Sazonalidade não gerida", value: 85 },
+      { label: "Equipe sem padrão", value: 80 },
+      { label: "Custos desconhecidos", value: 75 },
+      { label: "Precificação por intuição", value: 78 },
     ],
   },
 };

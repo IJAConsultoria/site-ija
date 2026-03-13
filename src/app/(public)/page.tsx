@@ -17,6 +17,8 @@ import {
   Wine,
   Coffee,
   Store,
+  ShoppingBag,
+  TreePalm,
   ArrowUpRight,
   Quote,
   BarChart3,
@@ -60,6 +62,8 @@ const segmentIcons: Record<string, React.ElementType> = {
   bares: Wine,
   cafeterias: Coffee,
   "food-service": Store,
+  varejo: ShoppingBag,
+  turismo: TreePalm,
 };
 
 export default function Home() {
@@ -77,21 +81,21 @@ export default function Home() {
             <FadeInUp>
               <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-6 py-2.5 text-sm font-medium text-accent backdrop-blur-sm">
                 <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-                14 anos transformando restaurantes em redes
+                14 anos estruturando negócios para crescer
               </p>
             </FadeInUp>
 
             <FadeInUp delay={0.1}>
               <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
-                Estruturamos seu restaurante para{" "}
-                <span className="serif-italic gradient-text">expansão</span>
+                Você é dono de negócio que fatura acima de{" "}
+                <span className="serif-italic gradient-text">R$ 100k/mês?</span>
               </h1>
             </FadeInUp>
 
             <FadeInUp delay={0.2}>
               <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy-300 sm:text-xl">
-                Liberdade e lucro para quem vive preso no próprio restaurante.
-                Método{" "}
+                Estruturamos restaurantes, bares, varejo e negócios turísticos
+                para expandir com lucro e liberdade. Método{" "}
                 <strong className="text-white">80% prático</strong> com
                 resultados comprovados em mais de 120 negócios.
               </p>
@@ -222,16 +226,15 @@ export default function Home() {
             <FadeInLeft>
               <div>
                 <p className="mb-3 text-sm font-bold uppercase tracking-widest text-accent">
-                  O cenário do food service
+                  O cenário do mercado
                 </p>
                 <h2 className="text-3xl font-bold text-navy-950 sm:text-4xl lg:text-5xl">
-                  Um mercado de{" "}
-                  <span className="serif-italic gradient-text">R$ 215 bilhões</span>{" "}
-                  que precisa de gestão
+                  Negócios que faturam alto mas{" "}
+                  <span className="serif-italic gradient-text">lucram pouco</span>
                 </h2>
                 <p className="mt-6 text-lg leading-relaxed text-navy-600">
-                  O Brasil tem mais de 1,3 milhão de estabelecimentos de food service.
-                  É o maior mercado da América Latina — e o mais desassistido em gestão profissional.
+                  Restaurantes, varejo e turismo movimentam centenas de bilhões
+                  por ano no Brasil — mas a maioria dos donos não tem gestão profissional.
                 </p>
                 <div className="mt-8 space-y-2">
                   <div className="editorial-quote">
@@ -254,10 +257,10 @@ export default function Home() {
             <FadeInRight>
               <div className="space-y-5">
                 {[
-                  { icon: AlertTriangle, value: "35%", label: "dos restaurantes fecham em até 2 anos", color: "text-red-500", bg: "bg-red-50" },
+                  { icon: AlertTriangle, value: "35%", label: "dos negócios fecham em até 2 anos", color: "text-red-500", bg: "bg-red-50" },
                   { icon: BarChart3, value: "90%+", label: "dos donos não sabem o lucro real do negócio", color: "text-amber-500", bg: "bg-amber-50" },
                   { icon: Users, value: "30-50%", label: "de rotatividade anual de equipe no setor", color: "text-blue-500", bg: "bg-blue-50" },
-                  { icon: Zap, value: "50-60%", label: "fecham antes de completar 5 anos", color: "text-purple-500", bg: "bg-purple-50" },
+                  { icon: Zap, value: "96%", label: "das empresas não tem gestão profissional", color: "text-purple-500", bg: "bg-purple-50" },
                 ].map((stat, index) => (
                   <HoverCard key={stat.label}>
                     <div className="flex items-center gap-5 rounded-2xl border border-navy-100/50 bg-white p-5 shadow-sm">
@@ -286,17 +289,17 @@ export default function Home() {
                 Quem atendemos
               </p>
               <h2 className="text-3xl font-bold text-navy-950 sm:text-4xl lg:text-5xl">
-                Especialistas em{" "}
-                <span className="serif-italic gradient-text">food service</span>
+                Segmentos que{" "}
+                <span className="serif-italic gradient-text">transformamos</span>
               </h2>
               <p className="mt-5 text-lg text-navy-600">
-                De hamburguerias artesanais a redes de restaurantes — estruturamos
-                qualquer negócio de alimentação para crescer.
+                De restaurantes a negócios turísticos — estruturamos empresas
+                que faturam acima de R$ 100k/mês para crescer com método.
               </p>
             </div>
           </FadeInUp>
 
-          <StaggerContainer className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-6">
+          <StaggerContainer className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6 lg:grid-cols-4">
             {SEGMENTS.map((segment) => {
               const Icon = segmentIcons[segment.slug] || Utensils;
               return (
@@ -334,7 +337,7 @@ export default function Home() {
                 <span className="serif-italic gradient-text">não é a crise.</span>
               </h2>
               <p className="mt-8 text-lg text-navy-300 leading-relaxed sm:text-xl">
-                É falta de gestão. O mercado cresce 14% ao ano, mas quem não se
+                É falta de gestão. O mercado cresce, mas quem não se
                 profissionaliza fica para trás — ou fecha as portas.
               </p>
             </div>
@@ -345,7 +348,7 @@ export default function Home() {
               {
                 icon: Clock,
                 title: "Preso na operação",
-                desc: "Trabalha 16h por dia, não tira férias e o restaurante não funciona sem você. Virou refém do próprio negócio.",
+                desc: "Trabalha 16h por dia, não tira férias e o negócio não funciona sem você. Virou refém da própria empresa.",
                 stat: "85%",
                 statLabel: "dos donos se sentem presos",
               },
@@ -719,7 +722,7 @@ export default function Home() {
                   <span className="serif-italic gradient-text">travam</span> o crescimento
                 </h2>
                 <p className="mt-5 text-lg text-navy-600 leading-relaxed">
-                  Mapeamos as 8 principais dores dos donos de restaurantes.
+                  Mapeamos as principais dores dos donos de negócio.
                   O IJA resolve todas elas com o Tripé da Expansão.
                 </p>
                 <Link
@@ -808,13 +811,13 @@ export default function Home() {
           <SlideUp>
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl xl:text-6xl">
-                Seu restaurante pode ser o próximo{" "}
+                Seu negócio pode ser o próximo{" "}
                 <span className="serif-italic gradient-text">caso de sucesso</span>
               </h2>
               <p className="mt-8 text-lg text-navy-300 leading-relaxed sm:text-xl">
                 Agende um diagnóstico gratuito e descubra o que está travando o
-                crescimento do seu negócio. Sessão de 30-45 minutos com análise
-                das 8 áreas de gestão.
+                crescimento da sua empresa. Sessão de 30-45 minutos com análise
+                personalizada das áreas críticas de gestão.
               </p>
               <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                 <PulseGlow className="rounded-2xl">

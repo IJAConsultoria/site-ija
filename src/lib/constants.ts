@@ -39,6 +39,8 @@ export const NAV_LINKS = [
       { label: "Bares", href: "/segmentos/bares" },
       { label: "Cafeterias", href: "/segmentos/cafeterias" },
       { label: "Food Service", href: "/segmentos/food-service" },
+      { label: "Varejo", href: "/segmentos/varejo" },
+      { label: "Turismo", href: "/segmentos/turismo" },
     ],
   },
   { label: "Soluções", href: "/solucoes" },
@@ -84,6 +86,18 @@ export const SEGMENTS = [
     name: "Food Service",
     emoji: "🏪",
     description: "Food trucks, dark kitchens, catering e delivery",
+  },
+  {
+    slug: "varejo",
+    name: "Varejo",
+    emoji: "🛍️",
+    description: "Lojas, franquias e redes de varejo",
+  },
+  {
+    slug: "turismo",
+    name: "Turismo",
+    emoji: "🏖️",
+    description: "Hotéis, pousadas, agências e negócios turísticos",
   },
 ];
 
