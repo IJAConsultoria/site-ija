@@ -115,19 +115,31 @@ function ThankYouContent() {
     }
   }, [completedSteps]);
 
+  // Build calendar date strings from dateISO
+  const getCalendarDates = () => {
+    if (!event || !("dateISO" in event) || !event.dateISO) return null;
+    const dateStr = (event as { dateISO: string }).dateISO.replace(/-/g, "");
+    // Event at 19h BRT (UTC-3) = 22h UTC, duration varies by type
+    const durationMinutes = parseInt(event.duration) || 60;
+    const startHour = 19;
+    const endHour = startHour + Math.floor(durationMinutes / 60);
+    const endMin = durationMinutes % 60;
+    const start = `${dateStr}T${String(startHour).padStart(2, "0")}0000`;
+    const end = `${dateStr}T${String(endHour).padStart(2, "0")}${String(endMin).padStart(2, "0")}00`;
+    return { start, end, isoDate: (event as { dateISO: string }).dateISO };
+  };
+
   // Generate Google Calendar URL
   const getGoogleCalendarUrl = () => {
     if (!event) return "#";
-    const title = encodeURIComponent(
-      `[IJA] ${event.title}`
-    );
+    const title = encodeURIComponent(`[IJA] ${event.title}`);
     const details = encodeURIComponent(
       `Evento gratuito do Instituto João Alves.\n\n${event.description}\n\nApresentador: ${event.speaker}\n\nGrupo WhatsApp: ${WHATSAPP_GROUP_URL}`
     );
     const location = encodeURIComponent("Online (link será enviado)");
-    // Using a placeholder date since events say "Em breve"
-    // Format: 20260401T190000/20260401T200000
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&sf=true&output=xml`;
+    const dates = getCalendarDates();
+    const dateParam = dates ? `&dates=${dates.start}/${dates.end}&ctz=America/Sao_Paulo` : "";
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}${dateParam}&sf=true&output=xml`;
   };
 
   // Generate Outlook Calendar URL
@@ -138,7 +150,11 @@ function ThankYouContent() {
       `Evento gratuito do Instituto João Alves.\n\n${event.description}\n\nApresentador: ${event.speaker}\n\nGrupo WhatsApp: ${WHATSAPP_GROUP_URL}`
     );
     const location = encodeURIComponent("Online (link será enviado)");
-    return `https://outlook.live.com/calendar/0/action/compose?subject=${title}&body=${body}&location=${location}`;
+    const dates = getCalendarDates();
+    const dateParam = dates
+      ? `&startdt=${dates.isoDate}T19:00:00&enddt=${dates.isoDate}T${String(19 + Math.floor((parseInt(event.duration) || 60) / 60)).padStart(2, "0")}:${String((parseInt(event.duration) || 60) % 60).padStart(2, "0")}:00`
+      : "";
+    return `https://outlook.live.com/calendar/0/action/compose?subject=${title}&body=${body}&location=${location}${dateParam}`;
   };
 
   return (
@@ -254,63 +270,7 @@ function ThankYouContent() {
               </div>
             </div>
 
-            {/* Step 2: Entrar no grupo */}
-            <div
-              className={`flex items-start gap-4 rounded-3xl border-2 p-6 lg:p-8 transition-all ${
-                joinedGroup
-                  ? "border-accent/30 bg-accent/5"
-                  : "border-navy-100 bg-white hover:border-accent/20 hover:shadow-lg"
-              }`}
-            >
-              <div
-                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${
-                  joinedGroup
-                    ? "bg-accent text-white"
-                    : "bg-navy-100 text-navy-400"
-                }`}
-              >
-                {joinedGroup ? (
-                  <CheckCircle size={24} />
-                ) : (
-                  <MessageCircle size={24} />
-                )}
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-bold text-navy-950">
-                    2. Entre no grupo do WhatsApp
-                  </h3>
-                  {joinedGroup && (
-                    <span className="rounded-full bg-accent/10 px-3 py-0.5 text-xs font-bold text-accent">
-                      Feito
-                    </span>
-                  )}
-                </div>
-                <p className="mt-1 text-navy-600">
-                  O link do evento e materiais exclusivos serão enviados no
-                  grupo. Não perca!
-                </p>
-                {!joinedGroup ? (
-                  <a
-                    href={WHATSAPP_GROUP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setJoinedGroup(true)}
-                    className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-all hover:bg-[#1ea952] hover:scale-105 hover:shadow-lg hover:shadow-[#25D366]/25"
-                  >
-                    <UsersIcon size={18} />
-                    Entrar no grupo
-                    <ExternalLink size={14} />
-                  </a>
-                ) : (
-                  <p className="mt-3 text-sm font-medium text-accent">
-                    Perfeito! Fique atento às mensagens do grupo.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Step 3: Salvar na agenda */}
+            {/* Step 2: Salvar na agenda */}
             <div
               className={`flex items-start gap-4 rounded-3xl border-2 p-6 lg:p-8 transition-all ${
                 savedCalendar
@@ -334,7 +294,7 @@ function ThankYouContent() {
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-lg font-bold text-navy-950">
-                    3. Salve na sua agenda
+                    2. Salve na sua agenda
                   </h3>
                   {savedCalendar && (
                     <span className="rounded-full bg-accent/10 px-3 py-0.5 text-xs font-bold text-accent">
@@ -343,8 +303,8 @@ function ThankYouContent() {
                   )}
                 </div>
                 <p className="mt-1 text-navy-600">
-                  Adicione o evento na sua agenda para não esquecer. Toda
-                  terça-feira às 19h!
+                  Adicione o evento na sua agenda para não esquecer.{" "}
+                  {event ? `${event.date}, terça-feira às ${event.time}.` : "Terça-feira às 19h."}
                 </p>
                 {!savedCalendar ? (
                   <div className="mt-4 flex flex-col gap-3 sm:flex-row">
@@ -376,6 +336,62 @@ function ThankYouContent() {
                 )}
               </div>
             </div>
+
+            {/* Step 3: Entrar no grupo */}
+            <div
+              className={`flex items-start gap-4 rounded-3xl border-2 p-6 lg:p-8 transition-all ${
+                joinedGroup
+                  ? "border-accent/30 bg-accent/5"
+                  : "border-navy-100 bg-white hover:border-accent/20 hover:shadow-lg"
+              }`}
+            >
+              <div
+                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${
+                  joinedGroup
+                    ? "bg-accent text-white"
+                    : "bg-navy-100 text-navy-400"
+                }`}
+              >
+                {joinedGroup ? (
+                  <CheckCircle size={24} />
+                ) : (
+                  <MessageCircle size={24} />
+                )}
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-navy-950">
+                    3. Entre no grupo do WhatsApp
+                  </h3>
+                  {joinedGroup && (
+                    <span className="rounded-full bg-accent/10 px-3 py-0.5 text-xs font-bold text-accent">
+                      Feito
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 text-navy-600">
+                  O link do evento e materiais exclusivos serão enviados no
+                  grupo. Não perca!
+                </p>
+                {!joinedGroup ? (
+                  <a
+                    href={WHATSAPP_GROUP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setJoinedGroup(true)}
+                    className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-all hover:bg-[#1ea952] hover:scale-105 hover:shadow-lg hover:shadow-[#25D366]/25"
+                  >
+                    <UsersIcon size={18} />
+                    Entrar no grupo
+                    <ExternalLink size={14} />
+                  </a>
+                ) : (
+                  <p className="mt-3 text-sm font-medium text-accent">
+                    Perfeito! Fique atento às mensagens do grupo.
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* All complete message */}
@@ -386,7 +402,7 @@ function ThankYouContent() {
                 Tudo pronto!
               </p>
               <p className="mt-2 text-navy-600">
-                Você completou todos os passos. Nos vemos na terça às 19h!
+                Você completou todos os passos. Nos vemos {event ? `dia ${event.date}` : "no evento"} às 19h!
               </p>
             </div>
           )}
@@ -415,14 +431,17 @@ function ThankYouContent() {
                   Quando
                 </p>
                 <p className="mt-2 text-lg font-bold text-navy-950">
-                  Toda terça
+                  {event ? event.date : "Em breve"}
                 </p>
+                <p className="mt-0.5 text-xs text-navy-500">Terça-feira</p>
               </div>
               <div className="rounded-2xl bg-cream p-5 text-center">
                 <p className="text-sm font-bold uppercase tracking-widest text-accent">
                   Horário
                 </p>
-                <p className="mt-2 text-lg font-bold text-navy-950">19h</p>
+                <p className="mt-2 text-lg font-bold text-navy-950">
+                  {event ? event.time : "19h"}
+                </p>
               </div>
               <div className="rounded-2xl bg-cream p-5 text-center">
                 <p className="text-sm font-bold uppercase tracking-widest text-accent">

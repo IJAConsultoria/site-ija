@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import EventBanner from "@/components/EventBanner";
 import { organizationSchema, localBusinessSchema } from "@/lib/seo";
 
 export default function PublicLayout({
@@ -23,6 +24,7 @@ export default function PublicLayout({
         }}
       />
       <Header />
+      <EventBanner />
       <main className="pt-16 lg:pt-20">{children}</main>
       <Footer />
       <WhatsAppButton />
