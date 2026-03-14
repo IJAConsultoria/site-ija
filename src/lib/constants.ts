@@ -45,7 +45,15 @@ export const NAV_LINKS = [
   },
   { label: "Soluções", href: "/solucoes" },
   { label: "Cases", href: "/cases" },
-  { label: "Eventos", href: "/eventos" },
+  {
+    label: "Eventos",
+    href: "/eventos",
+    children: [
+      { label: "Lucro Real em 30 Min", href: "/eventos/lucro-real-30-minutos" },
+      { label: "3 Erros de Crescimento", href: "/eventos/3-erros-crescimento" },
+      { label: "Liderança na Prática", href: "/eventos/lideranca-gerentes-donos" },
+    ],
+  },
   { label: "Blog", href: "/blog" },
   { label: "Contato", href: "/contato" },
 ];
@@ -254,7 +262,7 @@ export const EVENTS = [
     longDescription:
       "A maioria dos donos de restaurante não sabe quanto realmente lucra. Confundem faturamento com lucro, não separam custos fixos de variáveis, e tomam decisões financeiras no escuro. Nesta live 100% prática, João Pedro Alves — com 14 anos de experiência em consultoria para food service — vai mostrar o passo a passo para você descobrir seu lucro real em menos de 30 minutos, usando ferramentas que você já tem.",
     date: "Em breve",
-    time: "20h",
+    time: "19h",
     duration: "60 min",
     type: "Live" as const,
     tags: ["Gestão Financeira", "CMV", "Lucro", "DRE"],
@@ -312,7 +320,7 @@ export const EVENTS = [
     longDescription:
       "65% dos restaurantes sofrem com rotatividade alta. O custo de perder um funcionário treinado pode chegar a 3x o salário mensal. Neste workshop prático, João Pedro Alves mostra como criar um programa de desenvolvimento de líderes que transforma funcionários comuns em gerentes que pensam como donos — usando a metodologia da Universidade Corporativa do IJA, testada em mais de 120 negócios.",
     date: "Em breve",
-    time: "20h",
+    time: "19h",
     duration: "90 min",
     type: "Workshop" as const,
     tags: ["Liderança", "RH", "Equipe", "Turnover", "Universidade Corporativa"],

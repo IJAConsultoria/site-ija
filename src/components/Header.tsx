@@ -16,17 +16,27 @@ import {
   Wine,
   Coffee,
   Store,
+  ShoppingBag,
+  TreePalm,
   Phone,
+  Video,
+  Mic,
+  Users,
 } from "lucide-react";
 import { NAV_LINKS, WHATSAPP_URL, PHONE as PHONE_NUMBER } from "@/lib/constants";
 
-const segmentIcons: Record<string, React.ElementType> = {
+const dropdownIcons: Record<string, React.ElementType> = {
   Restaurantes: Utensils,
   Hamburguerias: Beef,
   Pizzarias: Pizza,
   Bares: Wine,
   Cafeterias: Coffee,
   "Food Service": Store,
+  Varejo: ShoppingBag,
+  Turismo: TreePalm,
+  "Lucro Real em 30 Min": Video,
+  "3 Erros de Crescimento": Mic,
+  "Liderança na Prática": Users,
 };
 
 export default function Header() {
@@ -132,7 +142,7 @@ export default function Header() {
                         >
                           {link.children.map((child) => {
                             const Icon =
-                              segmentIcons[child.label] || Utensils;
+                              dropdownIcons[child.label] || Utensils;
                             return (
                               <Link
                                 key={child.href}
@@ -275,7 +285,7 @@ export default function Header() {
                                   <div className="grid grid-cols-2 gap-1.5 pb-3">
                                     {link.children.map((child) => {
                                       const ChildIcon =
-                                        segmentIcons[child.label] || Utensils;
+                                        dropdownIcons[child.label] || Utensils;
                                       return (
                                         <Link
                                           key={child.href}

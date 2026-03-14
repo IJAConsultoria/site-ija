@@ -20,7 +20,8 @@ import {
   StaggerItem,
   AnimatedBlob,
 } from "@/components/animations";
-import { EVENTS, WHATSAPP_URL } from "@/lib/constants";
+import { EVENTS, SEGMENTS, WHATSAPP_URL } from "@/lib/constants";
+import { SEGMENT_EVENT_CONTENT } from "@/lib/event-segments";
 
 export const metadata = generatePageMetadata({
   title: "Eventos e Lives",
@@ -75,8 +76,9 @@ export default function EventosPage() {
                 <span className="serif-italic gradient-text">IJA</span>
               </h1>
               <p className="mt-6 text-lg text-navy-300 lg:text-xl">
-                Conteúdo ao vivo sobre gestão de restaurantes e food service.
-                100% prático, direto ao ponto, baseado em 14 anos de experiência.
+                Conteúdo ao vivo sobre gestão de negócios, finanças, liderança
+                e expansão. 100% prático, direto ao ponto, para todos os
+                segmentos.
               </p>
             </div>
           </FadeInUp>
@@ -109,71 +111,106 @@ export default function EventosPage() {
             </div>
           </FadeInUp>
 
-          <StaggerContainer className="mt-12 space-y-6">
-            {EVENTS.map((event, i) => {
+          <StaggerContainer className="mt-12 space-y-8">
+            {EVENTS.map((event) => {
               const config = typeConfig[event.type] || typeConfig.Live;
               const TypeIcon = config.icon;
+              const eventSegments = SEGMENTS.filter(
+                (s) => SEGMENT_EVENT_CONTENT[event.slug]?.[s.slug]
+              );
+
               return (
                 <StaggerItem key={event.slug}>
-                  <Link
-                    href={`/eventos/${event.slug}`}
-                    className="group block overflow-hidden rounded-3xl border border-navy-100/50 bg-white transition-all hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5"
-                  >
-                    <div className="flex flex-col lg:flex-row">
-                      {/* Left: date & type */}
-                      <div className="flex items-center gap-6 bg-navy-950 px-8 py-6 lg:w-56 lg:flex-col lg:justify-center lg:gap-3">
-                        <div className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1.5 text-xs font-bold ${config.color}`}>
-                          <TypeIcon size={12} />
-                          {event.type}
-                        </div>
-                        <div className="text-center">
-                          <p className="text-lg font-bold text-white">{event.date}</p>
-                          <div className="mt-1 flex items-center justify-center gap-3 text-navy-400">
-                            <span className="flex items-center gap-1 text-xs">
-                              <Clock size={11} />
-                              {event.time}
-                            </span>
-                            <span className="flex items-center gap-1 text-xs">
-                              <Timer size={11} />
-                              {event.duration}
-                            </span>
+                  <div className="overflow-hidden rounded-3xl border border-navy-100/50 bg-white">
+                    {/* Event header */}
+                    <Link
+                      href={`/eventos/${event.slug}`}
+                      className="group block"
+                    >
+                      <div className="flex flex-col lg:flex-row">
+                        {/* Left: date & type */}
+                        <div className="flex items-center gap-6 bg-navy-950 px-8 py-6 lg:w-56 lg:flex-col lg:justify-center lg:gap-3">
+                          <div
+                            className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1.5 text-xs font-bold ${config.color}`}
+                          >
+                            <TypeIcon size={12} />
+                            {event.type}
                           </div>
-                        </div>
-                      </div>
-
-                      {/* Right: content */}
-                      <div className="flex flex-1 flex-col justify-between p-8">
-                        <div>
-                          <h3 className="text-xl font-bold text-navy-950 transition-colors group-hover:text-accent lg:text-2xl">
-                            {event.title}
-                          </h3>
-                          <p className="mt-3 text-navy-600 leading-relaxed">
-                            {event.description}
-                          </p>
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {event.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="rounded-lg bg-cream px-2.5 py-1 text-xs font-medium text-navy-600"
-                              >
-                                {tag}
+                          <div className="text-center">
+                            <p className="text-lg font-bold text-white">
+                              {event.date}
+                            </p>
+                            <div className="mt-1 flex items-center justify-center gap-3 text-navy-400">
+                              <span className="flex items-center gap-1 text-xs">
+                                <Clock size={11} />
+                                {event.time}
                               </span>
-                            ))}
+                              <span className="flex items-center gap-1 text-xs">
+                                <Timer size={11} />
+                                {event.duration}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <div className="mt-6 flex items-center justify-between">
-                          <p className="text-sm text-navy-500">
-                            <span className="font-medium text-navy-700">{event.speaker}</span>{" "}
-                            — {event.speakerRole.split("—")[0]}
-                          </p>
-                          <span className="inline-flex items-center gap-2 rounded-xl bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-all group-hover:bg-accent group-hover:text-white">
-                            Ver detalhes
-                            <ArrowRight size={14} />
-                          </span>
+
+                        {/* Right: content */}
+                        <div className="flex flex-1 flex-col justify-between p-8">
+                          <div>
+                            <h3 className="text-xl font-bold text-navy-950 transition-colors group-hover:text-accent lg:text-2xl">
+                              {event.title}
+                            </h3>
+                            <p className="mt-3 text-navy-600 leading-relaxed">
+                              {event.description}
+                            </p>
+                            <div className="mt-4 flex flex-wrap gap-2">
+                              {event.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="rounded-lg bg-cream px-2.5 py-1 text-xs font-medium text-navy-600"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="mt-6 flex items-center justify-between">
+                            <p className="text-sm text-navy-500">
+                              <span className="font-medium text-navy-700">
+                                {event.speaker}
+                              </span>{" "}
+                              — {event.speakerRole.split("—")[0]}
+                            </p>
+                            <span className="inline-flex items-center gap-2 rounded-xl bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-all group-hover:bg-accent group-hover:text-white">
+                              Ver detalhes
+                              <ArrowRight size={14} />
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+
+                    {/* Segment strip */}
+                    {eventSegments.length > 0 && (
+                      <div className="border-t border-navy-100/50 bg-cream/50 px-8 py-5">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-navy-400">
+                          Inscreva-se pelo seu segmento
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {eventSegments.map((seg) => (
+                            <Link
+                              key={seg.slug}
+                              href={`/eventos/${event.slug}/${seg.slug}`}
+                              className="inline-flex items-center gap-2 rounded-xl border border-navy-100/50 bg-white px-4 py-2.5 text-sm font-medium text-navy-700 transition-all hover:border-accent/30 hover:text-accent hover:shadow-sm"
+                            >
+                              <span>{seg.emoji}</span>
+                              {seg.name}
+                              <ChevronRight size={12} className="text-navy-300" />
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </StaggerItem>
               );
             })}
@@ -211,7 +248,7 @@ export default function EventosPage() {
                 <p className="mt-4 text-lg text-navy-600">
                   Nossos eventos não são palestras genéricas. São sessões
                   práticas, com ferramentas aplicáveis e cases reais de
-                  restaurantes que já passaram pelos mesmos problemas que você.
+                  negócios que já passaram pelos mesmos problemas que você.
                 </p>
               </div>
               <div className="mt-10 space-y-5">
@@ -224,7 +261,7 @@ export default function EventosPage() {
                   {
                     icon: Users,
                     title: "Cases reais de +120 negócios",
-                    desc: "Exemplos concretos de restaurantes que saíram do caos para a estrutura.",
+                    desc: "Exemplos concretos de negócios que saíram do caos para a estrutura.",
                   },
                   {
                     icon: Video,
@@ -252,7 +289,7 @@ export default function EventosPage() {
                   <span className="serif-italic gradient-text">abordamos</span>
                 </h3>
                 <p className="mt-2 text-sm text-navy-600">
-                  Conteúdo focado na realidade do dono de restaurante.
+                  Conteúdo focado na realidade do dono de negócio.
                 </p>
                 <div className="mt-6 space-y-3">
                   {pastTopics.map((topic) => (
@@ -263,7 +300,9 @@ export default function EventosPage() {
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
                         <Video size={14} />
                       </div>
-                      <p className="text-sm font-medium text-navy-800">{topic}</p>
+                      <p className="text-sm font-medium text-navy-800">
+                        {topic}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -273,44 +312,6 @@ export default function EventosPage() {
         </div>
       </section>
 
-      {/* ===== CTA FINAL ===== */}
-      <section className="relative overflow-hidden bg-navy-950 py-28 lg:py-36 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.12)_0%,_transparent_50%)]" />
-        <AnimatedBlob className="absolute -bottom-20 -left-20 h-64 w-64 bg-accent/10" />
-        <div className="relative mx-auto max-w-3xl text-center px-4">
-          <FadeInUp>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-5 py-2 text-sm font-medium text-accent">
-              <Zap size={14} />
-              100% gratuito — sem compromisso
-            </div>
-            <h2 className="text-4xl font-bold text-white sm:text-5xl">
-              Não quer esperar o próximo{" "}
-              <span className="serif-italic gradient-text">evento</span>?
-            </h2>
-            <p className="mt-6 text-lg text-navy-300">
-              Agende um diagnóstico gratuito e receba uma análise personalizada
-              do seu negócio agora. 30-45 minutos, direto ao ponto.
-            </p>
-            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link
-                href="/diagnostico"
-                className="glow-orange-sm inline-flex items-center gap-2 rounded-2xl bg-accent px-10 py-5 text-lg font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
-              >
-                Agendar diagnóstico gratuito
-                <ArrowRight size={20} />
-              </Link>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-10 py-5 text-lg font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"
-              >
-                Falar pelo WhatsApp
-              </a>
-            </div>
-          </FadeInUp>
-        </div>
-      </section>
     </>
   );
 }
