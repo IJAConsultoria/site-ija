@@ -286,14 +286,14 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white lg:hidden"
+            className="fixed inset-0 z-[45] bg-white lg:hidden"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="flex h-full flex-col overflow-y-auto pt-16 pb-4"
+              className={`flex h-full flex-col overflow-y-auto pb-4 ${showBanner ? "pt-[6.5rem]" : "pt-16"}`}
             >
               {/* Nav Links - compacto */}
               <nav className="flex-1 px-4">
