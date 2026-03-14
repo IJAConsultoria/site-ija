@@ -76,7 +76,7 @@ export default async function EventoPage({ params }: Props) {
 
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-28 lg:py-40 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(166,133,35,0.15)_0%,_transparent_50%)]" />
         <AnimatedBlob className="absolute -top-40 -right-40 h-80 w-80 bg-accent/10" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-5">
@@ -362,7 +362,7 @@ export default async function EventoPage({ params }: Props) {
 
       {/* ===== CTA FINAL ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-28 lg:py-36 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.12)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.12)_0%,_transparent_50%)]" />
         <AnimatedBlob className="absolute -top-20 -right-20 h-64 w-64 bg-accent/10" />
         <div className="relative mx-auto max-w-3xl text-center px-4">
           <FadeInUp>
