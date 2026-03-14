@@ -10,6 +10,8 @@ import {
   splitName,
   maskPhone,
   pushFormSubmit,
+  getAllTrackingFields,
+  trackLandingPage,
 } from "@/lib/tracking";
 import { createClient } from "@/lib/supabase/client";
 
@@ -22,15 +24,6 @@ type Props = {
   segmentOrigin: string;
   segmentName: string;
 };
-
-function getDeviceType(): string {
-  if (typeof window === "undefined") return "unknown";
-  const ua = navigator.userAgent;
-  if (/tablet|ipad|playbook|silk/i.test(ua)) return "tablet";
-  if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua))
-    return "mobile";
-  return "desktop";
-}
 
 export default function EventRegistrationForm({
   eventSlug,
@@ -57,6 +50,7 @@ export default function EventRegistrationForm({
   useEffect(() => {
     setSessionId(getSessionId());
     setPageStart(getPageStartTime());
+    trackLandingPage();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,7 +83,7 @@ export default function EventRegistrationForm({
     // Save to Supabase
     try {
       const supabase = createClient();
-      const params = new URLSearchParams(window.location.search);
+      const tracking = getAllTrackingFields(sessionId, timeOnPage);
 
       await supabase.from("leads-eventos-ija").insert({
         nome,
@@ -105,17 +99,7 @@ export default function EventRegistrationForm({
         segment_name: segmentName,
         business_name: formData.businessName || null,
         revenue_range: formData.revenueRange || null,
-        apex_session_id: sessionId,
-        time_on_page_at_submit: timeOnPage,
-        utm_source: params.get("utm_source") || null,
-        utm_medium: params.get("utm_medium") || null,
-        utm_campaign: params.get("utm_campaign") || null,
-        utm_term: params.get("utm_term") || null,
-        utm_content: params.get("utm_content") || null,
-        page_url: window.location.href,
-        referrer_url: document.referrer || null,
-        user_agent: navigator.userAgent,
-        device_type: getDeviceType(),
+        ...tracking,
       });
     } catch (err) {
       console.error("Error saving to Supabase:", err);

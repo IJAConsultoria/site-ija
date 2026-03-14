@@ -10,7 +10,10 @@ import {
   splitName,
   maskPhone,
   pushFormSubmit,
+  getAllTrackingFields,
+  trackLandingPage,
 } from "@/lib/tracking";
+import { createClient } from "@/lib/supabase/client";
 
 export default function DiagnosticoPage() {
   const [formData, setFormData] = useState({
@@ -28,18 +31,22 @@ export default function DiagnosticoPage() {
   useEffect(() => {
     setSessionId(getSessionId());
     setPageStart(getPageStartTime());
+    trackLandingPage();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { nome, sobrenome } = splitName(formData.name);
+    const timeOnPage = getTimeOnPage(pageStart);
+
+    // Push GTM dataLayer
     pushFormSubmit({
       email: formData.email,
       phoneNumber: formData.phone,
       nome,
       sobrenome,
       sessionId,
-      timeOnPage: getTimeOnPage(pageStart),
+      timeOnPage,
       formName: "diagnostico",
       extraData: {
         restaurant_name: formData.restaurant,
@@ -47,6 +54,26 @@ export default function DiagnosticoPage() {
         main_pain: formData.pain,
       },
     });
+
+    // Save to Supabase
+    try {
+      const supabase = createClient();
+      const tracking = getAllTrackingFields(sessionId, timeOnPage);
+
+      await supabase.from("leads-falar-com-especialista-form-ija").insert({
+        nome,
+        sobrenome,
+        email: formData.email.trim().toLowerCase(),
+        phone_number: formData.phone.replace(/\D/g, ""),
+        business_name: formData.restaurant || null,
+        revenue_range: formData.revenue || null,
+        main_challenge: formData.pain || null,
+        ...tracking,
+      });
+    } catch (err) {
+      console.error("Error saving to Supabase:", err);
+    }
+
     setSubmitted(true);
   };
 
