@@ -23,7 +23,8 @@ import {
   Mic,
   Users,
 } from "lucide-react";
-import { NAV_LINKS, WHATSAPP_URL, PHONE as PHONE_NUMBER } from "@/lib/constants";
+import { Zap, Calendar as CalendarIcon } from "lucide-react";
+import { NAV_LINKS, WHATSAPP_URL, PHONE as PHONE_NUMBER, EVENTS } from "@/lib/constants";
 
 const dropdownIcons: Record<string, React.ElementType> = {
   Restaurantes: Utensils,
@@ -36,12 +37,42 @@ const dropdownIcons: Record<string, React.ElementType> = {
   Turismo: TreePalm,
 };
 
+function getNextEvent() {
+  const now = new Date();
+  const upcoming = EVENTS.filter((e) => {
+    if (!("dateISO" in e) || !(e as { dateISO?: string }).dateISO) return false;
+    const eventDate = new Date((e as { dateISO: string }).dateISO + "T23:59:59");
+    return eventDate >= now;
+  }).sort((a, b) => {
+    const da = ("dateISO" in a && (a as { dateISO?: string }).dateISO) || "9999";
+    const db = ("dateISO" in b && (b as { dateISO?: string }).dateISO) || "9999";
+    return da.localeCompare(db);
+  });
+  return upcoming[0] || null;
+}
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [dropdown, setDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const nextEvent = getNextEvent();
+
+  useEffect(() => {
+    if (nextEvent) {
+      const dismissed = sessionStorage.getItem("event_banner_dismissed");
+      setBannerDismissed(dismissed === nextEvent.slug);
+    }
+  }, [nextEvent]);
+
+  const showBanner = nextEvent && !bannerDismissed;
+
+  const handleDismissBanner = () => {
+    setBannerDismissed(true);
+    if (nextEvent) sessionStorage.setItem("event_banner_dismissed", nextEvent.slug);
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -90,6 +121,45 @@ export default function Header() {
             : "bg-cream/80 backdrop-blur-sm"
         }`}
       >
+        {/* Event Banner */}
+        {showBanner && (
+          <div className="bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 border-b border-accent/20">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between gap-3 py-2 sm:py-2.5">
+                <Link
+                  href={`/eventos/${nextEvent.slug}`}
+                  className="flex flex-1 items-center gap-2 sm:gap-3 group min-w-0"
+                >
+                  <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-xs font-bold text-accent ring-1 ring-accent/20">
+                    <Zap size={12} />
+                    Ao vivo
+                  </span>
+                  <span className="sm:hidden shrink-0">
+                    <Zap size={14} className="text-accent" />
+                  </span>
+                  <span className="truncate text-xs sm:text-sm font-medium text-white group-hover:text-accent transition-colors">
+                    <span className="font-bold">{nextEvent.title}</span>
+                  </span>
+                  <span className="hidden md:flex shrink-0 items-center gap-1.5 text-xs text-navy-400">
+                    <CalendarIcon size={12} className="text-accent" />
+                    {nextEvent.date} às {nextEvent.time}
+                  </span>
+                  <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-bold text-white group-hover:bg-accent-dark transition-colors">
+                    Inscreva-se
+                    <ArrowRight size={10} />
+                  </span>
+                </Link>
+                <button
+                  onClick={handleDismissBanner}
+                  className="shrink-0 rounded-lg p-1 text-navy-500 hover:text-white hover:bg-white/10 transition-colors"
+                  aria-label="Fechar banner"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between lg:h-20">
             {/* Logo: ícone no mobile, horizontal no desktop */}
