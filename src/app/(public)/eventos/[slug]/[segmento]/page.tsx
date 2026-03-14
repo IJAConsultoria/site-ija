@@ -174,6 +174,9 @@ export default async function SegmentEventPage({ params }: Props) {
                   <EventRegistrationForm
                     eventSlug={event.slug}
                     eventTitle={event.title}
+                    eventType={event.type}
+                    eventDate={event.date}
+                    eventTime={event.time}
                     segmentOrigin={segmento}
                     segmentName={segment.name}
                   />

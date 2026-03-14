@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
-import { WHATSAPP_URL } from "@/lib/constants";
+import { useRouter } from "next/navigation";
+import { ArrowRight, Loader2 } from "lucide-react";
 import {
   getSessionId,
   getPageStartTime,
@@ -16,16 +16,32 @@ import { createClient } from "@/lib/supabase/client";
 type Props = {
   eventSlug: string;
   eventTitle: string;
+  eventType: string;
+  eventDate: string;
+  eventTime: string;
   segmentOrigin: string;
   segmentName: string;
 };
 
+function getDeviceType(): string {
+  if (typeof window === "undefined") return "unknown";
+  const ua = navigator.userAgent;
+  if (/tablet|ipad|playbook|silk/i.test(ua)) return "tablet";
+  if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua))
+    return "mobile";
+  return "desktop";
+}
+
 export default function EventRegistrationForm({
   eventSlug,
   eventTitle,
+  eventType,
+  eventDate,
+  eventTime,
   segmentOrigin,
   segmentName,
 }: Props) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,7 +49,6 @@ export default function EventRegistrationForm({
     businessName: "",
     revenueRange: "",
   });
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [sessionId, setSessionId] = useState("");
@@ -64,6 +79,7 @@ export default function EventRegistrationForm({
       extraData: {
         event_slug: eventSlug,
         event_title: eventTitle,
+        event_type: eventType,
         segment_origin: segmentOrigin,
         business_name: formData.businessName,
         revenue_range: formData.revenueRange,
@@ -73,73 +89,46 @@ export default function EventRegistrationForm({
     // Save to Supabase
     try {
       const supabase = createClient();
-
-      // Get UTMs from URL
       const params = new URLSearchParams(window.location.search);
-      const utmSource = params.get("utm_source") || "";
-      const utmMedium = params.get("utm_medium") || "";
-      const utmCampaign = params.get("utm_campaign") || "";
-      const utmTerm = params.get("utm_term") || "";
-      const utmContent = params.get("utm_content") || "";
 
-      const { error: dbError } = await supabase
-        .from("event_waitlist")
-        .insert({
-          nome,
-          sobrenome,
-          email: formData.email.trim().toLowerCase(),
-          phone_number: formData.phone.replace(/\D/g, ""),
-          event_slug: eventSlug,
-          event_title: eventTitle,
-          segment_origin: segmentOrigin,
-          business_name: formData.businessName || null,
-          revenue_range: formData.revenueRange || null,
-          apex_session_id: sessionId,
-          time_on_page_at_submit: timeOnPage,
-          utm_source: utmSource || null,
-          utm_medium: utmMedium || null,
-          utm_campaign: utmCampaign || null,
-          utm_term: utmTerm || null,
-          utm_content: utmContent || null,
-          page_url: window.location.href,
-        });
-
-      if (dbError) {
-        console.error("Supabase error:", dbError);
-        // Still show success — GTM captured the data
-      }
+      await supabase.from("event_waitlist").insert({
+        nome,
+        sobrenome,
+        email: formData.email.trim().toLowerCase(),
+        phone_number: formData.phone.replace(/\D/g, ""),
+        event_slug: eventSlug,
+        event_title: eventTitle,
+        event_type: eventType,
+        event_date: eventDate,
+        event_time: eventTime,
+        segment_origin: segmentOrigin,
+        segment_name: segmentName,
+        business_name: formData.businessName || null,
+        revenue_range: formData.revenueRange || null,
+        apex_session_id: sessionId,
+        time_on_page_at_submit: timeOnPage,
+        utm_source: params.get("utm_source") || null,
+        utm_medium: params.get("utm_medium") || null,
+        utm_campaign: params.get("utm_campaign") || null,
+        utm_term: params.get("utm_term") || null,
+        utm_content: params.get("utm_content") || null,
+        page_url: window.location.href,
+        referrer_url: document.referrer || null,
+        user_agent: navigator.userAgent,
+        device_type: getDeviceType(),
+      });
     } catch (err) {
       console.error("Error saving to Supabase:", err);
-      // Still show success — GTM captured the data
     }
 
-    setLoading(false);
-    setSubmitted(true);
+    // Redirect to thank you page with event context
+    const thankYouParams = new URLSearchParams({
+      evento: eventSlug,
+      segmento: segmentOrigin,
+      nome: formData.name.split(" ")[0],
+    });
+    router.push(`/eventos/obrigado?${thankYouParams.toString()}`);
   };
-
-  if (submitted) {
-    return (
-      <div className="rounded-3xl border border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10 p-10 text-center">
-        <CheckCircle size={48} className="mx-auto text-accent" />
-        <p className="mt-4 text-xl font-semibold text-navy-950">
-          Inscrição confirmada!
-        </p>
-        <p className="mt-2 text-navy-600">
-          Você receberá todos os detalhes do evento no seu e-mail e WhatsApp.
-          Fique atento!
-        </p>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 font-semibold text-accent hover:text-accent-dark"
-        >
-          Ou fale conosco pelo WhatsApp
-          <ArrowRight size={16} />
-        </a>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -251,9 +240,7 @@ export default function EventRegistrationForm({
         </select>
       </div>
 
-      {error && (
-        <p className="text-sm text-red-500">{error}</p>
-      )}
+      {error && <p className="text-sm text-red-500">{error}</p>}
 
       <button
         type="submit"
