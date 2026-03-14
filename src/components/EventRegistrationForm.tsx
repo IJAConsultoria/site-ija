@@ -91,7 +91,7 @@ export default function EventRegistrationForm({
       const supabase = createClient();
       const params = new URLSearchParams(window.location.search);
 
-      await supabase.from("event_waitlist").insert({
+      await supabase.from("leads-eventos-ija").insert({
         nome,
         sobrenome,
         email: formData.email.trim().toLowerCase(),

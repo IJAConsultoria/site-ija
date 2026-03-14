@@ -6,11 +6,11 @@ import { type ReactNode, useRef, useEffect, useState } from "react";
 /* ===== VARIANT PRESETS ===== */
 
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -18,34 +18,34 @@ const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.35, ease: "easeOut" },
   },
 };
 
 const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { opacity: 0, x: -24 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { opacity: 0, x: 24 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.85 },
+  hidden: { opacity: 0, scale: 0.92 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -53,8 +53,8 @@ const staggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+      staggerChildren: 0.06,
+      delayChildren: 0.05,
     },
   },
 };
@@ -63,18 +63,18 @@ const staggerContainerSlow: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
 const slideUp: Variants = {
-  hidden: { opacity: 0, y: 80 },
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -280,12 +280,11 @@ export function TextReveal({ children, className }: { children: string; classNam
           key={i}
           className="inline-block mr-[0.25em]"
           variants={{
-            hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+            hidden: { opacity: 0, y: 10 },
             visible: {
               opacity: 1,
               y: 0,
-              filter: "blur(0px)",
-              transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+              transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
             },
           }}
         >
@@ -410,19 +409,9 @@ export function MarqueeReverse({
 
 export function FloatingElement({ children, className }: AnimatedProps) {
   return (
-    <motion.div
-      className={className}
-      animate={{
-        y: [0, -12, 0],
-      }}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    >
+    <div className={`animate-float ${className || ""}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -430,23 +419,9 @@ export function FloatingElement({ children, className }: AnimatedProps) {
 
 export function PulseGlow({ children, className }: AnimatedProps) {
   return (
-    <motion.div
-      className={className}
-      animate={{
-        boxShadow: [
-          "0 0 0 0 rgba(166, 133, 35, 0)",
-          "0 0 0 12px rgba(166, 133, 35, 0.15)",
-          "0 0 0 0 rgba(166, 133, 35, 0)",
-        ],
-      }}
-      transition={{
-        duration: 2.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    >
+    <div className={`animate-pulse-glow ${className || ""}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -509,21 +484,9 @@ export function HoverCard({ children, className }: AnimatedProps) {
 
 export function AnimatedBlob({ className }: { className?: string }) {
   return (
-    <motion.div
+    <div
       className={`absolute rounded-full blur-3xl ${className || ""}`}
-      animate={{
-        borderRadius: [
-          "60% 40% 30% 70% / 60% 30% 70% 40%",
-          "30% 60% 70% 40% / 50% 60% 30% 60%",
-          "50% 60% 30% 60% / 30% 40% 70% 60%",
-          "60% 40% 30% 70% / 60% 30% 70% 40%",
-        ],
-      }}
-      transition={{
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
+      style={{ borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%" }}
     />
   );
 }
