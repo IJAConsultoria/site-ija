@@ -34,9 +34,6 @@ const dropdownIcons: Record<string, React.ElementType> = {
   "Food Service": Store,
   Varejo: ShoppingBag,
   Turismo: TreePalm,
-  "Lucro Real em 30 Min": Video,
-  "3 Erros de Crescimento": Mic,
-  "Liderança na Prática": Users,
 };
 
 export default function Header() {
