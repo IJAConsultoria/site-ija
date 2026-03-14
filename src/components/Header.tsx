@@ -123,35 +123,28 @@ export default function Header() {
       >
         {/* Event Banner */}
         {showBanner && (
-          <div className="bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 border-b border-accent/20">
+          <div className="bg-accent">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between gap-3 py-2 sm:py-2.5">
+              <div className="flex items-center justify-center gap-2 py-2 sm:py-2.5 relative">
                 <Link
                   href={`/eventos/${nextEvent.slug}`}
-                  className="flex flex-1 items-center gap-2 sm:gap-3 group min-w-0"
+                  className="flex items-center justify-center gap-2 sm:gap-3 group"
                 >
-                  <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-xs font-bold text-accent ring-1 ring-accent/20">
-                    <Zap size={12} />
-                    Ao vivo
+                  <Zap size={14} className="shrink-0 text-white" />
+                  <span className="text-xs sm:text-sm font-bold text-white">
+                    {nextEvent.title}
                   </span>
-                  <span className="sm:hidden shrink-0">
-                    <Zap size={14} className="text-accent" />
+                  <span className="hidden sm:inline text-xs font-medium text-white/80">
+                    — {nextEvent.date} às {nextEvent.time}
                   </span>
-                  <span className="truncate text-xs sm:text-sm font-medium text-white group-hover:text-accent transition-colors">
-                    <span className="font-bold">{nextEvent.title}</span>
-                  </span>
-                  <span className="hidden md:flex shrink-0 items-center gap-1.5 text-xs text-navy-400">
-                    <CalendarIcon size={12} className="text-accent" />
-                    {nextEvent.date} às {nextEvent.time}
-                  </span>
-                  <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-bold text-white group-hover:bg-accent-dark transition-colors">
-                    Inscreva-se
+                  <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-white px-3 py-0.5 text-[10px] sm:text-xs font-bold text-accent group-hover:bg-navy-950 group-hover:text-white transition-colors">
+                    Inscreva-se grátis
                     <ArrowRight size={10} />
                   </span>
                 </Link>
                 <button
                   onClick={handleDismissBanner}
-                  className="shrink-0 rounded-lg p-1 text-navy-500 hover:text-white hover:bg-white/10 transition-colors"
+                  className="absolute right-0 shrink-0 rounded-lg p-1 text-white/60 hover:text-white transition-colors"
                   aria-label="Fechar banner"
                 >
                   <X size={14} />
