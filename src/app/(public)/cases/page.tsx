@@ -150,7 +150,7 @@ export default function CasesPage() {
           <ScaleIn delay={0.2}>
             <Link
               href="/diagnostico"
-              className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-accent-dark"
+              className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-accent-dark"
             >
               Agendar diagnóstico gratuito
               <ArrowRight size={18} />

@@ -124,23 +124,26 @@ export default function Header() {
         {/* Event Banner */}
         {showBanner && (
           <div className="bg-accent">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-center gap-2 py-2 sm:py-2.5 relative">
+            <div className="px-3 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-center py-1.5 sm:py-2.5 relative">
                 <Link
                   href={`/eventos/${nextEvent.slug}`}
-                  className="flex items-center justify-center gap-2 sm:gap-3 group"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2.5 group min-w-0 pr-6"
                 >
-                  <Zap size={14} className="shrink-0 text-white" />
-                  <span className="text-xs sm:text-sm font-bold text-white">
-                    {nextEvent.title}
+                  <Zap size={12} className="shrink-0 text-white sm:hidden" />
+                  <Zap size={14} className="shrink-0 text-white hidden sm:block" />
+                  <span className="text-[11px] sm:text-sm font-bold text-white truncate">
+                    <span className="sm:hidden">Live gratuita — Inscreva-se</span>
+                    <span className="hidden sm:inline">{nextEvent.title}</span>
                   </span>
-                  <span className="hidden sm:inline text-xs font-medium text-white/80">
+                  <span className="hidden md:inline text-xs font-medium text-white/80 shrink-0">
                     — {nextEvent.date} às {nextEvent.time}
                   </span>
-                  <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-white px-3 py-0.5 text-[10px] sm:text-xs font-bold text-accent group-hover:bg-navy-950 group-hover:text-white transition-colors">
+                  <span className="shrink-0 hidden sm:inline-flex items-center gap-1 rounded-full bg-white px-3 py-0.5 text-xs font-bold text-accent group-hover:bg-navy-950 group-hover:text-white transition-colors">
                     Inscreva-se grátis
                     <ArrowRight size={10} />
                   </span>
+                  <ArrowRight size={12} className="shrink-0 text-white sm:hidden" />
                 </Link>
                 <button
                   onClick={handleDismissBanner}

@@ -129,7 +129,7 @@ export default function EventosPage() {
                     >
                       <div className="flex flex-col lg:flex-row">
                         {/* Left: date & type */}
-                        <div className="flex items-center gap-6 bg-navy-950 px-8 py-6 lg:w-56 lg:flex-col lg:justify-center lg:gap-3">
+                        <div className="flex items-center gap-4 bg-navy-950 px-5 py-4 sm:gap-6 sm:px-8 sm:py-6 lg:w-56 lg:flex-col lg:justify-center lg:gap-3">
                           <div
                             className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1.5 text-xs font-bold ${config.color}`}
                           >
@@ -154,7 +154,7 @@ export default function EventosPage() {
                         </div>
 
                         {/* Right: content */}
-                        <div className="flex flex-1 flex-col justify-between p-8">
+                        <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
                           <div>
                             <h3 className="text-xl font-bold text-navy-950 transition-colors group-hover:text-accent lg:text-2xl">
                               {event.title}
@@ -191,7 +191,7 @@ export default function EventosPage() {
 
                     {/* Segment strip */}
                     {eventSegments.length > 0 && (
-                      <div className="border-t border-navy-100/50 bg-cream/50 px-8 py-5">
+                      <div className="border-t border-navy-100/50 bg-cream/50 px-4 py-4 sm:px-8 sm:py-5">
                         <p className="mb-3 text-xs font-bold uppercase tracking-widest text-navy-400">
                           Inscreva-se pelo seu segmento
                         </p>

@@ -391,7 +391,7 @@ export default async function SegmentoPage({ params }: Props) {
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
                     href="/diagnostico"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
                   >
                     Diagnóstico gratuito
                     <ArrowRight size={18} />
@@ -400,7 +400,7 @@ export default async function SegmentoPage({ params }: Props) {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"
                   >
                     Falar pelo WhatsApp
                   </a>
@@ -554,7 +554,7 @@ export default async function SegmentoPage({ params }: Props) {
           {/* Case highlight */}
           {content.caseHighlight && relatedCase && (
             <FadeInUp>
-              <div className="mx-auto mt-16 max-w-3xl rounded-3xl border border-accent/20 bg-accent/5 p-8 lg:p-10">
+              <div className="mx-auto mt-16 max-w-3xl rounded-3xl border border-accent/20 bg-accent/5 p-5 sm:p-8 lg:p-10">
                 <div className="flex items-start gap-4">
                   <Quote size={32} className="shrink-0 text-accent/50" />
                   <div>
@@ -792,7 +792,7 @@ export default async function SegmentoPage({ params }: Props) {
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
                 href="/diagnostico"
-                className="glow-orange-sm inline-flex items-center gap-2 rounded-2xl bg-accent px-10 py-5 text-lg font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
+                className="glow-orange-sm inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-4 sm:px-10 sm:py-5 text-base sm:text-lg font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
               >
                 Agendar diagnóstico gratuito
                 <ArrowRight size={20} />
@@ -801,7 +801,7 @@ export default async function SegmentoPage({ params }: Props) {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-10 py-5 text-lg font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 sm:px-10 sm:py-5 text-base sm:text-lg font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"
               >
                 Falar pelo WhatsApp
               </a>

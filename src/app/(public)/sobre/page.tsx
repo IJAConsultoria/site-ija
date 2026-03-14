@@ -88,7 +88,7 @@ export default function SobrePage() {
                     className="object-cover object-top"
                   />
                 </div>
-                <div className="p-8 lg:p-10">
+                <div className="p-5 sm:p-8 lg:p-10">
                   <h3 className="text-xl font-bold text-navy-950">
                     João Pedro Alves
                   </h3>
@@ -239,7 +239,7 @@ export default function SobrePage() {
             </p>
             <Link
               href="/metodo"
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-accent-dark"
+              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-accent-dark"
             >
               Conheça o Tripé da Expansão
               <ArrowRight size={18} />

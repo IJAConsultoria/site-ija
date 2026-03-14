@@ -197,7 +197,7 @@ export default function BlogPage() {
               </p>
               <Link
                 href="/diagnostico"
-                className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-lg hover:shadow-accent/25"
+                className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-lg hover:shadow-accent/25"
               >
                 Agendar diagnóstico gratuito
                 <ArrowRight size={18} />

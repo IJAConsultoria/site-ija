@@ -536,7 +536,7 @@ function EventDetailPage({ event }: { event: (typeof EVENTS)[number] }) {
                   </p>
                   <a
                     href="#segmentos"
-                    className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
+                    className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
                   >
                     Escolher segmento e inscrever
                     <ArrowRight size={18} />

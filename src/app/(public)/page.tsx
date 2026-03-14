@@ -106,7 +106,7 @@ export default function Home() {
                 <PulseGlow className="rounded-2xl">
                   <Link
                     href="/diagnostico"
-                    className="inline-flex items-center gap-2 rounded-2xl bg-accent px-10 py-5 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/25"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-4 sm:px-10 sm:py-5 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/25"
                   >
                     Agende seu diagnóstico gratuito
                     <ArrowRight size={18} />
@@ -114,7 +114,7 @@ export default function Home() {
                 </PulseGlow>
                 <Link
                   href="/metodo"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-10 py-5 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 sm:px-10 sm:py-5 text-sm sm:text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
                 >
                   Conheça o método
                 </Link>
@@ -445,7 +445,7 @@ export default function Home() {
                 },
               ].map((pillar) => (
                 <StaggerItem key={pillar.number}>
-                  <div className={`card-hover group relative overflow-hidden rounded-3xl border ${pillar.borderColor} bg-white p-8 lg:p-10`}>
+                  <div className={`card-hover group relative overflow-hidden rounded-3xl border ${pillar.borderColor} bg-white p-5 sm:p-8 lg:p-10`}>
                     <div className={`absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r ${pillar.color}`} />
                     <div
                       className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} text-white shadow-lg`}
@@ -480,7 +480,7 @@ export default function Home() {
             <div className="mt-16 text-center">
               <Link
                 href="/metodo"
-                className="group inline-flex items-center gap-2 rounded-2xl border border-navy-200 bg-white px-8 py-4 text-base font-semibold text-navy-950 shadow-sm transition-all hover:border-accent/30 hover:shadow-md hover:shadow-accent/5"
+                className="group inline-flex items-center gap-2 rounded-2xl border border-navy-200 bg-white px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-navy-950 shadow-sm transition-all hover:border-accent/30 hover:shadow-md hover:shadow-accent/5"
               >
                 Conheça o método completo
                 <ArrowRight
@@ -518,7 +518,7 @@ export default function Home() {
                     href={`/solucoes/${solution.slug}`}
                     className="card-hover group block overflow-hidden rounded-3xl border border-navy-100/50 bg-cream/30 transition-all hover:bg-white hover:border-accent/20"
                   >
-                    <div className="p-8 lg:p-10">
+                    <div className="p-5 sm:p-8 lg:p-10">
                       <div className="flex items-start gap-5">
                         <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/10 to-accent/5 text-accent transition-all duration-500 group-hover:from-accent group-hover:to-accent-dark group-hover:text-white group-hover:shadow-lg group-hover:shadow-accent/20 group-hover:scale-110">
                           <Icon size={28} />
@@ -635,7 +635,7 @@ export default function Home() {
                   className="card-hover group block overflow-hidden rounded-3xl border border-navy-100/50 bg-white"
                 >
                   {/* Header */}
-                  <div className="relative bg-navy-950 p-8 lg:p-10 noise-overlay">
+                  <div className="relative bg-navy-950 p-5 sm:p-8 lg:p-10 noise-overlay">
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(166,133,35,0.1)_0%,_transparent_50%)]" />
                     <div className="relative">
                       <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent">
@@ -695,7 +695,7 @@ export default function Home() {
             <div className="mt-16 text-center">
               <Link
                 href="/cases"
-                className="group inline-flex items-center gap-2 rounded-2xl border border-navy-200 bg-white px-8 py-4 text-base font-semibold text-navy-950 shadow-sm transition-all hover:border-accent/30 hover:shadow-md"
+                className="group inline-flex items-center gap-2 rounded-2xl border border-navy-200 bg-white px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-navy-950 shadow-sm transition-all hover:border-accent/30 hover:shadow-md"
               >
                 Ver todos os cases
                 <ArrowRight
@@ -727,7 +727,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="/diagnostico"
-                  className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
+                  className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105"
                 >
                   Faça seu diagnóstico gratuito
                   <ArrowRight size={16} />
@@ -736,7 +736,7 @@ export default function Home() {
             </FadeInLeft>
 
             <FadeInRight>
-              <div className="space-y-5 rounded-3xl border border-navy-100/50 bg-cream/50 p-8 lg:p-10">
+              <div className="space-y-5 rounded-3xl border border-navy-100/50 bg-cream/50 p-5 sm:p-8 lg:p-10">
                 <ProgressBar value={90} label="Gestão financeira precária" delay={0} />
                 <ProgressBar value={85} label="Preso na operação diária" delay={0.1} />
                 <ProgressBar value={80} label="Problemas com mão de obra" delay={0.2} />
@@ -823,7 +823,7 @@ export default function Home() {
                 <PulseGlow className="rounded-2xl">
                   <Link
                     href="/diagnostico"
-                    className="inline-flex items-center gap-2 rounded-2xl bg-accent px-10 py-5 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/25"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-4 sm:px-10 sm:py-5 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/25"
                   >
                     Agendar diagnóstico gratuito
                     <ArrowRight size={18} />
@@ -833,7 +833,7 @@ export default function Home() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-10 py-5 text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 sm:px-10 sm:py-5 text-sm sm:text-base font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20"
                 >
                   Falar pelo WhatsApp
                 </a>

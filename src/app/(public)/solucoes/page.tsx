@@ -267,7 +267,7 @@ export default function SolucoesPage() {
             </p>
             <Link
               href="/diagnostico"
-              className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-accent px-10 py-5 text-lg font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 glow-gold-sm"
+              className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-4 sm:px-10 sm:py-5 text-base sm:text-lg font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 glow-gold-sm"
             >
               Agendar diagnóstico gratuito
               <ArrowRight size={20} />
@@ -328,7 +328,7 @@ function SolutionMainContent({
 
       <Link
         href={`/solucoes/${solution.slug}`}
-        className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-lg hover:shadow-accent/25"
+        className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-lg hover:shadow-accent/25"
       >
         Ver solução completa
         <ArrowRight size={18} />

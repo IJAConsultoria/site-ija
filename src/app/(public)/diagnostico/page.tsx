@@ -282,7 +282,7 @@ export default function DiagnosticoPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full rounded-2xl bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/25"
+                    className="w-full rounded-2xl bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all hover:bg-accent-dark hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/25"
                   >
                     Quero meu diagnóstico gratuito
                   </button>

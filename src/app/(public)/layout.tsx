@@ -23,7 +23,7 @@ export default function PublicLayout({
         }}
       />
       <Header />
-      <main className="pt-[calc(4rem+2.5rem)] lg:pt-[calc(5rem+2.5rem)]">{children}</main>
+      <main className="pt-[calc(4rem+2rem)] sm:pt-[calc(4rem+2.5rem)] lg:pt-[calc(5rem+2.5rem)]">{children}</main>
       <Footer />
       <WhatsAppButton />
     </>

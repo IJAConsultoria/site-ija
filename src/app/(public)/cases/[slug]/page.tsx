@@ -183,7 +183,7 @@ export default async function CasePage({ params }: Props) {
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/diagnostico"
-              className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-accent-dark"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-accent-dark"
             >
               Agendar diagnóstico gratuito
               <ArrowRight size={18} />
@@ -192,7 +192,7 @@ export default async function CasePage({ params }: Props) {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-navy-600 px-8 py-4 text-base font-medium text-white transition-colors hover:border-navy-400 hover:bg-navy-900"
+              className="inline-flex items-center gap-2 rounded-lg border border-navy-600 px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-medium text-white transition-colors hover:border-navy-400 hover:bg-navy-900"
             >
               Falar pelo WhatsApp
             </a>
