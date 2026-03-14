@@ -73,7 +73,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-navy-950 py-28 lg:py-40 noise-overlay">
         <AnimatedBlob className="top-20 right-10 h-96 w-96 bg-accent/8" />
         <AnimatedBlob className="bottom-10 left-10 h-[500px] w-[500px] bg-navy-500/10" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(249,115,22,0.12)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.12)_0%,_transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(53,104,168,0.12)_0%,_transparent_50%)]" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -328,7 +328,7 @@ export default function Home() {
 
       {/* ===== PROBLEMA ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(249,115,22,0.06)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-4xl text-center">
@@ -416,7 +416,7 @@ export default function Home() {
                     "Procedimentos operacionais",
                     "Checklists de execução",
                   ],
-                  color: "from-accent to-orange-700",
+                  color: "from-accent to-gold-700",
                   borderColor: "border-accent/20",
                 },
                 {
@@ -550,7 +550,7 @@ export default function Home() {
 
       {/* ===== NÚMEROS COM COUNTERS ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(249,115,22,0.1)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(212,175,55,0.1)_0%,_transparent_50%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
@@ -594,7 +594,7 @@ export default function Home() {
             ].map((stat) => (
               <StaggerItem key={stat.label}>
                 <div className="glass group rounded-3xl p-8 text-center transition-all duration-500 hover:bg-white/10">
-                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-orange-700 text-white shadow-lg shadow-accent/20">
+                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-gold-700 text-white shadow-lg shadow-accent/20">
                     <stat.icon size={28} />
                   </div>
                   <p className="text-4xl font-bold text-white sm:text-5xl">
@@ -636,7 +636,7 @@ export default function Home() {
                 >
                   {/* Header */}
                   <div className="relative bg-navy-950 p-8 lg:p-10 noise-overlay">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(249,115,22,0.1)_0%,_transparent_50%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.1)_0%,_transparent_50%)]" />
                     <div className="relative">
                       <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent">
                         {cs.segment}
@@ -804,7 +804,7 @@ export default function Home() {
       {/* ===== CTA FINAL ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-28 lg:py-36 noise-overlay">
         <AnimatedBlob className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] bg-accent/5" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(249,115,22,0.12)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,175,55,0.12)_0%,_transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(53,104,168,0.08)_0%,_transparent_50%)]" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

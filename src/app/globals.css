@@ -18,10 +18,11 @@
   --navy-800: #082548;
   --navy-900: #041a35;
   --navy-950: #011735;
-  --orange-400: #fb923c;
-  --orange-500: #f97316;
-  --orange-600: #ea580c;
-  --orange-700: #c2410c;
+  --gold-300: #f0d77a;
+  --gold-400: #e5c44b;
+  --gold-500: #d4af37;
+  --gold-600: #b8962e;
+  --gold-700: #9a7b24;
 }
 
 @theme inline {
@@ -42,10 +43,10 @@
   --color-navy-800: var(--navy-800);
   --color-navy-900: var(--navy-900);
   --color-navy-950: var(--navy-950);
-  --color-accent: var(--orange-500);
-  --color-accent-light: var(--orange-400);
-  --color-accent-dark: var(--orange-600);
-  --color-accent-darker: var(--orange-700);
+  --color-accent: var(--gold-500);
+  --color-accent-light: var(--gold-400);
+  --color-accent-dark: var(--gold-600);
+  --color-accent-darker: var(--gold-700);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
   --font-mono: var(--font-geist-mono);
@@ -62,7 +63,7 @@ html {
 }
 
 ::selection {
-  background-color: var(--orange-500);
+  background-color: var(--gold-500);
   color: #ffffff;
 }
 
@@ -103,7 +104,7 @@ html {
 
 /* ===== GRADIENT TEXT ===== */
 .gradient-text {
-  background: linear-gradient(135deg, var(--orange-400) 0%, var(--orange-600) 100%);
+  background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-600) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -127,7 +128,7 @@ html {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, var(--orange-500), var(--navy-500), var(--orange-500));
+  background: linear-gradient(135deg, var(--gold-500), var(--navy-500), var(--gold-500));
   background-size: 300% 300%;
   animation: gradient-shift 6s ease infinite;
   z-index: -1;
@@ -139,17 +140,26 @@ html {
 }
 
 /* ===== GLOW EFFECTS ===== */
+.glow-gold {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1);
+}
+
+.glow-gold-sm {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+/* Legacy class names for compatibility */
 .glow-orange {
-  box-shadow: 0 0 30px rgba(249, 115, 22, 0.3), 0 0 60px rgba(249, 115, 22, 0.1);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1);
 }
 
 .glow-orange-sm {
-  box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
 /* ===== ICON GRADIENTS ===== */
 .icon-gradient {
-  background: linear-gradient(135deg, var(--orange-500) 0%, var(--orange-700) 100%);
+  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-700) 100%);
 }
 
 .icon-gradient-navy {
@@ -172,7 +182,7 @@ html {
 }
 .card-hover:hover {
   transform: translateY(-6px);
-  box-shadow: 0 25px 50px rgba(1, 23, 53, 0.12), 0 0 0 1px rgba(249, 115, 22, 0.1);
+  box-shadow: 0 25px 50px rgba(1, 23, 53, 0.12), 0 0 0 1px rgba(212, 175, 55, 0.15);
 }
 
 .card-hover-subtle {
@@ -195,7 +205,7 @@ html {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.08) 50%,
+    rgba(212, 175, 55, 0.06) 50%,
     transparent 100%
   );
   transform: translateX(-100%);
@@ -244,7 +254,7 @@ html {
 /* ===== HORIZONTAL RULE ANIMATION ===== */
 .hr-animated {
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--orange-500), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
   border: none;
 }
 
@@ -260,7 +270,7 @@ html {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--orange-500), var(--orange-700));
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-700));
   border-radius: 999px;
 }
 
@@ -284,7 +294,7 @@ html {
 .progress-bar {
   height: 4px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--orange-500), var(--orange-600));
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
   animation: progress-fill 1.5s ease-out forwards;
 }
 
@@ -306,7 +316,7 @@ html {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, var(--orange-500), var(--orange-700));
+  background: linear-gradient(to bottom, var(--gold-500), var(--gold-700));
   border-radius: 999px;
 }
 
@@ -325,7 +335,7 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: inherit;
   z-index: 1;
   pointer-events: none;
@@ -343,7 +353,7 @@ html {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--orange-500);
+  background: var(--gold-500);
   transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .hover-line:hover::after {

@@ -434,9 +434,9 @@ export function PulseGlow({ children, className }: AnimatedProps) {
       className={className}
       animate={{
         boxShadow: [
-          "0 0 0 0 rgba(249, 115, 22, 0)",
-          "0 0 0 12px rgba(249, 115, 22, 0.15)",
-          "0 0 0 0 rgba(249, 115, 22, 0)",
+          "0 0 0 0 rgba(212, 175, 55, 0)",
+          "0 0 0 12px rgba(212, 175, 55, 0.15)",
+          "0 0 0 0 rgba(212, 175, 55, 0)",
         ],
       }}
       transition={{

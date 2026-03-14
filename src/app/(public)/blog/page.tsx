@@ -69,7 +69,7 @@ export default function BlogPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(249,115,22,0.12)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.12)_0%,_transparent_50%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
@@ -160,7 +160,7 @@ export default function BlogPage() {
                 <div className="card-hover group flex h-full flex-col rounded-3xl border border-navy-100/50 bg-cream/30 p-8 transition-all hover:bg-white hover:border-accent/20">
                   {/* Category placeholder photo area */}
                   <div className="mb-6 flex h-48 items-center justify-center rounded-2xl bg-navy-950 noise-overlay relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(249,115,22,0.1)_0%,_transparent_60%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.1)_0%,_transparent_60%)]" />
                     <span className="relative text-4xl font-bold text-white/5 select-none">IJA</span>
                   </div>
                   <span className="inline-block w-fit rounded-full bg-accent/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-accent">
@@ -184,7 +184,7 @@ export default function BlogPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-2xl rounded-3xl border border-navy-100/50 bg-white p-10 text-center shadow-lg shadow-navy-950/5 lg:p-14">
-              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-orange-700 text-white shadow-lg shadow-accent/20">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-gold-700 text-white shadow-lg shadow-accent/20">
                 <BookOpen size={28} />
               </div>
               <h2 className="text-2xl font-bold text-navy-950 lg:text-3xl">

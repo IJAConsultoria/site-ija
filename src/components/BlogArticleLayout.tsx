@@ -223,7 +223,7 @@ export default function BlogArticleLayout({
 
                 {/* CTA Banner */}
                 <div className="overflow-hidden rounded-3xl bg-navy-950 p-6 noise-overlay relative">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(249,115,22,0.15)_0%,_transparent_60%)]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.15)_0%,_transparent_60%)]" />
                   <div className="relative">
                     <p className="text-xs font-bold uppercase tracking-wider text-accent">
                       Diagnóstico Gratuito
