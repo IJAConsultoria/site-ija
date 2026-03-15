@@ -1,4 +1,4 @@
-export const SITE_URL = "https://institutojoaoalves.com.br";
+export const SITE_URL = "https://www.ijaconsultoria.com.br";
 export const SITE_NAME = "Instituto João Alves";
 export const SITE_DESCRIPTION =
   "Consultoria especializada em estruturar restaurantes para expansão. Método Tripé da Expansão com 14 anos de experiência, +120 negócios transformados e +R$ 40 milhões em lucratividade gerada.";

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /acesso/
 Disallow: /api/
 
-Sitemap: https://institutojoaoalves.com.br/sitemap.xml
+Sitemap: https://www.ijaconsultoria.com.br/sitemap.xml
