@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, CheckCircle, Clock, BarChart3, Shield, Zap } from "lucide-react";
-import { WHATSAPP_URL, NUMBERS } from "@/lib/constants";
+import { useRouter } from "next/navigation";
+import { CheckCircle, Clock, BarChart3, Shield, Zap } from "lucide-react";
+import { NUMBERS } from "@/lib/constants";
 import {
   getSessionId,
   getPageStartTime,
@@ -24,7 +25,7 @@ export default function DiagnosticoPage() {
     revenue: "",
     pain: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
   const [sessionId, setSessionId] = useState("");
   const [pageStart, setPageStart] = useState(0);
 
@@ -74,7 +75,10 @@ export default function DiagnosticoPage() {
       console.error("Error saving to Supabase:", err);
     }
 
-    setSubmitted(true);
+    const thankYouParams = new URLSearchParams({
+      nome: formData.name.split(" ")[0],
+    });
+    router.push(`/diagnostico/obrigado?${thankYouParams.toString()}`);
   };
 
   return (
@@ -186,28 +190,7 @@ export default function DiagnosticoPage() {
               <p className="mt-2 text-navy-600">
                 Preencha o formulário e entraremos em contato em até 24h.
               </p>
-              {submitted ? (
-                <div className="mt-8 rounded-2xl bg-accent/10 border border-accent/20 p-10 text-center">
-                  <CheckCircle size={48} className="mx-auto text-accent" />
-                  <p className="mt-4 text-xl font-semibold text-navy-950">
-                    Recebemos sua solicitação!
-                  </p>
-                  <p className="mt-2 text-navy-600">
-                    Nossa equipe entrará em contato em até 24 horas úteis para
-                    agendar seu diagnóstico.
-                  </p>
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 text-accent font-semibold hover:text-accent-dark"
-                  >
-                    Ou fale agora pelo WhatsApp
-                    <ArrowRight size={16} />
-                  </a>
-                </div>
-              ) : (
-                <form id="waitlist-form" onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <form id="waitlist-form" onSubmit={handleSubmit} className="mt-8 space-y-5">
                   <div>
                     <label htmlFor="d-name" className="block text-sm font-medium text-navy-700">
                       Nome completo *
@@ -257,7 +240,7 @@ export default function DiagnosticoPage() {
                   </div>
                   <div>
                     <label htmlFor="d-restaurant" className="block text-sm font-medium text-navy-700">
-                      Nome do restaurante *
+                      Nome da empresa *
                     </label>
                     <input
                       type="text"
@@ -266,7 +249,7 @@ export default function DiagnosticoPage() {
                       value={formData.restaurant}
                       onChange={(e) => setFormData({ ...formData, restaurant: e.target.value })}
                       className="mt-1 w-full rounded-2xl border border-navy-200 bg-white px-4 py-3.5 text-navy-950 placeholder-navy-400 focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-colors"
-                      placeholder="Nome do seu negócio"
+                      placeholder="Nome da sua empresa"
                     />
                   </div>
                   <div>
@@ -320,7 +303,6 @@ export default function DiagnosticoPage() {
                     Seus dados estão seguros. Não compartilhamos com terceiros.
                   </p>
                 </form>
-              )}
             </div>
           </div>
         </div>
