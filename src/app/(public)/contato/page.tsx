@@ -110,7 +110,7 @@ export default function ContatoPage() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+                <form id="waitlist-form" onSubmit={handleSubmit} className="mt-8 space-y-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-navy-700">
@@ -119,6 +119,7 @@ export default function ContatoPage() {
                       <input
                         type="text"
                         id="name"
+                        name="name"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -133,6 +134,7 @@ export default function ContatoPage() {
                       <input
                         type="email"
                         id="email"
+                        name="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -149,6 +151,7 @@ export default function ContatoPage() {
                       <input
                         type="tel"
                         id="phone"
+                        name="whatsapp"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: maskPhone(e.target.value) })}
                         className="mt-1 w-full rounded-2xl border border-navy-200 bg-white px-4 py-3.5 text-navy-950 placeholder-navy-400 focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-colors"

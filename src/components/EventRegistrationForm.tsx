@@ -115,7 +115,7 @@ export default function EventRegistrationForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form id="waitlist-form" onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label
           htmlFor="ev-name"
@@ -126,6 +126,7 @@ export default function EventRegistrationForm({
         <input
           type="text"
           id="ev-name"
+          name="name"
           required
           value={formData.name}
           onChange={(e) =>
@@ -147,6 +148,7 @@ export default function EventRegistrationForm({
           <input
             type="email"
             id="ev-email"
+            name="email"
             required
             value={formData.email}
             onChange={(e) =>
@@ -166,6 +168,7 @@ export default function EventRegistrationForm({
           <input
             type="tel"
             id="ev-phone"
+            name="whatsapp"
             required
             value={formData.phone}
             onChange={(e) =>

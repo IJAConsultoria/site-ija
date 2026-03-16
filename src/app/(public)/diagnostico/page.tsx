@@ -207,7 +207,7 @@ export default function DiagnosticoPage() {
                   </a>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                <form id="waitlist-form" onSubmit={handleSubmit} className="mt-8 space-y-5">
                   <div>
                     <label htmlFor="d-name" className="block text-sm font-medium text-navy-700">
                       Nome completo *
@@ -215,6 +215,7 @@ export default function DiagnosticoPage() {
                     <input
                       type="text"
                       id="d-name"
+                      name="name"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -230,6 +231,7 @@ export default function DiagnosticoPage() {
                       <input
                         type="email"
                         id="d-email"
+                        name="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -244,6 +246,7 @@ export default function DiagnosticoPage() {
                       <input
                         type="tel"
                         id="d-phone"
+                        name="whatsapp"
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: maskPhone(e.target.value) })}
