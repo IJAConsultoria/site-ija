@@ -294,7 +294,7 @@ export function pushFormSubmit({
 }) {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    event: "form_submit_success",
+    event: "form_submit",
     email: email.trim().toLowerCase(),
     phoneNumber: stripPhoneMask(phoneNumber),
     nome,
