@@ -266,8 +266,8 @@ export const EVENTS = [
       "Live prática onde João Pedro Alves mostra como calcular o lucro real do seu negócio usando ferramentas simples. Você vai sair sabendo exatamente quanto sobra no final do mês.",
     longDescription:
       "A maioria dos donos de negócio não sabe quanto realmente lucra. Confundem faturamento com lucro, não separam custos fixos de variáveis, e tomam decisões financeiras no escuro. Nesta live 100% prática, João Pedro Alves — com 14 anos de experiência em consultoria para food service — vai mostrar o passo a passo para você descobrir seu lucro real em menos de 30 minutos, usando ferramentas que você já tem.",
-    date: "31 de março",
-    dateISO: "2026-03-31",
+    date: "7 de abril",
+    dateISO: "2026-04-07",
     time: "19h",
     duration: "60 min",
     type: "Live" as const,
@@ -296,8 +296,8 @@ export const EVENTS = [
       "Webinar com cases reais de negócios que travaram — e como o Tripé da Expansão desbloqueou o crescimento de cada um.",
     longDescription:
       "Por que alguns negócios faturam R$ 500 mil/mês mas não conseguem abrir a segunda unidade? Por que outros crescem rápido mas perdem qualidade? Neste webinar, João Pedro Alves apresenta 3 cases reais de negócios que travaram em pontos diferentes — e mostra como o Método Tripé da Expansão (Padronização + Universidade Corporativa + Controle de Qualidade) desbloqueou o crescimento de cada um.",
-    date: "21 de abril",
-    dateISO: "2026-04-21",
+    date: "2 de maio",
+    dateISO: "2026-05-02",
     time: "19h",
     duration: "75 min",
     type: "Webinar" as const,
@@ -326,8 +326,8 @@ export const EVENTS = [
       "Workshop sobre desenvolvimento de líderes internos para o seu negócio. Reduza turnover e crie uma equipe autônoma.",
     longDescription:
       "65% dos negócios sofrem com rotatividade alta. O custo de perder um funcionário treinado pode chegar a 3x o salário mensal. Neste workshop prático, João Pedro Alves mostra como criar um programa de desenvolvimento de líderes que transforma funcionários comuns em gerentes que pensam como donos — usando a metodologia da Universidade Corporativa do IJA, testada em mais de 120 negócios.",
-    date: "12 de maio",
-    dateISO: "2026-05-12",
+    date: "27 de maio",
+    dateISO: "2026-05-27",
     time: "19h",
     duration: "90 min",
     type: "Workshop" as const,
