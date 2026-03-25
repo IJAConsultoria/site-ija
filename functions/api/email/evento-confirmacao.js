@@ -107,10 +107,6 @@ function buildICS(title, dateISO, time, durationMinutes, meetUrl) {
   return lines.join("\r\n");
 }
 
-function btoa(str) {
-  return Buffer.from(str).toString("base64");
-}
-
 export async function onRequestPost(context) {
   const { env } = context;
   const RESEND_API_KEY = env.RESEND_API_KEY;
