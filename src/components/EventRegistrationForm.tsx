@@ -21,6 +21,8 @@ type Props = {
   eventType: string;
   eventDate: string;
   eventTime: string;
+  eventDuration?: string;
+  eventDateISO?: string;
   segmentOrigin?: string;
   segmentName?: string;
 };
@@ -31,6 +33,8 @@ export default function EventRegistrationForm({
   eventType,
   eventDate,
   eventTime,
+  eventDuration = "60 min",
+  eventDateISO,
   segmentOrigin = "geral",
   segmentName = "empresa",
 }: Props) {
@@ -103,6 +107,27 @@ export default function EventRegistrationForm({
       });
     } catch (err) {
       console.error("Error saving to Supabase:", err);
+    }
+
+    // Envia email de confirmação com convite .ics
+    try {
+      await fetch("/api/email/evento-confirmacao", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome,
+          email: formData.email.trim().toLowerCase(),
+          eventTitle,
+          eventType,
+          eventSlug,
+          eventDate,
+          eventTime,
+          eventDuration,
+          eventDateISO,
+        }),
+      });
+    } catch (err) {
+      console.error("Error sending confirmation email:", err);
     }
 
     // Redirect to thank you page with event context

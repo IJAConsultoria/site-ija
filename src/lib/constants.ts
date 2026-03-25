@@ -249,6 +249,9 @@ export const EVENTS = [
   {
     slug: "lucro-real-30-minutos",
     title: "Como Descobrir seu Lucro Real em 30 Minutos",
+    meetUrl: "https://meet.google.com/fkm-hpec-kcv",
+    meetPhone: "+55 31 3958-9568",
+    meetPin: "214 835 904#",
     description:
       "Live prática onde João Pedro Alves mostra como calcular o lucro real do seu negócio usando ferramentas simples. Você vai sair sabendo exatamente quanto sobra no final do mês.",
     longDescription:

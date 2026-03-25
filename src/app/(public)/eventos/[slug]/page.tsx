@@ -151,6 +151,8 @@ export default async function EventDetailPage({ params }: Props) {
                     eventType={event.type}
                     eventDate={event.date}
                     eventTime={event.time}
+                    eventDuration={event.duration}
+                    eventDateISO={event.dateISO}
                   />
                 </div>
               </FadeInRight>
