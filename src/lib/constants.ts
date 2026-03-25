@@ -45,20 +45,7 @@ export const NAV_LINKS = [
   },
   { label: "Soluções", href: "/solucoes" },
   { label: "Cases", href: "/cases" },
-  {
-    label: "Eventos",
-    href: "/eventos",
-    children: [
-      { label: "Restaurantes", href: "/eventos/restaurantes" },
-      { label: "Hamburguerias", href: "/eventos/hamburguerias" },
-      { label: "Pizzarias", href: "/eventos/pizzarias" },
-      { label: "Bares", href: "/eventos/bares" },
-      { label: "Cafeterias", href: "/eventos/cafeterias" },
-      { label: "Food Service", href: "/eventos/food-service" },
-      { label: "Varejo", href: "/eventos/varejo" },
-      { label: "Turismo", href: "/eventos/turismo" },
-    ],
-  },
+  { label: "Eventos", href: "/eventos" },
   { label: "Blog", href: "/blog" },
   { label: "Contato", href: "/contato" },
 ];
@@ -265,7 +252,7 @@ export const EVENTS = [
     description:
       "Live prática onde João Pedro Alves mostra como calcular o lucro real do seu negócio usando ferramentas simples. Você vai sair sabendo exatamente quanto sobra no final do mês.",
     longDescription:
-      "A maioria dos donos de negócio não sabe quanto realmente lucra. Confundem faturamento com lucro, não separam custos fixos de variáveis, e tomam decisões financeiras no escuro. Nesta live 100% prática, João Pedro Alves — com 14 anos de experiência em consultoria para food service — vai mostrar o passo a passo para você descobrir seu lucro real em menos de 30 minutos, usando ferramentas que você já tem.",
+      "A maioria dos donos de negócio não sabe quanto realmente lucra. Confundem faturamento com lucro, não separam custos fixos de variáveis, e tomam decisões financeiras no escuro. Nesta live 100% prática, João Pedro Alves — com 14 anos de experiência em consultoria empresarial — vai mostrar o passo a passo para você descobrir seu lucro real em menos de 30 minutos, usando ferramentas que você já tem.",
     date: "7 de abril",
     dateISO: "2026-04-07",
     time: "19h",
@@ -273,17 +260,17 @@ export const EVENTS = [
     type: "Live" as const,
     tags: ["Gestão Financeira", "CMV", "Lucro", "DRE"],
     speaker: "João Pedro Alves",
-    speakerRole: "Fundador do IJA — 14 anos em consultoria para food service",
+    speakerRole: "Fundador do IJA — 14 anos em consultoria empresarial",
     topics: [
-      "Como separar custos fixos e variáveis do seu restaurante",
+      "Como separar custos fixos e variáveis do seu negócio",
       "Cálculo do CMV real (não o que o contador diz)",
       "A diferença entre faturamento, lucro bruto e lucro líquido",
       "Planilha prática para acompanhar seu lucro semanalmente",
-      "Os 3 erros financeiros mais comuns em restaurantes",
+      "Os 3 erros financeiros mais comuns em negócios",
       "Como usar o DRE simplificado para tomar decisões",
     ],
     forWho: [
-      "Donos de restaurante que não sabem o lucro real",
+      "Donos de negócio que não sabem o lucro real",
       "Gestores que confundem faturamento com lucro",
       "Empreendedores que querem controlar melhor as finanças",
     ],
@@ -295,7 +282,7 @@ export const EVENTS = [
     description:
       "Webinar com cases reais de negócios que travaram — e como o Tripé da Expansão desbloqueou o crescimento de cada um.",
     longDescription:
-      "Por que alguns negócios faturam R$ 500 mil/mês mas não conseguem abrir a segunda unidade? Por que outros crescem rápido mas perdem qualidade? Neste webinar, João Pedro Alves apresenta 3 cases reais de negócios que travaram em pontos diferentes — e mostra como o Método Tripé da Expansão (Padronização + Universidade Corporativa + Controle de Qualidade) desbloqueou o crescimento de cada um.",
+      "Por que alguns negócios faturam R$ 500 mil/mês mas não conseguem abrir a segunda unidade? Por que outros crescem rápido mas perdem qualidade? Neste webinar, João Pedro Alves apresenta 3 cases reais de empresas que travaram em pontos diferentes — e mostra como o Método Tripé da Expansão (Padronização + Universidade Corporativa + Controle de Qualidade) desbloqueou o crescimento de cada um.",
     date: "2 de maio",
     dateISO: "2026-05-02",
     time: "19h",
@@ -303,10 +290,10 @@ export const EVENTS = [
     type: "Webinar" as const,
     tags: ["Expansão", "Cases", "Método Tripé", "Estratégia"],
     speaker: "João Pedro Alves",
-    speakerRole: "Fundador do IJA — 14 anos em consultoria para food service",
+    speakerRole: "Fundador do IJA — 14 anos em consultoria empresarial",
     topics: [
-      "Erro #1: Crescer sem padronizar (o caso da hamburgueria que abriu 3 e fechou 2)",
-      "Erro #2: Depender do dono para tudo funcionar (o restaurante refém)",
+      "Erro #1: Crescer sem padronizar (o caso do negócio que abriu 3 unidades e fechou 2)",
+      "Erro #2: Depender do dono para tudo funcionar (o negócio refém)",
       "Erro #3: Expandir sem controle financeiro (faturar mais e lucrar menos)",
       "O Método Tripé da Expansão: como funciona na prática",
       "Case Outros 500: de 2 para 10 unidades em 4 anos",
@@ -314,7 +301,7 @@ export const EVENTS = [
     ],
     forWho: [
       "Donos que querem expandir mas não sabem como",
-      "Restaurantes com faturamento alto mas lucro baixo",
+      "Negócios com faturamento alto mas lucro baixo",
       "Empreendedores presos na operação do dia a dia",
     ],
     status: "upcoming" as const,
@@ -325,7 +312,7 @@ export const EVENTS = [
     description:
       "Workshop sobre desenvolvimento de líderes internos para o seu negócio. Reduza turnover e crie uma equipe autônoma.",
     longDescription:
-      "65% dos negócios sofrem com rotatividade alta. O custo de perder um funcionário treinado pode chegar a 3x o salário mensal. Neste workshop prático, João Pedro Alves mostra como criar um programa de desenvolvimento de líderes que transforma funcionários comuns em gerentes que pensam como donos — usando a metodologia da Universidade Corporativa do IJA, testada em mais de 120 negócios.",
+      "65% dos negócios sofrem com rotatividade alta. O custo de perder um funcionário treinado pode chegar a 3x o salário mensal. Neste workshop prático, João Pedro Alves mostra como criar um programa de desenvolvimento de líderes que transforma funcionários comuns em gerentes que pensam como donos — usando a metodologia da Universidade Corporativa do IJA, testada em mais de 120 empresas.",
     date: "27 de maio",
     dateISO: "2026-05-27",
     time: "19h",
@@ -333,18 +320,18 @@ export const EVENTS = [
     type: "Workshop" as const,
     tags: ["Liderança", "RH", "Equipe", "Turnover", "Universidade Corporativa"],
     speaker: "João Pedro Alves",
-    speakerRole: "Fundador do IJA — 14 anos em consultoria para food service",
+    speakerRole: "Fundador do IJA — 14 anos em consultoria empresarial",
     topics: [
       "Por que bons funcionários pedem demissão (e não é só por dinheiro)",
       "O framework de 4 níveis para desenvolver líderes internos",
       "Como criar uma Universidade Corporativa mesmo com equipe pequena",
-      "Plano de carreira para restaurantes: do auxiliar ao gerente",
+      "Plano de carreira: do auxiliar ao gerente",
       "Scripts de feedback e avaliação de desempenho",
       "O erro fatal: promover o melhor técnico para gerente",
     ],
     forWho: [
       "Donos que querem sair da operação do dia a dia",
-      "Restaurantes com alta rotatividade de equipe",
+      "Negócios com alta rotatividade de equipe",
       "Gestores que não conseguem delegar",
     ],
     status: "upcoming" as const,

@@ -9,7 +9,6 @@ import {
   Mic,
   Bell,
   Zap,
-  ChevronRight,
 } from "lucide-react";
 import { generatePageMetadata, breadcrumbSchema } from "@/lib/seo";
 import {
@@ -20,13 +19,12 @@ import {
   StaggerItem,
   AnimatedBlob,
 } from "@/components/animations";
-import { EVENTS, SEGMENTS, WHATSAPP_URL } from "@/lib/constants";
-import { SEGMENT_EVENT_CONTENT } from "@/lib/event-segments";
+import { EVENTS, WHATSAPP_URL } from "@/lib/constants";
 
 export const metadata = generatePageMetadata({
   title: "Eventos e Lives",
   description:
-    "Lives, webinars e workshops do Instituto João Alves sobre gestão de restaurantes, food service, finanças, liderança e expansão.",
+    "Lives, webinars e workshops do Instituto João Alves sobre gestão de negócios, finanças, liderança e expansão.",
   path: "/eventos",
 });
 
@@ -77,8 +75,7 @@ export default function EventosPage() {
               </h1>
               <p className="mt-6 text-lg text-navy-300 lg:text-xl">
                 Conteúdo ao vivo sobre gestão de negócios, finanças, liderança
-                e expansão. 100% prático, direto ao ponto, para todos os
-                segmentos.
+                e expansão. 100% prático e direto ao ponto.
               </p>
             </div>
           </FadeInUp>
@@ -115,102 +112,74 @@ export default function EventosPage() {
             {EVENTS.map((event) => {
               const config = typeConfig[event.type] || typeConfig.Live;
               const TypeIcon = config.icon;
-              const eventSegments = SEGMENTS.filter(
-                (s) => SEGMENT_EVENT_CONTENT[event.slug]?.[s.slug]
-              );
 
               return (
                 <StaggerItem key={event.slug}>
-                  <div className="overflow-hidden rounded-3xl border border-navy-100/50 bg-white">
-                    {/* Event header */}
-                    <Link
-                      href={`/eventos/${event.slug}`}
-                      className="group block"
-                    >
-                      <div className="flex flex-col lg:flex-row">
-                        {/* Left: date & type */}
-                        <div className="flex items-center gap-4 bg-navy-950 px-5 py-4 sm:gap-6 sm:px-8 sm:py-6 lg:w-56 lg:flex-col lg:justify-center lg:gap-3">
-                          <div
-                            className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1.5 text-xs font-bold ${config.color}`}
-                          >
-                            <TypeIcon size={12} />
-                            {event.type}
-                          </div>
-                          <div className="text-center">
-                            <p className="text-lg font-bold text-white">
-                              {event.date}
-                            </p>
-                            <div className="mt-1 flex items-center justify-center gap-3 text-navy-400">
-                              <span className="flex items-center gap-1 text-xs">
-                                <Clock size={11} />
-                                {event.time}
-                              </span>
-                              <span className="flex items-center gap-1 text-xs">
-                                <Timer size={11} />
-                                {event.duration}
-                              </span>
-                            </div>
-                          </div>
+                  <Link
+                    href={`/eventos/${event.slug}`}
+                    className="group block overflow-hidden rounded-3xl border border-navy-100/50 bg-white transition-all hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5"
+                  >
+                    <div className="flex flex-col lg:flex-row">
+                      {/* Left: date & type */}
+                      <div className="flex items-center gap-4 bg-navy-950 px-5 py-4 sm:gap-6 sm:px-8 sm:py-6 lg:w-56 lg:flex-col lg:justify-center lg:gap-3">
+                        <div
+                          className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1.5 text-xs font-bold ${config.color}`}
+                        >
+                          <TypeIcon size={12} />
+                          {event.type}
                         </div>
-
-                        {/* Right: content */}
-                        <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
-                          <div>
-                            <h3 className="text-xl font-bold text-navy-950 transition-colors group-hover:text-accent lg:text-2xl">
-                              {event.title}
-                            </h3>
-                            <p className="mt-3 text-navy-600 leading-relaxed">
-                              {event.description}
-                            </p>
-                            <div className="mt-4 flex flex-wrap gap-2">
-                              {event.tags.map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="rounded-lg bg-cream px-2.5 py-1 text-xs font-medium text-navy-600"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="mt-6 flex items-center justify-between">
-                            <p className="text-sm text-navy-500">
-                              <span className="font-medium text-navy-700">
-                                {event.speaker}
-                              </span>{" "}
-                              — {event.speakerRole.split("—")[0]}
-                            </p>
-                            <span className="inline-flex items-center gap-2 rounded-xl bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-all group-hover:bg-accent group-hover:text-white">
-                              Ver detalhes
-                              <ArrowRight size={14} />
+                        <div className="text-center">
+                          <p className="text-lg font-bold text-white">
+                            {event.date}
+                          </p>
+                          <div className="mt-1 flex items-center justify-center gap-3 text-navy-400">
+                            <span className="flex items-center gap-1 text-xs">
+                              <Clock size={11} />
+                              {event.time}
+                            </span>
+                            <span className="flex items-center gap-1 text-xs">
+                              <Timer size={11} />
+                              {event.duration}
                             </span>
                           </div>
                         </div>
                       </div>
-                    </Link>
 
-                    {/* Segment strip */}
-                    {eventSegments.length > 0 && (
-                      <div className="border-t border-navy-100/50 bg-cream/50 px-4 py-4 sm:px-8 sm:py-5">
-                        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-navy-400">
-                          Inscreva-se pelo seu segmento
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {eventSegments.map((seg) => (
-                            <Link
-                              key={seg.slug}
-                              href={`/eventos/${event.slug}/${seg.slug}`}
-                              className="inline-flex items-center gap-2 rounded-xl border border-navy-100/50 bg-white px-4 py-2.5 text-sm font-medium text-navy-700 transition-all hover:border-accent/30 hover:text-accent hover:shadow-sm"
-                            >
-                              <span>{seg.emoji}</span>
-                              {seg.name}
-                              <ChevronRight size={12} className="text-navy-300" />
-                            </Link>
-                          ))}
+                      {/* Right: content */}
+                      <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
+                        <div>
+                          <h3 className="text-xl font-bold text-navy-950 transition-colors group-hover:text-accent lg:text-2xl">
+                            {event.title}
+                          </h3>
+                          <p className="mt-3 text-navy-600 leading-relaxed">
+                            {event.description}
+                          </p>
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {event.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="rounded-lg bg-cream px-2.5 py-1 text-xs font-medium text-navy-600"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="mt-6 flex items-center justify-between">
+                          <p className="text-sm text-navy-500">
+                            <span className="font-medium text-navy-700">
+                              {event.speaker}
+                            </span>{" "}
+                            — {event.speakerRole.split("—")[0]}
+                          </p>
+                          <span className="inline-flex items-center gap-2 rounded-xl bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-all group-hover:bg-accent group-hover:text-white">
+                            Inscrever-se
+                            <ArrowRight size={14} />
+                          </span>
                         </div>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  </Link>
                 </StaggerItem>
               );
             })}
@@ -260,8 +229,8 @@ export default function EventosPage() {
                   },
                   {
                     icon: Users,
-                    title: "Cases reais de +120 negócios",
-                    desc: "Exemplos concretos de negócios que saíram do caos para a estrutura.",
+                    title: "Cases reais de +120 empresas",
+                    desc: "Exemplos concretos de empresas que saíram do caos para a estrutura.",
                   },
                   {
                     icon: Video,

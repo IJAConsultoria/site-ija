@@ -21,8 +21,8 @@ type Props = {
   eventType: string;
   eventDate: string;
   eventTime: string;
-  segmentOrigin: string;
-  segmentName: string;
+  segmentOrigin?: string;
+  segmentName?: string;
 };
 
 export default function EventRegistrationForm({
@@ -31,8 +31,8 @@ export default function EventRegistrationForm({
   eventType,
   eventDate,
   eventTime,
-  segmentOrigin,
-  segmentName,
+  segmentOrigin = "geral",
+  segmentName = "empresa",
 }: Props) {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -108,7 +108,6 @@ export default function EventRegistrationForm({
     // Redirect to thank you page with event context
     const thankYouParams = new URLSearchParams({
       evento: eventSlug,
-      segmento: segmentOrigin,
       nome: formData.name.split(" ")[0],
     });
     router.push(`/eventos/obrigado?${thankYouParams.toString()}`);
@@ -198,7 +197,7 @@ export default function EventRegistrationForm({
             setFormData({ ...formData, businessName: e.target.value })
           }
           className="mt-1 w-full rounded-2xl border border-navy-200 bg-white px-4 py-3.5 text-navy-950 placeholder-navy-400 focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-colors"
-          placeholder={`Nome da sua ${segmentName.toLowerCase()}`}
+          placeholder="Nome da sua empresa"
         />
       </div>
 

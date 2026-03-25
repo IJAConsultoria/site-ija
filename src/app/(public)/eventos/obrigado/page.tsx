@@ -19,7 +19,6 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { EVENTS } from "@/lib/constants";
-import { getSegmentEventContent } from "@/lib/event-segments";
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/EqRxsVTZ67P7XObCFEjb3w";
 
@@ -32,11 +31,9 @@ const typeConfig: Record<string, { icon: React.ElementType; color: string; bg: s
 function ThankYouContent() {
   const searchParams = useSearchParams();
   const eventoSlug = searchParams.get("evento") || "";
-  const segmentoSlug = searchParams.get("segmento") || "";
   const nome = searchParams.get("nome") || "";
 
   const event = EVENTS.find((e) => e.slug === eventoSlug);
-  const segContent = getSegmentEventContent(eventoSlug, segmentoSlug);
   const config = event ? typeConfig[event.type] || typeConfig.Live : typeConfig.Live;
   const TypeIcon = config.icon;
 
@@ -217,7 +214,7 @@ function ThankYouContent() {
                 </span>
               </div>
               <p className="mt-3 text-base font-bold text-white">
-                {segContent?.headline || event.title}
+                {event.title}
               </p>
               <p className="mt-1 text-sm text-navy-400">
                 Com {event.speaker} - {event.duration}
