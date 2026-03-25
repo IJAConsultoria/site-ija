@@ -9,6 +9,7 @@ import {
   Users as UsersIcon,
   CalendarPlus,
   ArrowRight,
+  ArrowDown,
   MessageCircle,
   Clock,
   Video,
@@ -156,95 +157,73 @@ function ThankYouContent() {
 
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-navy-950 py-20 lg:py-28 noise-overlay">
+      {/* ===== HERO (compacto) ===== */}
+      <section className="relative overflow-hidden bg-navy-950 py-12 lg:py-16 noise-overlay">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.2)_0%,_transparent_60%)]" />
-
-        {/* Animated sparkles background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-pulse"
-              style={{
-                left: `${15 + i * 15}%`,
-                top: `${20 + (i % 3) * 25}%`,
-                animationDelay: `${i * 0.5}s`,
-                animationDuration: `${2 + i * 0.3}s`,
-              }}
-            >
-              <Sparkles
-                size={14 + i * 2}
-                className="text-accent/20"
-              />
-            </div>
-          ))}
-        </div>
 
         <div className="relative mx-auto max-w-3xl px-4 text-center">
           {/* Success icon */}
-          <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full bg-accent/20 ring-4 ring-accent/10">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white">
-              <CheckCircle size={36} />
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-accent/20 ring-4 ring-accent/10">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white">
+              <CheckCircle size={24} />
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
             {nome ? `${nome}, sua` : "Sua"} inscrição está{" "}
             <span className="serif-italic gradient-text">confirmada</span>!
           </h1>
 
-          <p className="mt-4 text-lg text-navy-300">
-            Você está inscrito no evento. Agora complete os passos abaixo para
-            garantir que não vai perder nada.
-          </p>
-
-          {/* Event info card */}
+          {/* Event info inline */}
           {event && (
-            <div className="mx-auto mt-8 max-w-md rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-              <div className="flex items-center justify-center gap-3">
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1 text-xs font-bold ${config.color}`}
-                >
-                  <TypeIcon size={12} />
-                  {event.type}
-                </span>
-                <span className="text-sm text-navy-400">
-                  {event.date} - {event.time}
-                </span>
-              </div>
-              <p className="mt-3 text-base font-bold text-white">
+            <div className="mt-4 inline-flex flex-wrap items-center justify-center gap-3">
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full ${config.bg} px-3 py-1 text-xs font-bold ${config.color}`}
+              >
+                <TypeIcon size={12} />
+                {event.type}
+              </span>
+              <span className="text-sm font-medium text-white">
                 {event.title}
-              </p>
-              <p className="mt-1 text-sm text-navy-400">
-                Com {event.speaker} - {event.duration}
-              </p>
+              </span>
+              <span className="text-sm text-navy-400">
+                {event.date} · {event.time} · {event.duration}
+              </span>
             </div>
           )}
-        </div>
-      </section>
 
-      {/* ===== PROGRESS BAR ===== */}
-      <section className="bg-cream py-16 lg:py-24">
-        <div className="mx-auto max-w-2xl px-4">
-          {/* Progress indicator */}
-          <div className="mb-10">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-bold uppercase tracking-widest text-accent">
+          {/* Progress bar dentro do hero */}
+          <div className="mx-auto mt-8 max-w-md">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-bold uppercase tracking-widest text-accent">
                 Seu progresso
               </p>
-              <p className="text-sm font-bold text-navy-950">
+              <p className="text-xs font-bold text-navy-300">
                 {completedSteps}/3 completos
               </p>
             </div>
-            <div className="h-3 rounded-full bg-navy-100 overflow-hidden">
+            <div className="h-2.5 rounded-full bg-white/10 overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-accent to-accent-dark transition-all duration-700 ease-out"
+                className="h-full rounded-full bg-gradient-to-r from-accent to-gold-300 transition-all duration-700 ease-out"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
 
+          {/* Scroll indicator */}
+          <a
+            href="#passos"
+            className="mt-6 inline-flex flex-col items-center gap-1 text-navy-400 transition-colors hover:text-accent"
+          >
+            <span className="text-sm font-medium">Complete os passos abaixo</span>
+            <ArrowDown size={18} className="animate-bounce" />
+          </a>
+        </div>
+      </section>
+
+      {/* ===== STEPS ===== */}
+      <section id="passos" className="bg-cream py-12 lg:py-16">
+        <div className="mx-auto max-w-2xl px-4">
           {/* Step 1: Inscrição (always complete) */}
           <div className="space-y-4">
             <div className="flex items-start gap-4 rounded-3xl border-2 border-accent/30 bg-accent/5 p-6 lg:p-8">
