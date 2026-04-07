@@ -44,22 +44,22 @@ export default function DashboardPage() {
       label: "Total de Artigos",
       value: stats.total,
       icon: FileText,
-      color: "text-blue-400",
-      bg: "bg-blue-500/10",
+      color: "text-blue-700",
+      bg: "bg-blue-50",
     },
     {
       label: "Publicados",
       value: stats.published,
       icon: Eye,
-      color: "text-green-400",
-      bg: "bg-green-500/10",
+      color: "text-green-700",
+      bg: "bg-green-50",
     },
     {
       label: "Rascunhos",
       value: stats.drafts,
       icon: Clock,
-      color: "text-yellow-400",
-      bg: "bg-yellow-500/10",
+      color: "text-yellow-700",
+      bg: "bg-yellow-50",
     },
   ];
 
@@ -82,8 +82,8 @@ export default function DashboardPage() {
       </div>
 
       {error && (
-        <div className="mb-6 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-4">
-          <p className="text-sm text-yellow-400">{error}</p>
+        <div className="mb-6 rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+          <p className="text-sm text-yellow-700">{error}</p>
           <p className="mt-2 text-xs text-yellow-500/80">
             Execute o SQL de migração no Supabase para criar a tabela{" "}
             <code className="rounded bg-gray-50 px-1">articles</code>.
@@ -174,8 +174,8 @@ export default function DashboardPage() {
                     <span
                       className={`ml-3 shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-medium ${
                         article.status === "published"
-                          ? "bg-green-500/10 text-green-400"
-                          : "bg-yellow-500/10 text-yellow-400"
+                          ? "bg-green-50 text-green-700"
+                          : "bg-yellow-50 text-yellow-700"
                       }`}
                     >
                       {article.status === "published"

@@ -107,7 +107,7 @@ export default function BannersPage() {
                   <span className="rounded bg-gray-50 px-2 py-0.5 text-navy-600">prioridade {b.priority}</span>
                   <span
                     className={`rounded px-2 py-0.5 ${
-                      b.active ? "bg-green-500/10 text-green-400" : "bg-navy-700 text-navy-600"
+                      b.active ? "bg-green-50 text-green-700" : "bg-navy-700 text-navy-600"
                     }`}
                   >
                     {b.active ? "Ativo" : "Inativo"}
@@ -124,7 +124,7 @@ export default function BannersPage() {
                     onClick={() => {
                       if (confirm("Excluir banner?")) deleteBanner(b.id).then(load);
                     }}
-                    className="flex items-center gap-1 rounded-lg bg-red-500/10 px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/20"
+                    className="flex items-center gap-1 rounded-lg bg-red-50 px-3 py-1.5 text-xs text-red-600 hover:bg-red-100"
                   >
                     <Trash2 size={12} />
                   </button>

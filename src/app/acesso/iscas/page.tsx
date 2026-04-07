@@ -105,7 +105,7 @@ export default function IscasPage() {
                   <h3 className="font-semibold text-navy-950">{m.title}</h3>
                   <span
                     className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                      m.active ? "bg-green-500/10 text-green-400" : "bg-navy-700 text-navy-600"
+                      m.active ? "bg-green-50 text-green-700" : "bg-navy-700 text-navy-600"
                     }`}
                   >
                     {m.active ? "Ativo" : "Inativo"}
@@ -123,7 +123,7 @@ export default function IscasPage() {
                     onClick={() => {
                       if (confirm("Excluir isca?")) deleteLeadMagnet(m.id).then(load);
                     }}
-                    className="flex items-center gap-1 rounded-lg bg-red-500/10 px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/20"
+                    className="flex items-center gap-1 rounded-lg bg-red-50 px-3 py-1.5 text-xs text-red-600 hover:bg-red-100"
                   >
                     <Trash2 size={12} />
                   </button>
@@ -214,7 +214,7 @@ export default function IscasPage() {
                 <label className="mb-1 block text-xs text-navy-600">Arquivo (PDF/etc)</label>
                 <input type="file" onChange={handleFile} disabled={uploadingFile} className="text-xs text-navy-600" />
                 {editing.file_url && (
-                  <p className="mt-1 truncate text-xs text-green-400">✓ {editing.file_url}</p>
+                  <p className="mt-1 truncate text-xs text-green-700">✓ {editing.file_url}</p>
                 )}
               </div>
 

@@ -78,7 +78,7 @@ export default function ArticlesListPage() {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">
+        <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">
           {error}
         </div>
       )}
@@ -190,8 +190,8 @@ export default function ArticlesListPage() {
                     <span
                       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-medium ${
                         article.status === "published"
-                          ? "bg-green-500/10 text-green-400"
-                          : "bg-yellow-500/10 text-yellow-400"
+                          ? "bg-green-50 text-green-700"
+                          : "bg-yellow-50 text-yellow-700"
                       }`}
                     >
                       <span
@@ -251,7 +251,7 @@ export default function ArticlesListPage() {
                           )}
                           <button
                             onClick={() => handleDelete(article.id)}
-                            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10"
+                            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
                           >
                             <Trash2 size={14} />
                             Excluir

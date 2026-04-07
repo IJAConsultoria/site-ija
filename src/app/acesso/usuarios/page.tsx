@@ -47,17 +47,17 @@ function UsuariosPage() {
       </div>
 
       {!isAdmin && me && (
-        <div className="mb-4 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-4 text-sm text-yellow-400">
+        <div className="mb-4 rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-700">
           Você está logado como <strong>{me.role}</strong> e não pode editar usuários.
         </div>
       )}
 
-      <div className="mb-4 rounded-lg border border-blue-500/20 bg-blue-500/10 p-4 text-xs text-blue-300">
+      <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4 text-xs text-blue-900">
         <p className="font-semibold">Como adicionar um novo usuário:</p>
         <ol className="ml-4 mt-1 list-decimal space-y-0.5">
           <li>No painel do Supabase: Authentication → Add User</li>
           <li>Copie o UUID gerado</li>
-          <li>Execute no SQL Editor: <code className="rounded bg-gray-50 px-1">INSERT INTO cms_admins (id, email, name, role) VALUES (...)</code></li>
+          <li>Execute no SQL Editor: <code className="rounded bg-gray-50 px-1">INSERT INTO cms_admins_ija (id, email, name, role) VALUES (...)</code></li>
         </ol>
       </div>
 
@@ -123,7 +123,7 @@ function UsuariosPage() {
                           await deleteAdmin(a.id);
                           setAdmins((prev) => prev.filter((x) => x.id !== a.id));
                         }}
-                        className="rounded p-1 text-red-400 hover:bg-red-500/10"
+                        className="rounded p-1 text-red-600 hover:bg-red-50"
                       >
                         <Trash2 size={14} />
                       </button>

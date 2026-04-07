@@ -55,7 +55,7 @@ export default function ComentariosPage() {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">{error}</div>
+        <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
       )}
 
       <div className="mb-4 flex gap-1 rounded-lg border border-gray-200 bg-gray-50 p-1 w-fit">
@@ -105,10 +105,10 @@ export default function ComentariosPage() {
                 <span
                   className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-medium ${
                     c.status === "approved"
-                      ? "bg-green-500/10 text-green-400"
+                      ? "bg-green-50 text-green-700"
                       : c.status === "rejected"
-                        ? "bg-red-500/10 text-red-400"
-                        : "bg-yellow-500/10 text-yellow-400"
+                        ? "bg-red-50 text-red-600"
+                        : "bg-yellow-50 text-yellow-700"
                   }`}
                 >
                   {c.status === "approved"
@@ -123,7 +123,7 @@ export default function ComentariosPage() {
                 {c.status !== "approved" && (
                   <button
                     onClick={() => handleStatus(c.id, "approved")}
-                    className="flex items-center gap-1 rounded-lg bg-green-500/10 px-3 py-1.5 text-xs text-green-400 hover:bg-green-500/20"
+                    className="flex items-center gap-1 rounded-lg bg-green-50 px-3 py-1.5 text-xs text-green-700 hover:bg-green-100"
                   >
                     <Check size={12} /> Aprovar
                   </button>
@@ -131,14 +131,14 @@ export default function ComentariosPage() {
                 {c.status !== "rejected" && (
                   <button
                     onClick={() => handleStatus(c.id, "rejected")}
-                    className="flex items-center gap-1 rounded-lg bg-yellow-500/10 px-3 py-1.5 text-xs text-yellow-400 hover:bg-yellow-500/20"
+                    className="flex items-center gap-1 rounded-lg bg-yellow-50 px-3 py-1.5 text-xs text-yellow-700 hover:bg-yellow-100"
                   >
                     <X size={12} /> Rejeitar
                   </button>
                 )}
                 <button
                   onClick={() => handleDelete(c.id)}
-                  className="ml-auto flex items-center gap-1 rounded-lg bg-red-500/10 px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/20"
+                  className="ml-auto flex items-center gap-1 rounded-lg bg-red-50 px-3 py-1.5 text-xs text-red-600 hover:bg-red-100"
                 >
                   <Trash2 size={12} /> Excluir
                 </button>

@@ -19,8 +19,8 @@ function EditArticleInner() {
       .catch(() => setError("Artigo não encontrado"));
   }, [id]);
 
-  if (!id) return <p className="text-sm text-red-400">ID do artigo ausente.</p>;
-  if (error) return <div className="rounded-lg bg-red-500/10 p-4 text-sm text-red-400">{error}</div>;
+  if (!id) return <p className="text-sm text-red-600">ID do artigo ausente.</p>;
+  if (error) return <div className="rounded-lg bg-red-50 p-4 text-sm text-red-600">{error}</div>;
   if (!article)
     return (
       <div className="flex items-center justify-center py-20">

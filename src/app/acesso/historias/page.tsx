@@ -112,8 +112,8 @@ export default function HistoriasPage() {
                   <span
                     className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${
                       s.status === "published"
-                        ? "bg-green-500/10 text-green-400"
-                        : "bg-yellow-500/10 text-yellow-400"
+                        ? "bg-green-50 text-green-700"
+                        : "bg-yellow-50 text-yellow-700"
                     }`}
                   >
                     {s.status === "published" ? "Publicado" : "Rascunho"}
@@ -135,7 +135,7 @@ export default function HistoriasPage() {
                     onClick={() => {
                       if (confirm("Excluir case?")) deleteStory(s.id).then(load);
                     }}
-                    className="flex items-center gap-1 rounded-lg bg-red-500/10 px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/20"
+                    className="flex items-center gap-1 rounded-lg bg-red-50 px-3 py-1.5 text-xs text-red-600 hover:bg-red-100"
                   >
                     <Trash2 size={12} />
                   </button>
