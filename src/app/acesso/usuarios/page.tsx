@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Loader2, Users, Trash2, Shield } from "lucide-react";
+import RequireAdmin from "@/components/admin/RequireAdmin";
 import {
   getAdmins,
   getCurrentAdmin,
@@ -10,7 +11,15 @@ import {
   type CmsAdmin,
 } from "@/lib/queries/admins";
 
-export default function UsuariosPage() {
+export default function UsuariosPageWrapper() {
+  return (
+    <RequireAdmin>
+      <UsuariosPage />
+    </RequireAdmin>
+  );
+}
+
+function UsuariosPage() {
   const [admins, setAdmins] = useState<CmsAdmin[]>([]);
   const [me, setMe] = useState<CmsAdmin | null>(null);
   const [loading, setLoading] = useState(true);

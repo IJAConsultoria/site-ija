@@ -21,25 +21,29 @@ import {
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { useCurrentAdmin } from "@/lib/useCurrentAdmin";
 
 const navItems = [
-  { href: "/acesso/painel", label: "Painel", icon: LayoutDashboard },
-  { href: "/acesso/artigos", label: "Artigos", icon: FileText },
-  { href: "/acesso/comentarios", label: "Comentários", icon: MessageSquare },
-  { href: "/acesso/iscas", label: "Iscas Digitais", icon: Download },
-  { href: "/acesso/historias", label: "Histórias", icon: Trophy },
-  { href: "/acesso/banners", label: "Banners", icon: Megaphone },
-  { href: "/acesso/leads", label: "Email Marketing", icon: Mail },
-  { href: "/acesso/ouvidoria", label: "Ouvidoria", icon: Shield },
-  { href: "/acesso/usuarios", label: "Usuários", icon: Users },
+  { href: "/acesso/painel", label: "Painel", icon: LayoutDashboard, adminOnly: false },
+  { href: "/acesso/artigos", label: "Artigos", icon: FileText, adminOnly: false },
+  { href: "/acesso/comentarios", label: "Comentários", icon: MessageSquare, adminOnly: false },
+  { href: "/acesso/iscas", label: "Iscas Digitais", icon: Download, adminOnly: false },
+  { href: "/acesso/historias", label: "Histórias", icon: Trophy, adminOnly: false },
+  { href: "/acesso/banners", label: "Banners", icon: Megaphone, adminOnly: false },
+  { href: "/acesso/leads", label: "Email Marketing", icon: Mail, adminOnly: false },
+  { href: "/acesso/ouvidoria", label: "Ouvidoria", icon: Shield, adminOnly: true },
+  { href: "/acesso/usuarios", label: "Usuários", icon: Users, adminOnly: true },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isAdmin, admin } = useCurrentAdmin();
 
   if (pathname === "/acesso") return null;
+
+  const visibleItems = navItems.filter((i) => !i.adminOnly || isAdmin);
 
   const handleLogout = async () => {
     const supabase = createClient();
@@ -87,7 +91,7 @@ export default function Sidebar() {
 
         {/* Nav */}
         <nav className="flex-1 space-y-1 px-3 py-4">
-          {navItems.map((item) => (
+          {visibleItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -115,6 +119,16 @@ export default function Sidebar() {
             Ver site
           </a>
         </nav>
+
+        {/* User badge */}
+        {admin && (
+          <div className="border-t border-white/10 px-4 py-3">
+            <p className="truncate text-xs font-medium text-white">{admin.name}</p>
+            <p className="text-[10px] uppercase tracking-wider text-navy-400">
+              {admin.role === "admin" ? "Admin Full" : "Editor"}
+            </p>
+          </div>
+        )}
 
         {/* Logout */}
         <div className="border-t border-white/10 p-3">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import RequireAdmin from "@/components/admin/RequireAdmin";
 import {
   Loader2,
   MessageCircle,
@@ -33,7 +34,15 @@ const STATUS_LABEL: Record<OuvidoriaStatus, { label: string; cls: string }> = {
   arquivado: { label: "Arquivado", cls: "bg-gray-100 text-gray-500" },
 };
 
-export default function OuvidoriaAdminPage() {
+export default function OuvidoriaPage() {
+  return (
+    <RequireAdmin>
+      <OuvidoriaAdminPage />
+    </RequireAdmin>
+  );
+}
+
+function OuvidoriaAdminPage() {
   const [items, setItems] = useState<OuvidoriaMensagem[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

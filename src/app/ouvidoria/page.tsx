@@ -34,6 +34,7 @@ export default function OuvidoriaPage() {
   const [jaTentou, setJaTentou] = useState<string>("");
   const [acoesTomadas, setAcoesTomadas] = useState("");
   const [formaContato, setFormaContato] = useState("");
+  const [aceiteLgpd, setAceiteLgpd] = useState(false);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -43,6 +44,10 @@ export default function OuvidoriaPage() {
     }
     if (tipo === "outro" && !tipoOutro.trim()) {
       setError("Especifique o motivo em 'Outro'.");
+      return;
+    }
+    if (!aceiteLgpd) {
+      setError("Você precisa aceitar a Política de Privacidade para enviar.");
       return;
     }
     setError("");
@@ -395,13 +400,38 @@ export default function OuvidoriaPage() {
               </div>
             </Field>
 
+            {/* LGPD */}
+            <div className="rounded-2xl border border-white/15 bg-white/[0.05] p-4">
+              <label className="flex cursor-pointer items-start gap-3 text-sm text-navy-200">
+                <input
+                  type="checkbox"
+                  checked={aceiteLgpd}
+                  onChange={(e) => setAceiteLgpd(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 accent-accent"
+                />
+                <span>
+                  Li e concordo com a{" "}
+                  <a
+                    href="/privacidade"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline hover:text-accent-dark"
+                  >
+                    Política de Privacidade
+                  </a>{" "}
+                  do IJA. Autorizo o tratamento dos meus dados pessoais conforme a LGPD,
+                  exclusivamente para análise desta manifestação.
+                </span>
+              </label>
+            </div>
+
             {error && (
               <div className="rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">{error}</div>
             )}
 
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || !aceiteLgpd}
               className="flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm font-semibold text-white transition-all hover:bg-accent-dark disabled:opacity-50"
             >
               {submitting ? <Loader2 size={16} className="animate-spin" /> : null}

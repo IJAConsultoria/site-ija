@@ -21,6 +21,8 @@ export type OuvidoriaMensagem = {
   forma_contato: string | null;
   anexo_url: string | null;
   identificado: boolean;
+  aceite_lgpd: boolean;
+  aceite_lgpd_at: string | null;
   status: OuvidoriaStatus;
   created_at: string;
   updated_at: string;
@@ -62,7 +64,14 @@ export async function createOuvidoria(input: Omit<Partial<OuvidoriaMensagem>, "i
 
   const { error } = await supabase
     .from("ouvidoria_mensagens_ija")
-    .insert({ ...input, protocolo, identificado, status: "novo" });
+    .insert({
+      ...input,
+      protocolo,
+      identificado,
+      aceite_lgpd: true,
+      aceite_lgpd_at: new Date().toISOString(),
+      status: "novo",
+    });
   if (error) throw error;
   return { protocolo } as OuvidoriaMensagem;
 }
