@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2, Users, Trash2, Shield } from "lucide-react";
+import { Loader2, Users, Trash2, Shield, Plus, X } from "lucide-react";
 import RequireAdmin from "@/components/admin/RequireAdmin";
 import {
   getAdmins,
@@ -10,6 +10,7 @@ import {
   deleteAdmin,
   type CmsAdmin,
 } from "@/lib/queries/admins";
+import { createClient } from "@/lib/supabase/client";
 
 export default function UsuariosPageWrapper() {
   return (
@@ -23,27 +24,45 @@ function UsuariosPage() {
   const [admins, setAdmins] = useState<CmsAdmin[]>([]);
   const [me, setMe] = useState<CmsAdmin | null>(null);
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    Promise.all([getAdmins(), getCurrentAdmin()])
-      .then(([list, current]) => {
-        setAdmins(list);
-        setMe(current);
-      })
-      .finally(() => setLoading(false));
+    load();
   }, []);
+
+  async function load() {
+    setLoading(true);
+    try {
+      const [list, current] = await Promise.all([getAdmins(), getCurrentAdmin()]);
+      setAdmins(list);
+      setMe(current);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const isAdmin = me?.role === "admin";
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy-950">Usuários do CMS</h1>
-        <p className="mt-1 text-sm text-navy-600">
-          {isAdmin
-            ? "Gerencie quem tem acesso ao painel"
-            : "Apenas administradores podem gerenciar usuários"}
-        </p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-navy-950">Usuários do CMS</h1>
+          <p className="mt-1 text-sm text-navy-600">
+            {isAdmin
+              ? "Gerencie quem tem acesso ao painel"
+              : "Apenas administradores podem gerenciar usuários"}
+          </p>
+        </div>
+        {isAdmin && (
+          <button
+            onClick={() => setModal(true)}
+            className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-dark"
+          >
+            <Plus size={16} />
+            Novo usuário
+          </button>
+        )}
       </div>
 
       {!isAdmin && me && (
@@ -51,15 +70,6 @@ function UsuariosPage() {
           Você está logado como <strong>{me.role}</strong> e não pode editar usuários.
         </div>
       )}
-
-      <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4 text-xs text-blue-900">
-        <p className="font-semibold">Como adicionar um novo usuário:</p>
-        <ol className="ml-4 mt-1 list-decimal space-y-0.5">
-          <li>No painel do Supabase: Authentication → Add User</li>
-          <li>Copie o UUID gerado</li>
-          <li>Execute no SQL Editor: <code className="rounded bg-gray-50 px-1">INSERT INTO cms_admins_ija (id, email, name, role) VALUES (...)</code></li>
-        </ol>
-      </div>
 
       {loading ? (
         <div className="flex items-center justify-center py-20">
@@ -135,6 +145,154 @@ function UsuariosPage() {
           </table>
         </div>
       )}
+
+      {modal && <NovoUsuarioModal onClose={() => setModal(false)} onCreated={load} />}
+    </div>
+  );
+}
+
+function NovoUsuarioModal({ onClose, onCreated }: { onClose: () => void; onCreated: () => void }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState<"admin" | "editor">("editor");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name || !email || !password) {
+      setError("Preencha todos os campos.");
+      return;
+    }
+    if (password.length < 8) {
+      setError("A senha precisa ter pelo menos 8 caracteres.");
+      return;
+    }
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const supabase = createClient();
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setError("Sessão expirada. Faça login novamente.");
+        return;
+      }
+
+      const res = await fetch("/api/users/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ name, email, password, role }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Erro ao criar usuário.");
+        return;
+      }
+
+      onCreated();
+      onClose();
+    } catch {
+      setError("Erro ao criar usuário. Tente novamente.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl">
+        <div className="mb-5 flex items-center justify-between">
+          <h2 className="text-xl font-bold text-navy-950">Novo usuário</h2>
+          <button onClick={onClose} className="rounded-lg p-1 text-navy-600 hover:bg-gray-100">
+            <X size={18} />
+          </button>
+        </div>
+
+        <form onSubmit={submit} className="space-y-4">
+          <div>
+            <label className="mb-1 block text-xs font-medium text-navy-700">
+              Nome completo <span className="text-accent">*</span>
+            </label>
+            <input
+              required
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy-950 focus:border-accent focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-xs font-medium text-navy-700">
+              Email <span className="text-accent">*</span>
+            </label>
+            <input
+              required
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy-950 focus:border-accent focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-xs font-medium text-navy-700">
+              Senha <span className="text-accent">*</span>
+            </label>
+            <input
+              required
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mínimo 8 caracteres"
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy-950 focus:border-accent focus:outline-none"
+            />
+            <p className="mt-1 text-[11px] text-navy-500">
+              Anote a senha e envie ao usuário por canal seguro.
+            </p>
+          </div>
+
+          <div>
+            <label className="mb-1 block text-xs font-medium text-navy-700">Role</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value as "admin" | "editor")}
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-navy-950"
+            >
+              <option value="editor">Editor (só artigos, banners, iscas, histórias)</option>
+              <option value="admin">Admin Full (vê tudo, inclusive Ouvidoria e Usuários)</option>
+            </select>
+          </div>
+
+          {error && (
+            <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{error}</div>
+          )}
+
+          <div className="flex justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-navy-700 hover:bg-gray-50"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark disabled:opacity-50"
+            >
+              {submitting && <Loader2 size={14} className="animate-spin" />}
+              Criar usuário
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
