@@ -51,6 +51,8 @@ function OuvidoriaAdminPage() {
   const [filterTipo, setFilterTipo] = useState<OuvidoriaTipo | "all">("all");
   const [filterEmpresa, setFilterEmpresa] = useState<string>("all");
   const [filterIdentif, setFilterIdentif] = useState<"all" | "identificado" | "anonimo">("all");
+  const [dateFrom, setDateFrom] = useState<string>("");
+  const [dateTo, setDateTo] = useState<string>("");
   const [open, setOpen] = useState<OuvidoriaMensagem | null>(null);
 
   useEffect(() => {
@@ -74,6 +76,14 @@ function OuvidoriaAdminPage() {
     if (filterEmpresa !== "all" && i.empresa !== filterEmpresa) return false;
     if (filterIdentif === "identificado" && !i.identificado) return false;
     if (filterIdentif === "anonimo" && i.identificado) return false;
+    if (dateFrom) {
+      const from = new Date(dateFrom + "T00:00:00");
+      if (new Date(i.created_at) < from) return false;
+    }
+    if (dateTo) {
+      const to = new Date(dateTo + "T23:59:59");
+      if (new Date(i.created_at) > to) return false;
+    }
     if (search) {
       const q = search.toLowerCase();
       return (
@@ -231,6 +241,42 @@ function OuvidoriaAdminPage() {
           <option value="identificado">Só identificados</option>
           <option value="anonimo">Só anônimos</option>
         </select>
+      </div>
+
+      {/* Filtros de data */}
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2">
+          <label className="text-xs font-medium text-navy-600">De:</label>
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-navy-950 focus:border-accent focus:outline-none"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="text-xs font-medium text-navy-600">Até:</label>
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-navy-950 focus:border-accent focus:outline-none"
+          />
+        </div>
+        {(dateFrom || dateTo) && (
+          <button
+            onClick={() => {
+              setDateFrom("");
+              setDateTo("");
+            }}
+            className="rounded-lg border border-gray-200 px-3 py-2 text-xs text-navy-600 hover:bg-gray-100"
+          >
+            Limpar datas
+          </button>
+        )}
+        <span className="ml-auto text-xs text-navy-500">
+          {filtered.length} de {items.length} manifestações
+        </span>
       </div>
 
       {loading ? (
