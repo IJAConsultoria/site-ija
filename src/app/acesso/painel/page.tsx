@@ -67,14 +67,14 @@ export default function DashboardPage() {
     <div>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Painel</h1>
-          <p className="mt-1 text-sm text-navy-400">
+          <h1 className="text-2xl font-bold text-navy-950">Painel</h1>
+          <p className="mt-1 text-sm text-navy-600">
             Gerencie o conteúdo do blog do IJA
           </p>
         </div>
         <Link
           href="/acesso/artigos/novo"
-          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
+          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-accent-dark"
         >
           <PenSquare size={16} />
           Novo artigo
@@ -86,7 +86,7 @@ export default function DashboardPage() {
           <p className="text-sm text-yellow-400">{error}</p>
           <p className="mt-2 text-xs text-yellow-500/80">
             Execute o SQL de migração no Supabase para criar a tabela{" "}
-            <code className="rounded bg-white/5 px-1">articles</code>.
+            <code className="rounded bg-gray-50 px-1">articles</code>.
           </p>
         </div>
       )}
@@ -102,7 +102,7 @@ export default function DashboardPage() {
             {statCards.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-xl border border-white/10 bg-white/5 p-5"
+                className="rounded-xl border border-gray-200 bg-gray-50 p-5"
               >
                 <div className="flex items-center gap-3">
                   <div
@@ -111,10 +111,10 @@ export default function DashboardPage() {
                     <stat.icon size={18} className={stat.color} />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white">
+                    <p className="text-2xl font-bold text-navy-950">
                       {stat.value}
                     </p>
-                    <p className="text-xs text-navy-400">{stat.label}</p>
+                    <p className="text-xs text-navy-600">{stat.label}</p>
                   </div>
                 </div>
               </div>
@@ -122,9 +122,9 @@ export default function DashboardPage() {
           </div>
 
           {/* Recent Articles */}
-          <div className="rounded-xl border border-white/10 bg-white/5">
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-              <h2 className="font-semibold text-white">Artigos recentes</h2>
+          <div className="rounded-xl border border-gray-200 bg-gray-50">
+            <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
+              <h2 className="font-semibold text-navy-950">Artigos recentes</h2>
               <Link
                 href="/acesso/artigos"
                 className="flex items-center gap-1 text-xs text-accent hover:text-accent-dark"
@@ -139,7 +139,7 @@ export default function DashboardPage() {
                   size={32}
                   className="mx-auto mb-3 text-navy-600"
                 />
-                <p className="text-sm text-navy-400">
+                <p className="text-sm text-navy-600">
                   Nenhum artigo ainda.
                 </p>
                 <Link
@@ -151,15 +151,15 @@ export default function DashboardPage() {
                 </Link>
               </div>
             ) : (
-              <div className="divide-y divide-white/5">
+              <div className="divide-y divide-gray-200">
                 {recentArticles.map((article) => (
                   <Link
                     key={article.id}
                     href={`/acesso/artigos/editar?id=${article.id}`}
-                    className="flex items-center justify-between px-5 py-3 transition-colors hover:bg-white/5"
+                    className="flex items-center justify-between px-5 py-3 transition-colors hover:bg-gray-50"
                   >
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-white">
+                      <p className="truncate text-sm font-medium text-navy-950">
                         {article.title}
                       </p>
                       <div className="mt-0.5 flex items-center gap-3 text-xs text-navy-500">
@@ -192,14 +192,14 @@ export default function DashboardPage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <Link
               href="/acesso/artigos/novo"
-              className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-5 transition-all hover:border-accent/30 hover:bg-accent/5"
+              className="group flex items-center gap-4 rounded-xl border border-gray-200 bg-gray-50 p-5 transition-all hover:border-accent/30 hover:bg-accent/5"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-navy-950">
                 <PenSquare size={20} />
               </div>
               <div>
-                <p className="font-semibold text-white">Escrever artigo</p>
-                <p className="text-xs text-navy-400">
+                <p className="font-semibold text-navy-950">Escrever artigo</p>
+                <p className="text-xs text-navy-600">
                   Crie conteúdo para o blog do IJA
                 </p>
               </div>
@@ -209,14 +209,14 @@ export default function DashboardPage() {
               href="/blog"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-5 transition-all hover:border-accent/30 hover:bg-accent/5"
+              className="group flex items-center gap-4 rounded-xl border border-gray-200 bg-gray-50 p-5 transition-all hover:border-accent/30 hover:bg-accent/5"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-navy-950">
                 <TrendingUp size={20} />
               </div>
               <div>
-                <p className="font-semibold text-white">Ver blog</p>
-                <p className="text-xs text-navy-400">
+                <p className="font-semibold text-navy-950">Ver blog</p>
+                <p className="text-xs text-navy-600">
                   Visualize como os artigos aparecem no site
                 </p>
               </div>

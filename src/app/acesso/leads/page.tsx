@@ -59,13 +59,13 @@ export default function LeadsPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Email Marketing</h1>
-          <p className="mt-1 text-sm text-navy-400">{leads.length} leads totais</p>
+          <h1 className="text-2xl font-bold text-navy-950">Email Marketing</h1>
+          <p className="mt-1 text-sm text-navy-600">{leads.length} leads totais</p>
         </div>
         <button
           onClick={exportCsv}
           disabled={!filtered.length}
-          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-dark disabled:opacity-50"
+          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-navy-950 hover:bg-accent-dark disabled:opacity-50"
         >
           <Download size={16} /> Exportar CSV
         </button>
@@ -79,13 +79,13 @@ export default function LeadsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por nome, email, telefone..."
-            className="w-full rounded-lg border border-white/10 bg-white/5 py-2.5 pl-9 pr-4 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+            className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-4 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
           />
         </div>
         <select
           value={source}
           onChange={(e) => setSource(e.target.value)}
-          className="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white"
+          className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-navy-950"
         >
           <option value="all">Todas as origens</option>
           {sources.map((s) => (
@@ -101,37 +101,37 @@ export default function LeadsPage() {
           <Loader2 className="h-6 w-6 animate-spin text-accent" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-12 text-center">
           <Mail size={36} className="mx-auto mb-3 text-navy-600" />
-          <p className="text-sm text-navy-400">Nenhum lead encontrado.</p>
+          <p className="text-sm text-navy-600">Nenhum lead encontrado.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-white/10">
+        <div className="overflow-x-auto rounded-xl border border-gray-200">
           <table className="w-full">
-            <thead className="bg-white/5">
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400">Data</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400">Nome</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400">Contato</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400">Origem</th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400">UTM</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600">Data</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600">Nome</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600">Contato</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600">Origem</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600">UTM</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-gray-200">
               {filtered.slice(0, 200).map((l) => (
-                <tr key={l.id} className="hover:bg-white/5">
-                  <td className="whitespace-nowrap px-4 py-3 text-xs text-navy-400">
+                <tr key={l.id} className="hover:bg-gray-50">
+                  <td className="whitespace-nowrap px-4 py-3 text-xs text-navy-600">
                     {new Date(l.created_at).toLocaleDateString("pt-BR")}
                   </td>
-                  <td className="px-4 py-3 text-sm text-white">
+                  <td className="px-4 py-3 text-sm text-navy-950">
                     <p className="font-medium">{l.name}</p>
                     {l.business && <p className="text-xs text-navy-500">{l.business}</p>}
                   </td>
                   <td className="px-4 py-3 text-xs">
-                    <p className="text-navy-300">{l.email}</p>
+                    <p className="text-navy-700">{l.email}</p>
                     {l.phone && <p className="text-navy-500">{l.phone}</p>}
                   </td>
-                  <td className="px-4 py-3 text-xs text-navy-400">{l.source}</td>
+                  <td className="px-4 py-3 text-xs text-navy-600">{l.source}</td>
                   <td className="px-4 py-3 text-xs text-navy-500">
                     {l.utm_source || "—"}
                     {l.utm_campaign && <span> / {l.utm_campaign}</span>}
@@ -141,7 +141,7 @@ export default function LeadsPage() {
             </tbody>
           </table>
           {filtered.length > 200 && (
-            <p className="border-t border-white/10 px-4 py-3 text-center text-xs text-navy-500">
+            <p className="border-t border-gray-200 px-4 py-3 text-center text-xs text-navy-500">
               Mostrando 200 de {filtered.length}. Use o filtro ou exporte CSV pra ver todos.
             </p>
           )}

@@ -37,17 +37,17 @@ export default function AdminLayout({
 
   if (checking) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-navy-900">
+      <div className="flex min-h-screen items-center justify-center bg-white">
         <Loader2 className="h-6 w-6 animate-spin text-accent" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-navy-900">
+    <div className="min-h-screen bg-white">
       <Sidebar />
       <div className="lg:pl-64">
-        <main className="min-h-screen p-4 pt-16 lg:p-8 lg:pt-8">{children}</main>
+        <main className="min-h-screen p-4 pt-16 lg:p-8 lg:pt-8 text-navy-950">{children}</main>
       </div>
     </div>
   );

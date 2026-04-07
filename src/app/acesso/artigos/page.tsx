@@ -63,14 +63,14 @@ export default function ArticlesListPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Artigos</h1>
-          <p className="mt-1 text-sm text-navy-400">
+          <h1 className="text-2xl font-bold text-navy-950">Artigos</h1>
+          <p className="mt-1 text-sm text-navy-600">
             {articles.length} artigo{articles.length !== 1 ? "s" : ""}
           </p>
         </div>
         <Link
           href="/acesso/artigos/novo"
-          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
+          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-accent-dark"
         >
           <PenSquare size={16} />
           Novo artigo
@@ -95,18 +95,18 @@ export default function ArticlesListPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar artigos..."
-            className="w-full rounded-lg border border-white/10 bg-white/5 py-2.5 pl-9 pr-4 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+            className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-4 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
           />
         </div>
-        <div className="flex gap-1 rounded-lg border border-white/10 bg-white/5 p-1">
+        <div className="flex gap-1 rounded-lg border border-gray-200 bg-gray-50 p-1">
           {(["all", "published", "draft"] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                 filter === f
-                  ? "bg-accent text-white"
-                  : "text-navy-400 hover:text-white"
+                  ? "bg-accent text-navy-950"
+                  : "text-navy-600 hover:text-navy-950"
               }`}
             >
               {f === "all" ? "Todos" : f === "published" ? "Publicados" : "Rascunhos"}
@@ -121,9 +121,9 @@ export default function ArticlesListPage() {
           <Loader2 className="h-6 w-6 animate-spin text-accent" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-16 text-center">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 px-5 py-16 text-center">
           <FileText size={40} className="mx-auto mb-3 text-navy-600" />
-          <p className="text-navy-400">
+          <p className="text-navy-600">
             {search || filter !== "all"
               ? "Nenhum artigo encontrado."
               : "Nenhum artigo criado ainda."}
@@ -139,37 +139,37 @@ export default function ArticlesListPage() {
           )}
         </div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-white/10">
+        <div className="rounded-xl border border-gray-200">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-white/10 bg-white/5">
-                <th className="px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400">
+              <tr className="border-b border-gray-200 bg-gray-50">
+                <th className="px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600">
                   Artigo
                 </th>
-                <th className="hidden px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400 md:table-cell">
+                <th className="hidden px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600 md:table-cell">
                   Categoria
                 </th>
-                <th className="hidden px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400 sm:table-cell">
+                <th className="hidden px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600 sm:table-cell">
                   Status
                 </th>
-                <th className="hidden px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-400 lg:table-cell">
+                <th className="hidden px-5 py-3 text-left text-xs font-medium uppercase tracking-wider text-navy-600 lg:table-cell">
                   Data
                 </th>
                 <th className="w-10 px-5 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-gray-200">
               {filtered.map((article) => (
                 <tr
                   key={article.id}
-                  className="transition-colors hover:bg-white/5"
+                  className="transition-colors hover:bg-gray-50"
                 >
                   <td className="px-5 py-4">
                     <Link
                       href={`/acesso/artigos/editar?id=${article.id}`}
                       className="block"
                     >
-                      <p className="font-medium text-white hover:text-accent transition-colors">
+                      <p className="font-medium text-navy-950 hover:text-accent transition-colors">
                         {article.title}
                       </p>
                       {article.excerpt && (
@@ -180,7 +180,7 @@ export default function ArticlesListPage() {
                     </Link>
                   </td>
                   <td className="hidden px-5 py-4 md:table-cell">
-                    <span className="text-xs text-navy-400">
+                    <span className="text-xs text-navy-600">
                       {article.category
                         ? getCategoryName(article.category)
                         : "—"}
@@ -218,7 +218,7 @@ export default function ArticlesListPage() {
                           menuOpen === article.id ? null : article.id
                         )
                       }
-                      className="rounded p-1 text-navy-400 transition-colors hover:text-white"
+                      className="rounded p-1 text-navy-600 transition-colors hover:text-navy-950"
                     >
                       <MoreVertical size={16} />
                     </button>
@@ -228,11 +228,11 @@ export default function ArticlesListPage() {
                           className="fixed inset-0 z-10"
                           onClick={() => setMenuOpen(null)}
                         />
-                        <div className="absolute right-5 top-full z-20 w-44 rounded-lg border border-white/10 bg-navy-900 py-1 shadow-xl">
+                        <div className="absolute right-5 top-full z-20 w-44 rounded-lg border border-gray-200 bg-white py-1 shadow-xl">
                           <Link
                             href={`/acesso/artigos/editar?id=${article.id}`}
                             onClick={() => setMenuOpen(null)}
-                            className="flex items-center gap-2 px-3 py-2 text-sm text-navy-300 hover:bg-white/5 hover:text-white"
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-navy-700 hover:bg-gray-50 hover:text-navy-950"
                           >
                             <Edit3 size={14} />
                             Editar
@@ -243,7 +243,7 @@ export default function ArticlesListPage() {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={() => setMenuOpen(null)}
-                              className="flex items-center gap-2 px-3 py-2 text-sm text-navy-300 hover:bg-white/5 hover:text-white"
+                              className="flex items-center gap-2 px-3 py-2 text-sm text-navy-700 hover:bg-gray-50 hover:text-navy-950"
                             >
                               <ExternalLink size={14} />
                               Ver no site

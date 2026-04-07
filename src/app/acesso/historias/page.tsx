@@ -75,12 +75,12 @@ export default function HistoriasPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Histórias de Clientes</h1>
-          <p className="mt-1 text-sm text-navy-400">{items.length} cases</p>
+          <h1 className="text-2xl font-bold text-navy-950">Histórias de Clientes</h1>
+          <p className="mt-1 text-sm text-navy-600">{items.length} cases</p>
         </div>
         <button
           onClick={() => setEditing(blank)}
-          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-dark"
+          className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-navy-950 hover:bg-accent-dark"
         >
           <Plus size={16} /> Novo case
         </button>
@@ -91,14 +91,14 @@ export default function HistoriasPage() {
           <Loader2 className="h-6 w-6 animate-spin text-accent" />
         </div>
       ) : items.length === 0 ? (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-12 text-center">
           <Trophy size={36} className="mx-auto mb-3 text-navy-600" />
-          <p className="text-sm text-navy-400">Nenhum case ainda.</p>
+          <p className="text-sm text-navy-600">Nenhum case ainda.</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {items.map((s) => (
-            <div key={s.id} className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            <div key={s.id} className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
               {s.cover_url && (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img src={s.cover_url} alt="" className="h-32 w-full object-cover" />
@@ -106,7 +106,7 @@ export default function HistoriasPage() {
               <div className="p-4">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-semibold text-white">{s.company_name}</h3>
+                    <h3 className="font-semibold text-navy-950">{s.company_name}</h3>
                     <p className="text-xs text-navy-500">{s.segment}</p>
                   </div>
                   <span
@@ -120,14 +120,14 @@ export default function HistoriasPage() {
                   </span>
                 </div>
                 {s.testimonial && (
-                  <p className="mt-2 line-clamp-2 text-xs italic text-navy-400">
+                  <p className="mt-2 line-clamp-2 text-xs italic text-navy-600">
                     &ldquo;{s.testimonial}&rdquo;
                   </p>
                 )}
                 <div className="mt-3 flex gap-2">
                   <button
                     onClick={() => setEditing(s)}
-                    className="flex items-center gap-1 rounded-lg bg-white/5 px-3 py-1.5 text-xs text-white hover:bg-white/10"
+                    className="flex items-center gap-1 rounded-lg bg-gray-50 px-3 py-1.5 text-xs text-navy-950 hover:bg-gray-100"
                   >
                     <Edit3 size={12} /> Editar
                   </button>
@@ -148,84 +148,84 @@ export default function HistoriasPage() {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-          <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/10 bg-navy-900 p-6">
-            <h2 className="mb-4 text-xl font-bold text-white">
+          <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-gray-200 bg-white p-6">
+            <h2 className="mb-4 text-xl font-bold text-navy-950">
               {editing.id ? "Editar case" : "Novo case"}
             </h2>
             <div className="space-y-4">
               <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-xs text-navy-400">Nome da empresa</label>
+                  <label className="mb-1 block text-xs text-navy-600">Nome da empresa</label>
                   <input
                     type="text"
                     value={editing.company_name || ""}
                     onChange={(e) => setEditing({ ...editing, company_name: e.target.value })}
-                    className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                    className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs text-navy-400">Segmento</label>
+                  <label className="mb-1 block text-xs text-navy-600">Segmento</label>
                   <input
                     type="text"
                     value={editing.segment || ""}
                     onChange={(e) => setEditing({ ...editing, segment: e.target.value })}
-                    className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                    className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs text-navy-400">Nome do contato</label>
+                  <label className="mb-1 block text-xs text-navy-600">Nome do contato</label>
                   <input
                     type="text"
                     value={editing.contact_name || ""}
                     onChange={(e) => setEditing({ ...editing, contact_name: e.target.value })}
-                    className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                    className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs text-navy-400">Cargo</label>
+                  <label className="mb-1 block text-xs text-navy-600">Cargo</label>
                   <input
                     type="text"
                     value={editing.contact_role || ""}
                     onChange={(e) => setEditing({ ...editing, contact_role: e.target.value })}
-                    className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                    className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1 block text-xs text-navy-400">Desafio</label>
+                <label className="mb-1 block text-xs text-navy-600">Desafio</label>
                 <textarea
                   value={editing.challenge || ""}
                   onChange={(e) => setEditing({ ...editing, challenge: e.target.value })}
                   rows={3}
-                  className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs text-navy-400">Solução</label>
+                <label className="mb-1 block text-xs text-navy-600">Solução</label>
                 <textarea
                   value={editing.solution || ""}
                   onChange={(e) => setEditing({ ...editing, solution: e.target.value })}
                   rows={3}
-                  className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs text-navy-400">Resultados</label>
+                <label className="mb-1 block text-xs text-navy-600">Resultados</label>
                 <textarea
                   value={editing.results || ""}
                   onChange={(e) => setEditing({ ...editing, results: e.target.value })}
                   rows={3}
-                  className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs text-navy-400">Depoimento curto</label>
+                <label className="mb-1 block text-xs text-navy-600">Depoimento curto</label>
                 <textarea
                   value={editing.testimonial || ""}
                   onChange={(e) => setEditing({ ...editing, testimonial: e.target.value })}
                   rows={2}
-                  className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
               </div>
 
@@ -245,13 +245,13 @@ export default function HistoriasPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-xs text-navy-400">Status</label>
+                <label className="mb-1 block text-xs text-navy-600">Status</label>
                 <select
                   value={editing.status}
                   onChange={(e) =>
                     setEditing({ ...editing, status: e.target.value as "draft" | "published" })
                   }
-                  className="w-full rounded-lg border border-white/10 bg-navy-950 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 >
                   <option value="draft">Rascunho</option>
                   <option value="published">Publicado</option>
@@ -262,14 +262,14 @@ export default function HistoriasPage() {
             <div className="mt-6 flex justify-end gap-2">
               <button
                 onClick={() => setEditing(null)}
-                className="rounded-lg border border-white/10 px-4 py-2 text-sm text-white hover:bg-white/5"
+                className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-navy-950 hover:bg-gray-50"
               >
                 Cancelar
               </button>
               <button
                 onClick={save}
                 disabled={saving}
-                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark"
+                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-navy-950 hover:bg-accent-dark"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 Salvar

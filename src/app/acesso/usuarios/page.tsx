@@ -29,8 +29,8 @@ export default function UsuariosPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">Usuários do CMS</h1>
-        <p className="mt-1 text-sm text-navy-400">
+        <h1 className="text-2xl font-bold text-navy-950">Usuários do CMS</h1>
+        <p className="mt-1 text-sm text-navy-600">
           {isAdmin
             ? "Gerencie quem tem acesso ao painel"
             : "Apenas administradores podem gerenciar usuários"}
@@ -48,7 +48,7 @@ export default function UsuariosPage() {
         <ol className="ml-4 mt-1 list-decimal space-y-0.5">
           <li>No painel do Supabase: Authentication → Add User</li>
           <li>Copie o UUID gerado</li>
-          <li>Execute no SQL Editor: <code className="rounded bg-white/5 px-1">INSERT INTO cms_admins (id, email, name, role) VALUES (...)</code></li>
+          <li>Execute no SQL Editor: <code className="rounded bg-gray-50 px-1">INSERT INTO cms_admins (id, email, name, role) VALUES (...)</code></li>
         </ol>
       </div>
 
@@ -57,31 +57,31 @@ export default function UsuariosPage() {
           <Loader2 className="h-6 w-6 animate-spin text-accent" />
         </div>
       ) : admins.length === 0 ? (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-12 text-center">
           <Users size={36} className="mx-auto mb-3 text-navy-600" />
-          <p className="text-sm text-navy-400">Nenhum usuário cadastrado.</p>
+          <p className="text-sm text-navy-600">Nenhum usuário cadastrado.</p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-white/10">
+        <div className="overflow-hidden rounded-xl border border-gray-200">
           <table className="w-full">
-            <thead className="bg-white/5">
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 py-3 text-left text-xs uppercase text-navy-400">Nome</th>
-                <th className="px-4 py-3 text-left text-xs uppercase text-navy-400">Email</th>
-                <th className="px-4 py-3 text-left text-xs uppercase text-navy-400">Role</th>
+                <th className="px-4 py-3 text-left text-xs uppercase text-navy-600">Nome</th>
+                <th className="px-4 py-3 text-left text-xs uppercase text-navy-600">Email</th>
+                <th className="px-4 py-3 text-left text-xs uppercase text-navy-600">Role</th>
                 <th className="w-20" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-gray-200">
               {admins.map((a) => (
-                <tr key={a.id} className="hover:bg-white/5">
-                  <td className="px-4 py-3 text-sm text-white">
+                <tr key={a.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-3 text-sm text-navy-950">
                     {a.name}
                     {me?.id === a.id && (
                       <span className="ml-2 text-[10px] text-accent">(você)</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-sm text-navy-300">{a.email}</td>
+                  <td className="px-4 py-3 text-sm text-navy-700">{a.email}</td>
                   <td className="px-4 py-3">
                     {isAdmin && me?.id !== a.id ? (
                       <select
@@ -94,13 +94,13 @@ export default function UsuariosPage() {
                             )
                           );
                         }}
-                        className="rounded border border-white/10 bg-navy-950 px-2 py-1 text-xs text-white"
+                        className="rounded border border-gray-200 bg-white px-2 py-1 text-xs text-navy-950"
                       >
                         <option value="admin">admin</option>
                         <option value="editor">editor</option>
                       </select>
                     ) : (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2 py-0.5 text-[10px] text-navy-300">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-2 py-0.5 text-[10px] text-navy-700">
                         {a.role === "admin" && <Shield size={10} />}
                         {a.role}
                       </span>

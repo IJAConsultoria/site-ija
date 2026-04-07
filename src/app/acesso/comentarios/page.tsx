@@ -50,21 +50,21 @@ export default function ComentariosPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">Comentários</h1>
-        <p className="mt-1 text-sm text-navy-400">Modere os comentários do blog</p>
+        <h1 className="text-2xl font-bold text-navy-950">Comentários</h1>
+        <p className="mt-1 text-sm text-navy-600">Modere os comentários do blog</p>
       </div>
 
       {error && (
         <div className="mb-4 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">{error}</div>
       )}
 
-      <div className="mb-4 flex gap-1 rounded-lg border border-white/10 bg-white/5 p-1 w-fit">
+      <div className="mb-4 flex gap-1 rounded-lg border border-gray-200 bg-gray-50 p-1 w-fit">
         {(["pending", "approved", "rejected", "all"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-              filter === f ? "bg-accent text-white" : "text-navy-400 hover:text-white"
+              filter === f ? "bg-accent text-navy-950" : "text-navy-600 hover:text-navy-950"
             }`}
           >
             {f === "pending"
@@ -83,17 +83,17 @@ export default function ComentariosPage() {
           <Loader2 className="h-6 w-6 animate-spin text-accent" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-12 text-center">
           <MessageSquare size={36} className="mx-auto mb-3 text-navy-600" />
-          <p className="text-sm text-navy-400">Nenhum comentário {filter !== "all" ? filter : ""}.</p>
+          <p className="text-sm text-navy-600">Nenhum comentário {filter !== "all" ? filter : ""}.</p>
         </div>
       ) : (
         <div className="space-y-3">
           {filtered.map((c) => (
-            <div key={c.id} className="rounded-xl border border-white/10 bg-white/5 p-5">
+            <div key={c.id} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
               <div className="mb-2 flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-white">{c.name}</p>
+                  <p className="font-semibold text-navy-950">{c.name}</p>
                   <p className="text-xs text-navy-500">
                     {c.email} {c.phone && `• ${c.phone}`}
                   </p>
@@ -118,7 +118,7 @@ export default function ComentariosPage() {
                       : "Pendente"}
                 </span>
               </div>
-              <p className="mt-3 whitespace-pre-wrap text-sm text-navy-200">{c.comment}</p>
+              <p className="mt-3 whitespace-pre-wrap text-sm text-navy-800">{c.comment}</p>
               <div className="mt-4 flex gap-2">
                 {c.status !== "approved" && (
                   <button
