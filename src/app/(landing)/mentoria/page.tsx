@@ -335,19 +335,24 @@ export default function MentoriaPage() {
                     </p>
                   </div>
 
-                  {/* Lista de metas em coluna */}
-                  <div className="relative mt-8 space-y-3">
+                  {/* Metas empilhadas como cards verticais */}
+                  <div className="relative mt-10 space-y-4">
                     {fase.metas.map((meta, i) => (
                       <div
                         key={i}
-                        className="flex items-start gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-accent/20 hover:bg-white/[0.04]"
+                        className="group/meta flex items-start gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-accent/10 sm:p-6"
                       >
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-xs font-bold text-accent">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-gradient-to-br from-accent/25 to-accent/5 text-base font-black text-accent ring-1 ring-accent/20 sm:h-14 sm:w-14 sm:text-lg">
                           {String(i + 1).padStart(2, "0")}
                         </div>
-                        <p className="text-sm leading-relaxed text-navy-200 lg:text-base">
-                          {meta}
-                        </p>
+                        <div className="flex-1 pt-1">
+                          <p className="text-[11px] font-bold uppercase tracking-widest text-accent/80">
+                            Meta {i + 1}
+                          </p>
+                          <p className="mt-1 text-base leading-relaxed text-white sm:text-lg">
+                            {meta}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -743,17 +748,33 @@ export default function MentoriaPage() {
                     Economia de R$ 510/mês · R$ 6.120 por ano
                   </p>
 
+                  {/* Chave PIX */}
+                  <div className="mt-6 rounded-2xl border border-white/15 bg-black/30 p-5 backdrop-blur-sm">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-accent">
+                      Chave PIX (CNPJ)
+                    </p>
+                    <p className="mt-2 select-all break-all font-mono text-lg font-bold text-white sm:text-xl">
+                      39.391.673/0001-55
+                    </p>
+                    <p className="mt-2 text-xs text-navy-300">
+                      <strong className="text-white">IJA Consultoria e Treinamentos LTDA</strong>
+                    </p>
+                    <p className="mt-1 text-[11px] text-navy-400">
+                      Após pagar, envie o comprovante no WhatsApp pra confirmar sua vaga
+                    </p>
+                  </div>
+
                   <a
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-accent px-10 py-5 text-lg font-bold text-navy-950 transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/40"
+                    className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-accent px-10 py-5 text-lg font-bold text-navy-950 transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/40"
                   >
-                    Quero garantir o PIX agora
+                    Enviar comprovante no WhatsApp
                     <ArrowRight size={22} />
                   </a>
                   <p className="mt-4 text-xs text-navy-400">
-                    Vagas limitadas · Oferta válida só até o fim da live · WhatsApp direto
+                    Vagas limitadas · Oferta válida só até o fim da live
                   </p>
                 </div>
 
