@@ -41,6 +41,44 @@ export const metadata = generatePageMetadata({
   path: "/mentoria",
 });
 
+const metas = [
+  {
+    n: 1,
+    title: "Análise Econômica Operacional",
+    desc: "Identificação em reais e centavos dos custos operacionais, determinação do DNA Financeiro, determinação do Ponto de Equilíbrio e Apuração real do lucro.",
+  },
+  {
+    n: 2,
+    title: "Novo Plano Orçamentário",
+    desc: "Implementação do Novo Plano Orçamentário Operacional com foco no aumento da lucratividade.",
+  },
+  {
+    n: 3,
+    title: "Pricing e Política Promocional",
+    desc: "Análise de Pricing e implementação da gestão estratégica de markup para política promocional.",
+  },
+  {
+    n: 4,
+    title: "Rotinas de Gerenciamento Financeiro",
+    desc: "Reestruturação das Rotinas de Gerenciamento Financeiro com foco na otimização da qualidade, redução de esforço, redução de tempo e economia financeira.",
+  },
+  {
+    n: 5,
+    title: "Dashboard Econômico-Financeiro",
+    desc: "Elaboração e implementação do Dashboard de Análise Econômica e Financeira com foco em trazer uma visão clara geral e específica da saúde financeira da empresa.",
+  },
+  {
+    n: 6,
+    title: "Gestão do Capital de Giro",
+    desc: "Análise e Otimização da Gestão do Capital de Giro com foco na melhoria da saúde do caixa.",
+  },
+  {
+    n: 7,
+    title: "Monitoramento e Apoio Estratégico",
+    desc: "Monitoramento dos Indicadores de Desempenho Econômico-Financeiro e apoio periódico na tomada de decisões com foco na otimização da Lucratividade.",
+  },
+];
+
 const inclusos = [
   {
     icon: BookOpen,
@@ -200,6 +238,67 @@ export default function MentoriaPage() {
               </div>
             </div>
 
+          </FadeInUp>
+        </div>
+      </section>
+
+      {/* ===== ROADMAP / FASES DA MENTORIA ===== */}
+      <section className="relative overflow-hidden bg-navy-900 py-24 lg:py-32 noise-overlay">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.08)_0%,_transparent_60%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeInUp>
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-accent">
+                Fase 2 · Roadmap da Mentoria
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+                Gestão Financeira{" "}
+                <span className="serif-italic gradient-text">Afiada</span>
+              </h2>
+              <p className="mt-4 text-lg text-navy-300">
+                7 metas que vamos implementar juntos para transformar a saúde
+                financeira do seu negócio — do diagnóstico ao monitoramento
+                contínuo.
+              </p>
+            </div>
+          </FadeInUp>
+
+          <StaggerContainer className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {metas.map((m) => (
+              <StaggerItem key={m.n}>
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-accent/10">
+                  {/* Número grande no fundo */}
+                  <div className="absolute -right-4 -top-4 text-[120px] font-black leading-none text-accent/[0.05] transition-colors group-hover:text-accent/[0.08]">
+                    {String(m.n).padStart(2, "0")}
+                  </div>
+
+                  {/* Badge Meta N */}
+                  <div className="relative inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1">
+                    <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                      Meta {m.n}
+                    </span>
+                  </div>
+
+                  <h3 className="relative mt-5 text-lg font-bold text-white">
+                    {m.title}
+                  </h3>
+                  <p className="relative mt-3 text-sm leading-relaxed text-navy-300">
+                    {m.desc}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          <FadeInUp>
+            <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-accent/20 bg-accent/5 p-5 text-center backdrop-blur-sm">
+              <p className="text-sm text-navy-200">
+                Da <strong className="text-accent">Meta 1 à 7</strong>, você sai
+                de uma gestão reativa para uma operação financeira otimizada e
+                previsível — no seu ritmo, com acompanhamento direto.
+              </p>
+            </div>
           </FadeInUp>
         </div>
       </section>
