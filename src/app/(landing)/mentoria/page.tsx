@@ -200,18 +200,6 @@ export default function MentoriaPage() {
               </div>
             </div>
 
-            <div className="mt-10">
-              <a
-                href="#oferta"
-                className="inline-flex items-center gap-3 rounded-2xl bg-accent px-8 py-5 text-base font-bold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/30 sm:text-lg"
-              >
-                Quero garantir minha vaga
-                <ArrowRight size={20} />
-              </a>
-              <p className="mt-4 text-sm text-navy-400">
-                Condição especial só para quem está na live de hoje
-              </p>
-            </div>
           </FadeInUp>
         </div>
       </section>
