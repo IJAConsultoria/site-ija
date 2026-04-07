@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Shield, Lock, Eye, FileText, Mail } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo";
+import LgpdRequestForm from "@/components/LgpdRequestForm";
 
 export const metadata = generatePageMetadata({
   title: "Política de Privacidade",
@@ -154,6 +155,10 @@ export default function PrivacidadePage() {
               periodicamente. Mudanças significativas serão comunicadas pelos canais oficiais.
             </p>
           </section>
+        </div>
+
+        <div className="mt-10">
+          <LgpdRequestForm />
         </div>
 
         <div className="mt-8 text-center">

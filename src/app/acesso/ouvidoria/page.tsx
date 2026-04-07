@@ -19,6 +19,7 @@ import {
   type OuvidoriaStatus,
   type OuvidoriaTipo,
 } from "@/lib/queries/ouvidoria";
+import { logOuvidoriaAccess } from "@/lib/queries/auditLog";
 
 const TIPO_LABEL: Record<OuvidoriaTipo, { label: string; cls: string }> = {
   elogio: { label: "Elogio", cls: "bg-green-100 text-green-700" },
@@ -87,18 +88,22 @@ function OuvidoriaAdminPage() {
 
   async function changeStatus(item: OuvidoriaMensagem, status: OuvidoriaStatus) {
     await updateOuvidoriaStatus(item.id, status);
+    await logOuvidoriaAccess(item.id, "status_change", { from: item.status, to: status });
     setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, status } : i)));
     if (open?.id === item.id) setOpen({ ...item, status });
   }
 
   async function remove(item: OuvidoriaMensagem) {
     if (!confirm(`Excluir manifestação ${item.protocolo}?`)) return;
+    await logOuvidoriaAccess(item.id, "delete", { protocolo: item.protocolo });
     await deleteOuvidoria(item.id);
     setItems((prev) => prev.filter((i) => i.id !== item.id));
     if (open?.id === item.id) setOpen(null);
   }
 
   function exportCsv() {
+    // Log de exportação (atende LGPD art. 37 — registros de operações)
+    Promise.all(filtered.map((i) => logOuvidoriaAccess(i.id, "export"))).catch(() => {});
     const header = [
       "Protocolo",
       "Data",
@@ -256,6 +261,7 @@ function OuvidoriaAdminPage() {
                   key={i.id}
                   onClick={() => {
                     setOpen(i);
+                    logOuvidoriaAccess(i.id, "view");
                     if (i.status === "novo") changeStatus(i, "lido");
                   }}
                   className="cursor-pointer hover:bg-gray-50"

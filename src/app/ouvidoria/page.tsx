@@ -74,6 +74,17 @@ export default function OuvidoriaPage() {
         forma_contato: formaContato || null,
       });
       setProtocolo(result.protocolo);
+      // Notifica admins via email (fire-and-forget, não bloqueia)
+      fetch("/api/ouvidoria/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          protocolo: result.protocolo,
+          empresa: empresa.trim(),
+          tipo: tipoFinal,
+          identificado: !!(nome.trim() || email.trim()),
+        }),
+      }).catch(() => {});
       setStep("success");
     } catch (err) {
       console.error(err);
