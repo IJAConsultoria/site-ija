@@ -518,24 +518,27 @@ export default function MentoriaPage() {
 
               {/* Pricing */}
               <div className="px-8 py-12 text-center lg:px-12 lg:py-16">
-                {/* Preço cheio */}
-                <div className="mb-8">
-                  <p className="text-sm font-medium text-navy-400">
-                    De{" "}
-                    <span className="line-through decoration-2">
-                      R$ 4.800/mês
-                    </span>
+                {/* Preço oficial */}
+                <div className="mb-10">
+                  <p className="text-xs font-bold uppercase tracking-widest text-navy-300">
+                    Valor oficial da mentoria
+                  </p>
+                  <p className="mt-3 text-5xl font-bold text-white sm:text-6xl">
+                    R$ 2.500
+                    <span className="text-xl font-medium text-navy-400">/mês</span>
+                  </p>
+                  <p className="mt-2 text-xs text-navy-400">
+                    Demais formas de pagamento
                   </p>
                 </div>
 
-                {/* Preço live */}
-                <div className="mb-8">
-                  <p className="text-sm font-bold uppercase tracking-widest text-navy-300">
-                    Por hoje, na live, apenas
-                  </p>
-                  <p className="mt-2 text-2xl font-bold text-navy-400 line-through decoration-2">
-                    R$ 2.500/mês
-                  </p>
+                {/* Divider */}
+                <div className="relative my-8 flex items-center">
+                  <div className="flex-1 border-t border-white/10" />
+                  <span className="px-4 text-[10px] font-bold uppercase tracking-widest text-accent">
+                    ou
+                  </span>
+                  <div className="flex-1 border-t border-white/10" />
                 </div>
 
                 {/* Preço PIX */}
