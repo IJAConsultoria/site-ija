@@ -41,88 +41,41 @@ export const metadata = generatePageMetadata({
   path: "/mentoria",
 });
 
-const fases = [
+const metas = [
   {
     n: 1,
-    title: "Planejamento Estratégico",
-    desc: "Construímos a base da sua empresa: visão clara, metas e roadmap dos próximos 10 anos.",
-    metas: [
-      "Elaboração da Missão, Visão e Valores",
-      "Diagnóstico Estratégico através da Matriz SWOT e Matriz BCG",
-      "Prognóstico de Soluções Estratégicas com prazos definidos para os próximos 5 anos",
-      "Planejamento de Objetivos Estratégicos e Indicadores de Resultados para os próximos 10 anos",
-      "Elaboração do Projeto Estratégico detalhado com foco na expansão comercial",
-    ],
+    title: "Análise Econômica Operacional",
+    desc: "Identificação em reais e centavos dos custos operacionais, determinação do DNA Financeiro, determinação do Ponto de Equilíbrio e Apuração real do lucro.",
   },
   {
     n: 2,
-    title: "Gestão Financeira Afiada",
-    desc: "Estruturamos toda a saúde financeira do seu negócio — do diagnóstico ao monitoramento contínuo.",
-    metas: [
-      "Análise Econômica Operacional (custos, DNA Financeiro, Ponto de Equilíbrio e Apuração real do lucro)",
-      "Implementação do Novo Plano Orçamentário Operacional com foco no aumento da lucratividade",
-      "Análise de Pricing e implementação da gestão estratégica de markup para política promocional",
-      "Reestruturação das Rotinas de Gerenciamento Financeiro com foco em qualidade, tempo e economia",
-      "Dashboard de Análise Econômica e Financeira para visão clara da saúde financeira",
-      "Análise e Otimização da Gestão do Capital de Giro com foco na saúde do caixa",
-      "Implementação do Método Just in Time para Gestão de Compras e Estoque",
-    ],
+    title: "Novo Plano Orçamentário",
+    desc: "Implementação do Novo Plano Orçamentário Operacional com foco no aumento da lucratividade.",
   },
   {
     n: 3,
-    title: "Gestão Estratégica de Pessoas",
-    desc: "Transformamos sua equipe em um time autônomo, alinhado e de alta performance.",
-    metas: [
-      "Revisão e otimização do Organograma Funcional",
-      "Definição do Perfil Profissional de cada cargo",
-      "Elaboração dos Processos de Recrutamento e Seleção",
-      "Banco de Currículos e Ferramenta de Triagem",
-      "Programa de Integração de Novos Colaboradores",
-      "Canal interno de Comunicação alinhado aos objetivos estratégicos",
-      "Políticas Internas de Compliance",
-      "Código de Ética e Conduta",
-      "Documentação e Rotinas da Equipe",
-      "Disseminação da Missão, Visão e Valores empresariais",
-      "Estratégias de Endomarketing para reduzir rotatividade",
-      "Plano de Carreira com foco no aperfeiçoamento e retenção",
-      "Mapeamento e Otimização dos Processos",
-      "Implementação da Universidade Corporativa",
-      "Processos e Instrumentos de Auditoria de Qualidade",
-    ],
+    title: "Pricing e Política Promocional",
+    desc: "Análise de Pricing e implementação da gestão estratégica de markup para política promocional.",
   },
   {
     n: 4,
-    title: "Gestão Comercial e Marketing",
-    desc: "Estruturamos a máquina de vendas e marketing para atrair, conquistar e reter clientes.",
-    metas: [
-      "Definição do Público-Alvo e Personas",
-      "Plano Estratégico de Marketing através da Fórmula da Escada da Lealdade",
-      "Definição dos Benefícios e Diferenciais comerciais",
-      "Planejamento das Metas de Vendas com foco em lucratividade",
-      "Plano de Bonificação Estratégica para a equipe comercial",
-      "Planos de Campanhas Promocionais conforme sazonalidade",
-      "Definição dos Canais de Publicidade e Vendas para o público-alvo",
-      "Implementação prática do Funil de Vendas",
-      "Estratégias de Neurovendas e Rapport",
-      "Estratégias de superação de expectativas (Fórmula da Satisfação)",
-      "Identificação da Jornada do Consumidor",
-      "Fluxogramas e Roteiros de Prospecção, Venda e Pós-Venda (Spin Selling)",
-      "Fluxograma de SAC com foco em resolução de problemas",
-      "Relatórios de Indicadores de Resultados de venda",
-      "Análise e apoio nas tomadas de decisões estratégicas",
-    ],
+    title: "Rotinas de Gerenciamento Financeiro",
+    desc: "Reestruturação das Rotinas de Gerenciamento Financeiro com foco na otimização da qualidade, redução de esforço, redução de tempo e economia financeira.",
   },
   {
     n: 5,
-    title: "Universidade do Líder",
-    desc: "Formamos líderes de verdade — capazes de manter o padrão e fazer o negócio crescer sem você.",
-    metas: [
-      "Ordenação e Processos: Senso de Ordenação (estrutura, organograma, pessoas, recursos, espaço, tempo)",
-      "Atitude de Dono, Liderança e Metas: características do intraempreendedor, ferramentas SMART, 5W2H, Kanban",
-      "Gestão e Crises: Diagnóstico Empresarial, Análise SWOT, Árvore de Causas e Efeitos, prevenção",
-      "Comunicação e Feedback: comunicação clara, Rapport, assertividade e métodos de Feedback",
-      "Sustentabilidade Econômica: raciocínio lógico, conceitos de gestão econômica, lucratividade e ponto de equilíbrio",
-    ],
+    title: "Dashboard Econômico-Financeiro",
+    desc: "Elaboração e implementação do Dashboard de Análise Econômica e Financeira com foco em trazer uma visão clara geral e específica da saúde financeira da empresa.",
+  },
+  {
+    n: 6,
+    title: "Gestão do Capital de Giro",
+    desc: "Análise e Otimização da Gestão do Capital de Giro com foco na melhoria da saúde do caixa.",
+  },
+  {
+    n: 7,
+    title: "Monitoramento e Apoio Estratégico",
+    desc: "Monitoramento dos Indicadores de Desempenho Econômico-Financeiro e apoio periódico na tomada de decisões com foco na otimização da Lucratividade.",
   },
 ];
 
@@ -289,85 +242,71 @@ export default function MentoriaPage() {
         </div>
       </section>
 
-      {/* ===== ROADMAP / 5 FASES DA MENTORIA ===== */}
+      {/* ===== ROADMAP DA MENTORIA — 7 METAS ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.08)_0%,_transparent_60%)]" />
-        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-sm font-bold uppercase tracking-widest text-accent">
-                Roadmap completo
+                Roadmap da Mentoria
               </p>
               <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-                As 5 fases da{" "}
-                <span className="serif-italic gradient-text">Mentoria</span>
+                Gestão Financeira{" "}
+                <span className="serif-italic gradient-text">Afiada</span>
               </h2>
               <p className="mt-4 text-lg text-navy-300">
-                Cada fase representa uma etapa da transformação do seu negócio.
-                Vamos passar por todas, no seu ritmo, com acompanhamento direto.
+                7 metas que vamos implementar juntos para transformar a saúde
+                financeira do seu negócio — do diagnóstico ao monitoramento
+                contínuo.
               </p>
             </div>
           </FadeInUp>
 
-          {/* Fases stacked verticalmente */}
-          <div className="mt-16 space-y-8">
-            {fases.map((fase) => (
-              <FadeInUp key={fase.n}>
-                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm lg:p-12">
-                  {/* Número grande no fundo */}
-                  <div className="absolute -right-8 -top-12 text-[200px] font-black leading-none text-accent/[0.05]">
-                    {String(fase.n).padStart(2, "0")}
+          <StaggerContainer className="mt-16 space-y-5">
+            {metas.map((m) => (
+              <StaggerItem key={m.n}>
+                <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-accent/10 sm:p-8">
+                  {/* Número gigante decorativo no fundo */}
+                  <div className="absolute -right-6 -top-8 text-[160px] font-black leading-none text-accent/[0.06] transition-colors group-hover:text-accent/[0.1] sm:text-[200px]">
+                    {String(m.n).padStart(2, "0")}
                   </div>
 
-                  {/* Header da fase */}
-                  <div className="relative">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5">
-                      <div className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span className="text-xs font-bold uppercase tracking-widest text-accent">
-                        Fase {fase.n}
+                  {/* Glow sutil no hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent/[0.03] via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+                    {/* Número da meta */}
+                    <div className="flex shrink-0 items-center gap-4 sm:flex-col sm:gap-2">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/25 to-accent/5 text-2xl font-black text-accent ring-1 ring-accent/20 sm:h-20 sm:w-20 sm:text-3xl">
+                        {String(m.n).padStart(2, "0")}
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-accent/80">
+                        Meta {m.n}
                       </span>
                     </div>
-                    <h3 className="mt-5 text-3xl font-bold text-white sm:text-4xl">
-                      {fase.title}
-                    </h3>
-                    <p className="mt-3 max-w-3xl text-base leading-relaxed text-navy-300 lg:text-lg">
-                      {fase.desc}
-                    </p>
-                  </div>
 
-                  {/* Metas empilhadas como cards verticais */}
-                  <div className="relative mt-10 space-y-4">
-                    {fase.metas.map((meta, i) => (
-                      <div
-                        key={i}
-                        className="group/meta flex items-start gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.07] hover:shadow-xl hover:shadow-accent/10 sm:p-6"
-                      >
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-gradient-to-br from-accent/25 to-accent/5 text-base font-black text-accent ring-1 ring-accent/20 sm:h-14 sm:w-14 sm:text-lg">
-                          {String(i + 1).padStart(2, "0")}
-                        </div>
-                        <div className="flex-1 pt-1">
-                          <p className="text-[11px] font-bold uppercase tracking-widest text-accent/80">
-                            Meta {i + 1}
-                          </p>
-                          <p className="mt-1 text-base leading-relaxed text-white sm:text-lg">
-                            {meta}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                    {/* Conteúdo */}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white sm:text-2xl">
+                        {m.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-navy-300 sm:text-base">
+                        {m.desc}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </FadeInUp>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
           <FadeInUp>
-            <div className="mx-auto mt-16 max-w-2xl rounded-2xl border border-accent/20 bg-accent/5 p-6 text-center backdrop-blur-sm">
-              <p className="text-base text-navy-200">
-                Da <strong className="text-accent">Fase 1 à 5</strong>, você
-                transforma a gestão completa do seu negócio — finanças,
-                pessoas, comercial e liderança — em um modelo replicável e
-                sustentável.
+            <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-accent/20 bg-accent/5 p-5 text-center backdrop-blur-sm">
+              <p className="text-sm text-navy-200">
+                Da <strong className="text-accent">Meta 1 à 7</strong>, você sai
+                de uma gestão reativa para uma operação financeira otimizada e
+                previsível — no seu ritmo, com acompanhamento direto.
               </p>
             </div>
           </FadeInUp>
