@@ -60,13 +60,11 @@ export async function createOuvidoria(input: Omit<Partial<OuvidoriaMensagem>, "i
 
   const identificado = !!(input.nome || input.email);
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("ouvidoria_mensagens")
-    .insert({ ...input, protocolo, identificado, status: "novo" })
-    .select()
-    .single();
+    .insert({ ...input, protocolo, identificado, status: "novo" });
   if (error) throw error;
-  return data as OuvidoriaMensagem;
+  return { protocolo } as OuvidoriaMensagem;
 }
 
 export async function updateOuvidoriaStatus(id: string, status: OuvidoriaStatus) {

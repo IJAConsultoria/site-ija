@@ -419,7 +419,7 @@ export default function OuvidoriaPage() {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent";
+  "w-full rounded-xl border border-white/15 bg-white/[0.08] px-4 py-3 text-sm text-white placeholder-navy-400 focus:border-accent focus:bg-white/[0.12] focus:outline-none focus:ring-1 focus:ring-accent";
 
 function Field({
   label,
@@ -458,8 +458,8 @@ function Radio({
     <label
       className={`flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-3 text-sm transition-colors ${
         checked
-          ? "border-accent bg-accent/10 text-white"
-          : "border-white/10 bg-white/5 text-navy-300 hover:border-white/20 hover:text-white"
+          ? "border-accent bg-accent/15 text-white"
+          : "border-white/15 bg-white/[0.08] text-navy-200 hover:border-white/25 hover:bg-white/[0.12] hover:text-white"
       }`}
     >
       <input
