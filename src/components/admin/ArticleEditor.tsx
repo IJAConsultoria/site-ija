@@ -152,7 +152,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
       <div className="mb-6 flex items-center justify-between">
         <button
           onClick={() => router.push("/acesso/artigos")}
-          className="flex items-center gap-2 text-sm text-navy-400 transition-colors hover:text-white"
+          className="flex items-center gap-2 text-sm text-navy-600 transition-colors hover:text-navy-950"
         >
           <ArrowLeft size={16} />
           Voltar
@@ -177,7 +177,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           <button
             onClick={() => handleSave("draft")}
             disabled={saving || publishing}
-            className="flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2 text-sm text-white transition-colors hover:bg-white/5"
+            className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-navy-950 transition-colors hover:bg-gray-50"
           >
             {saving ? (
               <Loader2 size={14} className="animate-spin" />
@@ -190,7 +190,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           <button
             onClick={() => handleSave("published")}
             disabled={saving || publishing}
-            className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
+            className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-navy-950 transition-colors hover:bg-accent-dark"
           >
             {publishing ? (
               <Loader2 size={14} className="animate-spin" />
@@ -217,7 +217,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
             value={title}
             onChange={(e) => handleTitleChange(e.target.value)}
             placeholder="Título do artigo"
-            className="w-full bg-transparent text-3xl font-bold text-white placeholder-navy-600 focus:outline-none"
+            className="w-full bg-transparent text-3xl font-bold text-navy-950 placeholder-gray-400 focus:outline-none"
           />
 
           {/* Excerpt */}
@@ -226,7 +226,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
             onChange={(e) => setExcerpt(e.target.value)}
             placeholder="Resumo do artigo (aparece nas listagens e SEO)"
             rows={2}
-            className="w-full resize-none rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+            className="w-full resize-none rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
           />
 
           {/* Editor */}
@@ -237,8 +237,8 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
         <div className="space-y-4">
           {/* Status */}
           {isEditing && (
-            <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-navy-400">
+            <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-navy-600">
                 Status
               </p>
               <span
@@ -261,14 +261,14 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           )}
 
           {/* Category */}
-          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-400">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-600">
               Categoria
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white focus:border-accent focus:outline-none"
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950 focus:border-accent focus:outline-none"
             >
               <option value="">Selecione...</option>
               {BLOG_CATEGORIES.map((cat) => (
@@ -280,8 +280,8 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           </div>
 
           {/* Tags */}
-          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-400">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-600">
               Tags
             </label>
             <input
@@ -289,7 +289,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
               placeholder="CMV, Lucro, Finanças"
-              className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+              className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
             />
             <p className="mt-1 text-[11px] text-navy-500">
               Separe com vírgula
@@ -297,7 +297,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           </div>
 
           {/* Cover */}
-          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
             <ImageUpload
               value={coverUrl || null}
               onChange={(url) => setCoverUrl(url || "")}
@@ -307,13 +307,13 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           </div>
 
           {/* CTA Banner */}
-          <div className="rounded-lg border border-white/10 bg-white/5">
+          <div className="rounded-lg border border-gray-200 bg-gray-50">
             <button
               type="button"
               onClick={() => setShowCta(!showCta)}
               className="flex w-full items-center justify-between p-4 text-left"
             >
-              <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-navy-400">
+              <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-navy-600">
                 CTA Banner
                 {ctaEnabled && (
                   <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-[9px] text-green-400">
@@ -323,12 +323,12 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
               </span>
               <ChevronDown
                 size={14}
-                className={`text-navy-400 transition-transform ${showCta ? "rotate-180" : ""}`}
+                className={`text-navy-600 transition-transform ${showCta ? "rotate-180" : ""}`}
               />
             </button>
             {showCta && (
-              <div className="space-y-3 border-t border-white/10 p-4">
-                <label className="flex items-center gap-2 text-xs text-white">
+              <div className="space-y-3 border-t border-gray-200 p-4">
+                <label className="flex items-center gap-2 text-xs text-navy-950">
                   <input
                     type="checkbox"
                     checked={ctaEnabled}
@@ -341,28 +341,28 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
                   value={ctaTitle}
                   onChange={(e) => setCtaTitle(e.target.value)}
                   placeholder="Título do CTA"
-                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
                 <textarea
                   value={ctaDescription}
                   onChange={(e) => setCtaDescription(e.target.value)}
                   placeholder="Descrição"
                   rows={2}
-                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
                 <input
                   type="text"
                   value={ctaButtonText}
                   onChange={(e) => setCtaButtonText(e.target.value)}
                   placeholder="Texto do botão"
-                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
                 <input
                   type="text"
                   value={ctaButtonUrl}
                   onChange={(e) => setCtaButtonUrl(e.target.value)}
                   placeholder="URL do botão"
-                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950"
                 />
                 <ImageUpload
                   value={ctaImage}
@@ -375,8 +375,8 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
           </div>
 
           {/* Slug */}
-          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-400">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-600">
               Slug (URL)
             </label>
             <div className="flex items-center gap-1 text-xs text-navy-500">
@@ -386,33 +386,33 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
                 placeholder="titulo-do-artigo"
-                className="flex-1 rounded border border-white/10 bg-navy-900 px-2 py-1 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+                className="flex-1 rounded border border-gray-200 bg-white px-2 py-1 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
               />
             </div>
           </div>
 
           {/* SEO */}
-          <div className="rounded-lg border border-white/10 bg-white/5">
+          <div className="rounded-lg border border-gray-200 bg-gray-50">
             <button
               type="button"
               onClick={() => setShowSeo(!showSeo)}
               className="flex w-full items-center justify-between p-4 text-left"
             >
-              <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-navy-400">
+              <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-navy-600">
                 <Eye size={14} />
                 SEO
               </span>
               <ChevronDown
                 size={14}
-                className={`text-navy-400 transition-transform ${
+                className={`text-navy-600 transition-transform ${
                   showSeo ? "rotate-180" : ""
                 }`}
               />
             </button>
             {showSeo && (
-              <div className="space-y-3 border-t border-white/10 p-4">
+              <div className="space-y-3 border-t border-gray-200 p-4">
                 <div>
-                  <label className="mb-1 block text-xs text-navy-400">
+                  <label className="mb-1 block text-xs text-navy-600">
                     Meta título
                   </label>
                   <input
@@ -420,14 +420,14 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
                     value={metaTitle}
                     onChange={(e) => setMetaTitle(e.target.value)}
                     placeholder={title || "Título para SEO"}
-                    className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+                    className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
                   />
                   <p className="mt-0.5 text-[11px] text-navy-500">
                     {(metaTitle || title).length}/60 caracteres
                   </p>
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs text-navy-400">
+                  <label className="mb-1 block text-xs text-navy-600">
                     Meta descrição
                   </label>
                   <textarea
@@ -435,7 +435,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
                     onChange={(e) => setMetaDescription(e.target.value)}
                     placeholder={excerpt || "Descrição para SEO"}
                     rows={3}
-                    className="w-full resize-none rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+                    className="w-full resize-none rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-navy-950 placeholder-gray-400 focus:border-accent focus:outline-none"
                   />
                   <p className="mt-0.5 text-[11px] text-navy-500">
                     {(metaDescription || excerpt).length}/160 caracteres
