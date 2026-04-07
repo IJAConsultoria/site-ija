@@ -17,7 +17,7 @@ export type LeadMagnet = {
 
 export async function getLeadMagnets(activeOnly = false) {
   const supabase = createClient();
-  let query = supabase.from("lead_magnets").select("*").order("created_at", { ascending: false });
+  let query = supabase.from("lead_magnets_ija").select("*").order("created_at", { ascending: false });
   if (activeOnly) query = query.eq("active", true);
   const { data, error } = await query;
   if (error) throw error;
@@ -26,14 +26,14 @@ export async function getLeadMagnets(activeOnly = false) {
 
 export async function getLeadMagnet(id: string) {
   const supabase = createClient();
-  const { data, error } = await supabase.from("lead_magnets").select("*").eq("id", id).single();
+  const { data, error } = await supabase.from("lead_magnets_ija").select("*").eq("id", id).single();
   if (error) throw error;
   return data as LeadMagnet;
 }
 
 export async function createLeadMagnet(input: Partial<LeadMagnet>) {
   const supabase = createClient();
-  const { data, error } = await supabase.from("lead_magnets").insert(input).select().single();
+  const { data, error } = await supabase.from("lead_magnets_ija").insert(input).select().single();
   if (error) throw error;
   return data as LeadMagnet;
 }
@@ -41,7 +41,7 @@ export async function createLeadMagnet(input: Partial<LeadMagnet>) {
 export async function updateLeadMagnet(id: string, input: Partial<LeadMagnet>) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("lead_magnets")
+    .from("lead_magnets_ija")
     .update(input)
     .eq("id", id)
     .select()
@@ -52,6 +52,6 @@ export async function updateLeadMagnet(id: string, input: Partial<LeadMagnet>) {
 
 export async function deleteLeadMagnet(id: string) {
   const supabase = createClient();
-  const { error } = await supabase.from("lead_magnets").delete().eq("id", id);
+  const { error } = await supabase.from("lead_magnets_ija").delete().eq("id", id);
   if (error) throw error;
 }

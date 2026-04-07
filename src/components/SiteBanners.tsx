@@ -33,7 +33,7 @@ export default function SiteBanners() {
     setDismissedIds(getDismissed());
     const supabase = createClient();
     supabase
-      .from("site_banners")
+      .from("site_banners_ija")
       .select("*")
       .eq("active", true)
       .order("priority", { ascending: false })

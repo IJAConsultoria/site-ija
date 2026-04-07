@@ -32,7 +32,7 @@ export type Article = {
 export async function getArticleBySlug(slug: string) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("articles")
+    .from("articles_ija")
     .select("*")
     .eq("slug", slug)
     .eq("status", "published")
@@ -44,7 +44,7 @@ export async function getArticleBySlug(slug: string) {
 export async function getPublishedArticles() {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("articles")
+    .from("articles_ija")
     .select("*")
     .eq("status", "published")
     .order("published_at", { ascending: false });
@@ -55,7 +55,7 @@ export async function getPublishedArticles() {
 export async function getArticles(status?: "draft" | "published") {
   const supabase = createClient();
   let query = supabase
-    .from("articles")
+    .from("articles_ija")
     .select("*")
     .order("created_at", { ascending: false });
 
@@ -71,7 +71,7 @@ export async function getArticles(status?: "draft" | "published") {
 export async function getArticle(id: string) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("articles")
+    .from("articles_ija")
     .select("*")
     .eq("id", id)
     .single();
@@ -83,7 +83,7 @@ export async function getArticle(id: string) {
 export async function createArticle(article: Partial<Article>) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("articles")
+    .from("articles_ija")
     .insert(article)
     .select()
     .single();
@@ -95,7 +95,7 @@ export async function createArticle(article: Partial<Article>) {
 export async function updateArticle(id: string, article: Partial<Article>) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("articles")
+    .from("articles_ija")
     .update({ ...article, updated_at: new Date().toISOString() })
     .eq("id", id)
     .select()
@@ -107,13 +107,13 @@ export async function updateArticle(id: string, article: Partial<Article>) {
 
 export async function deleteArticle(id: string) {
   const supabase = createClient();
-  const { error } = await supabase.from("articles").delete().eq("id", id);
+  const { error } = await supabase.from("articles_ija").delete().eq("id", id);
   if (error) throw error;
 }
 
 export async function getArticleStats() {
   const supabase = createClient();
-  const { data, error } = await supabase.from("articles").select("status");
+  const { data, error } = await supabase.from("articles_ija").select("status");
 
   if (error) throw error;
 

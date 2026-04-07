@@ -301,7 +301,7 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
             <ImageUpload
               value={coverUrl || null}
               onChange={(url) => setCoverUrl(url || "")}
-              folder="articles"
+              folder="articles_ija"
               label="Imagem de capa"
             />
           </div>

@@ -30,7 +30,7 @@ export type SiteBanner = {
 export async function getBanners() {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("site_banners")
+    .from("site_banners_ija")
     .select("*")
     .order("priority", { ascending: false })
     .order("created_at", { ascending: false });
@@ -40,14 +40,14 @@ export async function getBanners() {
 
 export async function getBanner(id: string) {
   const supabase = createClient();
-  const { data, error } = await supabase.from("site_banners").select("*").eq("id", id).single();
+  const { data, error } = await supabase.from("site_banners_ija").select("*").eq("id", id).single();
   if (error) throw error;
   return data as SiteBanner;
 }
 
 export async function createBanner(input: Partial<SiteBanner>) {
   const supabase = createClient();
-  const { data, error } = await supabase.from("site_banners").insert(input).select().single();
+  const { data, error } = await supabase.from("site_banners_ija").insert(input).select().single();
   if (error) throw error;
   return data as SiteBanner;
 }
@@ -55,7 +55,7 @@ export async function createBanner(input: Partial<SiteBanner>) {
 export async function updateBanner(id: string, input: Partial<SiteBanner>) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("site_banners")
+    .from("site_banners_ija")
     .update(input)
     .eq("id", id)
     .select()
@@ -66,6 +66,6 @@ export async function updateBanner(id: string, input: Partial<SiteBanner>) {
 
 export async function deleteBanner(id: string) {
   const supabase = createClient();
-  const { error } = await supabase.from("site_banners").delete().eq("id", id);
+  const { error } = await supabase.from("site_banners_ija").delete().eq("id", id);
   if (error) throw error;
 }

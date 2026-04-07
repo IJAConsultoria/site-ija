@@ -10,7 +10,7 @@ import {
   type CommentStatus,
 } from "@/lib/queries/comments";
 
-type CommentRow = BlogComment & { articles: { title: string; slug: string } | null };
+type CommentRow = BlogComment & { articles_ija: { title: string; slug: string } | null };
 
 export default function ComentariosPage() {
   const [comments, setComments] = useState<CommentRow[]>([]);
@@ -98,7 +98,7 @@ export default function ComentariosPage() {
                     {c.email} {c.phone && `• ${c.phone}`}
                   </p>
                   <p className="mt-0.5 text-xs text-navy-500">
-                    em <span className="text-accent">{c.articles?.title || "—"}</span> •{" "}
+                    em <span className="text-accent">{c.articles_ija?.title || "—"}</span> •{" "}
                     {new Date(c.created_at).toLocaleString("pt-BR")}
                   </p>
                 </div>

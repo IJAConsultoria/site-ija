@@ -29,7 +29,7 @@ export type OuvidoriaMensagem = {
 export async function getOuvidorias(status?: OuvidoriaStatus) {
   const supabase = createClient();
   let q = supabase
-    .from("ouvidoria_mensagens")
+    .from("ouvidoria_mensagens_ija")
     .select("*")
     .order("created_at", { ascending: false });
   if (status) q = q.eq("status", status);
@@ -40,7 +40,7 @@ export async function getOuvidorias(status?: OuvidoriaStatus) {
 
 export async function getOuvidoriaStats() {
   const supabase = createClient();
-  const { data, error } = await supabase.from("ouvidoria_mensagens").select("status, tipo");
+  const { data, error } = await supabase.from("ouvidoria_mensagens_ija").select("status, tipo");
   if (error) throw error;
   return {
     total: data.length,
@@ -61,7 +61,7 @@ export async function createOuvidoria(input: Omit<Partial<OuvidoriaMensagem>, "i
   const identificado = !!(input.nome || input.email);
 
   const { error } = await supabase
-    .from("ouvidoria_mensagens")
+    .from("ouvidoria_mensagens_ija")
     .insert({ ...input, protocolo, identificado, status: "novo" });
   if (error) throw error;
   return { protocolo } as OuvidoriaMensagem;
@@ -69,12 +69,12 @@ export async function createOuvidoria(input: Omit<Partial<OuvidoriaMensagem>, "i
 
 export async function updateOuvidoriaStatus(id: string, status: OuvidoriaStatus) {
   const supabase = createClient();
-  const { error } = await supabase.from("ouvidoria_mensagens").update({ status }).eq("id", id);
+  const { error } = await supabase.from("ouvidoria_mensagens_ija").update({ status }).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteOuvidoria(id: string) {
   const supabase = createClient();
-  const { error } = await supabase.from("ouvidoria_mensagens").delete().eq("id", id);
+  const { error } = await supabase.from("ouvidoria_mensagens_ija").delete().eq("id", id);
   if (error) throw error;
 }

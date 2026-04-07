@@ -17,19 +17,19 @@ export type BlogComment = {
 export async function getComments(status?: CommentStatus) {
   const supabase = createClient();
   let query = supabase
-    .from("blog_comments")
-    .select("*, articles(title, slug)")
+    .from("blog_comments_ija")
+    .select("*, articles_ija(title, slug)")
     .order("created_at", { ascending: false });
   if (status) query = query.eq("status", status);
   const { data, error } = await query;
   if (error) throw error;
-  return data as (BlogComment & { articles: { title: string; slug: string } | null })[];
+  return data as (BlogComment & { articles_ija: { title: string; slug: string } | null })[];
 }
 
 export async function getApprovedComments(articleId: string) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("blog_comments")
+    .from("blog_comments_ija")
     .select("*")
     .eq("article_id", articleId)
     .eq("status", "approved")
@@ -47,7 +47,7 @@ export async function createComment(input: {
 }) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("blog_comments")
+    .from("blog_comments_ija")
     .insert({ ...input, status: "pending" })
     .select()
     .single();
@@ -57,19 +57,19 @@ export async function createComment(input: {
 
 export async function updateCommentStatus(id: string, status: CommentStatus) {
   const supabase = createClient();
-  const { error } = await supabase.from("blog_comments").update({ status }).eq("id", id);
+  const { error } = await supabase.from("blog_comments_ija").update({ status }).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteComment(id: string) {
   const supabase = createClient();
-  const { error } = await supabase.from("blog_comments").delete().eq("id", id);
+  const { error } = await supabase.from("blog_comments_ija").delete().eq("id", id);
   if (error) throw error;
 }
 
 export async function getCommentStats() {
   const supabase = createClient();
-  const { data, error } = await supabase.from("blog_comments").select("status");
+  const { data, error } = await supabase.from("blog_comments_ija").select("status");
   if (error) throw error;
   return {
     total: data.length,
