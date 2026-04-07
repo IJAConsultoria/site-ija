@@ -39,6 +39,8 @@ export default function OuvidoriaAdminPage() {
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<OuvidoriaStatus | "all">("all");
   const [filterTipo, setFilterTipo] = useState<OuvidoriaTipo | "all">("all");
+  const [filterEmpresa, setFilterEmpresa] = useState<string>("all");
+  const [filterIdentif, setFilterIdentif] = useState<"all" | "identificado" | "anonimo">("all");
   const [open, setOpen] = useState<OuvidoriaMensagem | null>(null);
 
   useEffect(() => {
@@ -54,9 +56,14 @@ export default function OuvidoriaAdminPage() {
     }
   }
 
+  const empresasUnicas = Array.from(new Set(items.map((i) => i.empresa).filter(Boolean))).sort();
+
   const filtered = items.filter((i) => {
     if (filterStatus !== "all" && i.status !== filterStatus) return false;
     if (filterTipo !== "all" && i.tipo !== filterTipo) return false;
+    if (filterEmpresa !== "all" && i.empresa !== filterEmpresa) return false;
+    if (filterIdentif === "identificado" && !i.identificado) return false;
+    if (filterIdentif === "anonimo" && i.identificado) return false;
     if (search) {
       const q = search.toLowerCase();
       return (
@@ -86,6 +93,7 @@ export default function OuvidoriaAdminPage() {
     const header = [
       "Protocolo",
       "Data",
+      "Status",
       "Empresa",
       "Cargo",
       "Identificado",
@@ -95,11 +103,17 @@ export default function OuvidoriaAdminPage() {
       "Gravidade",
       "Resposta desejada",
       "Mensagem",
-      "Status",
+      "Sugestão de melhoria",
+      "Já tentou resolver",
+      "Ações tomadas",
+      "Forma de contato",
     ];
+    const formatFormaContato = (v: string | null) =>
+      v === "reuniao" ? "Gostaria de uma reunião" : v === "nao_contatar" ? "Não gostaria de contato" : "";
     const rows = filtered.map((i) => [
       i.protocolo,
       new Date(i.created_at).toLocaleString("pt-BR"),
+      STATUS_LABEL[i.status].label,
       i.empresa,
       i.cargo || "",
       i.identificado ? "Sim" : "Anônimo",
@@ -109,7 +123,10 @@ export default function OuvidoriaAdminPage() {
       i.gravidade || "",
       i.resposta_desejada ? "Sim" : "Não",
       i.mensagem.replace(/\n/g, " "),
-      i.status,
+      (i.sugestao_melhoria || "").replace(/\n/g, " "),
+      i.ja_tentou_resolver === null ? "" : i.ja_tentou_resolver ? "Sim" : "Não",
+      (i.acoes_tomadas || "").replace(/\n/g, " "),
+      formatFormaContato(i.forma_contato),
     ]);
     const csv = [header, ...rows]
       .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
@@ -178,6 +195,27 @@ export default function OuvidoriaAdminPage() {
           <option value="sugestao">Sugestão</option>
           <option value="reclamacao">Reclamação</option>
           <option value="denuncia">Denúncia</option>
+        </select>
+        <select
+          value={filterEmpresa}
+          onChange={(e) => setFilterEmpresa(e.target.value)}
+          className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-navy-950"
+        >
+          <option value="all">Todas empresas</option>
+          {empresasUnicas.map((e) => (
+            <option key={e} value={e}>
+              {e}
+            </option>
+          ))}
+        </select>
+        <select
+          value={filterIdentif}
+          onChange={(e) => setFilterIdentif(e.target.value as "all" | "identificado" | "anonimo")}
+          className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-navy-950"
+        >
+          <option value="all">Identificados + Anônimos</option>
+          <option value="identificado">Só identificados</option>
+          <option value="anonimo">Só anônimos</option>
         </select>
       </div>
 
