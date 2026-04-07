@@ -125,29 +125,42 @@ export default function MentoriaPresentation() {
 
       {/* ============ SLIDE 3 — QUEM É O MENTOR ============ */}
       <Slide id={2}>
-        <div className="grid items-center gap-16 lg:grid-cols-2 max-w-7xl">
-          <div>
+        <div className="grid items-center gap-12 lg:grid-cols-12 max-w-7xl">
+          {/* Foto */}
+          <div className="lg:col-span-4 flex justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/30 to-accent/0 blur-2xl" />
+              <img
+                src="/images/equipe/joao-pedro-alves-dark.jpg"
+                alt="João Pedro Alves"
+                className="relative h-72 w-72 lg:h-96 lg:w-96 rounded-3xl object-cover border-4 border-accent/30 shadow-2xl"
+              />
+            </div>
+          </div>
+
+          {/* Conteúdo */}
+          <div className="lg:col-span-8">
             <p className="text-sm font-bold uppercase tracking-[0.3em] text-accent">
               Quem é o seu mentor
             </p>
-            <h2 className="mt-6 text-5xl font-bold lg:text-7xl">
+            <h2 className="mt-4 text-5xl font-bold lg:text-6xl">
               João Pedro
               <br />
               <span className="serif-italic gradient-text">Alves</span>
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-navy-300 lg:text-xl">
+            <p className="mt-5 text-base leading-relaxed text-navy-300 lg:text-lg">
               Fundador e CEO do Instituto João Alves. Especialista em
               estruturar negócios para expansão. Criador do Método Tripé da
               Expansão. +14 anos transformando empresas.
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <SmallStat valor="+14" label="anos de experiência" />
-            <SmallStat valor="+500" label="projetos realizados" />
-            <SmallStat valor="+130" label="clientes atendidos" />
-            <SmallStat valor="+700" label="líderes qualificados" />
-            <SmallStat valor="+5.000" label="colaboradores qualificados" />
-            <SmallStat valor="4 estados" label="RJ · SP · ES · RS" />
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              <SmallStat valor="+14" label="anos" />
+              <SmallStat valor="+500" label="projetos" />
+              <SmallStat valor="+130" label="clientes" />
+              <SmallStat valor="+700" label="líderes" />
+              <SmallStat valor="+5.000" label="colaboradores" />
+              <SmallStat valor="4" label="estados" />
+            </div>
           </div>
         </div>
       </Slide>
