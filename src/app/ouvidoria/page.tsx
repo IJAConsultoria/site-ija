@@ -25,7 +25,8 @@ export default function OuvidoriaPage() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [cargo, setCargo] = useState("");
-  const [tipo, setTipo] = useState<OuvidoriaTipo | "">("");
+  const [tipo, setTipo] = useState<OuvidoriaTipo | "outro" | "">("");
+  const [tipoOutro, setTipoOutro] = useState("");
   const [respostaDesejada, setRespostaDesejada] = useState<string>("");
   const [mensagem, setMensagem] = useState("");
   const [sugestaoMelhoria, setSugestaoMelhoria] = useState("");
@@ -36,21 +37,31 @@ export default function OuvidoriaPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!empresa.trim() || !tipo || !mensagem.trim()) {
-      setError("Preencha empresa, motivo e descrição.");
+    if (!empresa.trim() || !tipo || !respostaDesejada) {
+      setError("Preencha empresa, motivo e se deseja resposta.");
+      return;
+    }
+    if (tipo === "outro" && !tipoOutro.trim()) {
+      setError("Especifique o motivo em 'Outro'.");
       return;
     }
     setError("");
     setSubmitting(true);
     try {
+      // Se for "outro", salva como reclamacao com prefixo no campo mensagem
+      const tipoFinal: OuvidoriaTipo = tipo === "outro" ? "reclamacao" : tipo;
+      const mensagemFinal =
+        tipo === "outro"
+          ? `[OUTRO MOTIVO: ${tipoOutro.trim()}]\n\n${mensagem.trim()}`
+          : mensagem.trim();
       const result = await createOuvidoria({
         empresa: empresa.trim(),
         nome: nome.trim() || null,
         email: email.trim() || null,
         cargo: cargo.trim() || null,
-        tipo: tipo as OuvidoriaTipo,
+        tipo: tipoFinal,
         resposta_desejada: respostaDesejada === "sim",
-        mensagem: mensagem.trim(),
+        mensagem: mensagemFinal,
         sugestao_melhoria: sugestaoMelhoria.trim() || null,
         gravidade: (gravidade as "alta" | "media" | "baixa") || null,
         ja_tentou_resolver: jaTentou ? jaTentou === "sim" : null,
@@ -239,12 +250,12 @@ export default function OuvidoriaPage() {
             </Field>
 
             <Field label="Qual é o motivo do seu contato?" required>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="space-y-2">
                 {[
-                  { v: "elogio", l: "Elogio" },
-                  { v: "sugestao", l: "Sugestão" },
                   { v: "reclamacao", l: "Reclamação" },
+                  { v: "sugestao", l: "Sugestão" },
                   { v: "denuncia", l: "Denúncia" },
+                  { v: "elogio", l: "Elogio" },
                 ].map((o) => (
                   <Radio
                     key={o.v}
@@ -255,10 +266,26 @@ export default function OuvidoriaPage() {
                     onChange={() => setTipo(o.v as OuvidoriaTipo)}
                   />
                 ))}
+                <Radio
+                  name="tipo"
+                  value="outro"
+                  label="Outro:"
+                  checked={tipo === "outro"}
+                  onChange={() => setTipo("outro")}
+                />
+                {tipo === "outro" && (
+                  <input
+                    type="text"
+                    value={tipoOutro}
+                    onChange={(e) => setTipoOutro(e.target.value)}
+                    placeholder="Especifique"
+                    className={inputCls + " mt-2"}
+                  />
+                )}
               </div>
             </Field>
 
-            <Field label="Deseja uma resposta da empresa ou este é apenas um desabafo?">
+            <Field label="Deseja uma resposta da empresa ou este é apenas um desabafo?" required>
               <div className="space-y-2">
                 <Radio
                   name="resposta"
@@ -277,9 +304,8 @@ export default function OuvidoriaPage() {
               </div>
             </Field>
 
-            <Field label="Por favor, descreva detalhadamente o que você gostaria de relatar:" required>
+            <Field label="Por favor, descreva detalhadamente o que você gostaria de relatar:">
               <textarea
-                required
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
                 rows={5}
@@ -287,44 +313,40 @@ export default function OuvidoriaPage() {
               />
             </Field>
 
-            {tipo === "sugestao" && (
-              <Field label="Se for uma sugestão, o que você acredita que poderia melhorar na empresa?">
-                <textarea
-                  value={sugestaoMelhoria}
-                  onChange={(e) => setSugestaoMelhoria(e.target.value)}
-                  rows={3}
-                  className={inputCls}
-                />
-              </Field>
-            )}
+            <Field label="Se for uma sugestão, o que você acredita que poderia melhorar na empresa?">
+              <textarea
+                value={sugestaoMelhoria}
+                onChange={(e) => setSugestaoMelhoria(e.target.value)}
+                rows={3}
+                className={inputCls}
+              />
+            </Field>
 
-            {tipo === "denuncia" && (
-              <Field label="Caso seja uma denúncia, qual é a gravidade do problema relatado?">
-                <div className="space-y-2">
-                  <Radio
-                    name="gravidade"
-                    value="alta"
-                    label="Alta — prejudica gravemente o ambiente de trabalho ou a segurança"
-                    checked={gravidade === "alta"}
-                    onChange={() => setGravidade("alta")}
-                  />
-                  <Radio
-                    name="gravidade"
-                    value="media"
-                    label="Média — impacta o ambiente, mas sem riscos imediatos"
-                    checked={gravidade === "media"}
-                    onChange={() => setGravidade("media")}
-                  />
-                  <Radio
-                    name="gravidade"
-                    value="baixa"
-                    label="Baixa — problema pontual, mas merece atenção"
-                    checked={gravidade === "baixa"}
-                    onChange={() => setGravidade("baixa")}
-                  />
-                </div>
-              </Field>
-            )}
+            <Field label="Caso seja uma denúncia, qual é a gravidade do problema relatado?">
+              <div className="space-y-2">
+                <Radio
+                  name="gravidade"
+                  value="alta"
+                  label="Alta (prejudica gravemente o ambiente de trabalho ou a segurança)."
+                  checked={gravidade === "alta"}
+                  onChange={() => setGravidade("alta")}
+                />
+                <Radio
+                  name="gravidade"
+                  value="media"
+                  label="Média (impacta o ambiente, mas sem riscos imediatos)."
+                  checked={gravidade === "media"}
+                  onChange={() => setGravidade("media")}
+                />
+                <Radio
+                  name="gravidade"
+                  value="baixa"
+                  label="Baixa (problema pontual, mas merece atenção)."
+                  checked={gravidade === "baixa"}
+                  onChange={() => setGravidade("baixa")}
+                />
+              </div>
+            </Field>
 
             <Field label="Você já tentou resolver esse problema diretamente com algum superior ou colega?">
               <div className="flex gap-3">
@@ -345,37 +367,33 @@ export default function OuvidoriaPage() {
               </div>
             </Field>
 
-            {jaTentou === "sim" && (
-              <Field label="Caso tenha tentado resolver, quais foram as ações tomadas até agora?">
-                <textarea
-                  value={acoesTomadas}
-                  onChange={(e) => setAcoesTomadas(e.target.value)}
-                  rows={3}
-                  className={inputCls}
-                />
-              </Field>
-            )}
+            <Field label="Caso tenha tentado resolver, quais foram as ações tomadas até agora?">
+              <textarea
+                value={acoesTomadas}
+                onChange={(e) => setAcoesTomadas(e.target.value)}
+                rows={3}
+                className={inputCls}
+              />
+            </Field>
 
-            {(nome || email) && (
-              <Field label="Para relatos identificados, qual a melhor forma de entrarmos em contato com você?">
-                <div className="space-y-2">
-                  <Radio
-                    name="formaContato"
-                    value="nao_contatar"
-                    label="Não gostaria que entrasse em contato comigo"
-                    checked={formaContato === "nao_contatar"}
-                    onChange={() => setFormaContato("nao_contatar")}
-                  />
-                  <Radio
-                    name="formaContato"
-                    value="reuniao"
-                    label="Gostaria de uma reunião"
-                    checked={formaContato === "reuniao"}
-                    onChange={() => setFormaContato("reuniao")}
-                  />
-                </div>
-              </Field>
-            )}
+            <Field label="Para relatos identificados, qual a melhor forma de entrarmos em contato com você?">
+              <div className="space-y-2">
+                <Radio
+                  name="formaContato"
+                  value="nao_contatar"
+                  label="Não gostaria que entrasse em contato comigo."
+                  checked={formaContato === "nao_contatar"}
+                  onChange={() => setFormaContato("nao_contatar")}
+                />
+                <Radio
+                  name="formaContato"
+                  value="reuniao"
+                  label="Gostaria de uma reunião."
+                  checked={formaContato === "reuniao"}
+                  onChange={() => setFormaContato("reuniao")}
+                />
+              </div>
+            </Field>
 
             {error && (
               <div className="rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">{error}</div>
