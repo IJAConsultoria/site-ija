@@ -290,7 +290,7 @@ export default function MentoriaPage() {
       </section>
 
       {/* ===== ROADMAP / 5 FASES DA MENTORIA ===== */}
-      <section className="relative overflow-hidden bg-navy-900 py-24 lg:py-32 noise-overlay">
+      <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.08)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
@@ -491,7 +491,7 @@ export default function MentoriaPage() {
       </section>
 
       {/* ===== MENTORIA X CURSO X TERCEIRIZAÇÃO ===== */}
-      <section className="relative overflow-hidden bg-navy-900 py-24 lg:py-32 noise-overlay">
+      <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(166,133,35,0.08)_0%,_transparent_50%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
@@ -683,46 +683,64 @@ export default function MentoriaPage() {
 
               {/* Pricing */}
               <div className="px-8 py-12 text-center lg:px-12 lg:py-16">
-                {/* Preço oficial */}
-                <div className="mb-10">
-                  <p className="text-xs font-bold uppercase tracking-widest text-navy-300">
+                {/* Nível 1: Preço oficial cheio */}
+                <div className="mb-6">
+                  <p className="text-xs font-bold uppercase tracking-widest text-navy-400">
                     Valor oficial da mentoria
                   </p>
-                  <p className="mt-3 text-5xl font-bold text-white sm:text-6xl">
-                    R$ 2.500
-                    <span className="text-xl font-medium text-navy-400">/mês</span>
-                  </p>
-                  <p className="mt-2 text-xs text-navy-400">
-                    Demais formas de pagamento
+                  <p className="mt-2 text-3xl font-bold text-navy-400 line-through decoration-2 sm:text-4xl">
+                    R$ 4.800<span className="text-base font-medium">/mês</span>
                   </p>
                 </div>
 
                 {/* Divider */}
-                <div className="relative my-8 flex items-center">
+                <div className="relative my-6 flex items-center">
                   <div className="flex-1 border-t border-white/10" />
-                  <span className="px-4 text-[10px] font-bold uppercase tracking-widest text-accent">
-                    ou
+                  <span className="px-4 text-[10px] font-bold uppercase tracking-widest text-accent/80">
+                    Por hoje, na live
                   </span>
                   <div className="flex-1 border-t border-white/10" />
                 </div>
 
-                {/* Preço PIX */}
-                <div className="rounded-3xl border-2 border-accent bg-gradient-to-br from-accent/10 to-accent/[0.03] p-8 lg:p-10 shadow-inner shadow-accent/10">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-navy-950">
-                    <Sparkles size={14} />
-                    PIX agora · 20% OFF
+                {/* Nível 2: Preço para quem está na live */}
+                <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+                  <p className="text-xs font-bold uppercase tracking-widest text-navy-300">
+                    Para quem está assistindo agora
+                  </p>
+                  <p className="mt-2 text-4xl font-bold text-white sm:text-5xl">
+                    R$ 2.500
+                    <span className="text-lg font-medium text-navy-400">/mês</span>
+                  </p>
+                  <p className="mt-1 text-xs text-navy-400">
+                    Cartão, boleto ou demais formas
+                  </p>
+                </div>
+
+                {/* Pitch transição */}
+                <p className="mx-auto mb-6 max-w-md text-base italic text-navy-200">
+                  Agora, se você é daqueles que{" "}
+                  <span className="font-semibold text-accent">já sabe o que quer</span>,
+                  temos uma oferta especial pra você...
+                </p>
+
+                {/* Nível 3: Preço PIX (destaque máximo) */}
+                <div className="relative rounded-3xl border-2 border-accent bg-gradient-to-br from-accent/15 to-accent/[0.03] p-8 lg:p-10 shadow-2xl shadow-accent/20">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-xs font-bold uppercase tracking-widest text-navy-950 shadow-lg shadow-accent/30">
+                      <Sparkles size={14} />
+                      Oferta PIX · Só durante a live
+                    </div>
                   </div>
-                  <p className="mt-5 text-sm font-medium text-navy-300">
-                    Para quem fizer o PIX agora durante a live
+
+                  <p className="mt-4 text-sm font-medium text-navy-300">
+                    PIX agora, à vista, durante a live
                   </p>
                   <p className="mt-3 text-6xl font-bold text-white sm:text-7xl">
                     R$ 1.990
-                    <span className="text-2xl font-medium text-navy-400">
-                      /mês
-                    </span>
+                    <span className="text-2xl font-medium text-navy-400">/mês</span>
                   </p>
-                  <p className="mt-3 text-sm text-navy-300">
-                    Demais formas de pagamento: R$ 2.500/mês
+                  <p className="mt-3 text-sm text-accent">
+                    Economia de R$ 510/mês · R$ 6.120 por ano
                   </p>
 
                   <a
@@ -731,11 +749,11 @@ export default function MentoriaPage() {
                     rel="noopener noreferrer"
                     className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-accent px-10 py-5 text-lg font-bold text-navy-950 transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/40"
                   >
-                    Quero entrar agora
+                    Quero garantir o PIX agora
                     <ArrowRight size={22} />
                   </a>
                   <p className="mt-4 text-xs text-navy-400">
-                    Vagas limitadas · Atendimento direto via WhatsApp
+                    Vagas limitadas · Oferta válida só até o fim da live · WhatsApp direto
                   </p>
                 </div>
 
