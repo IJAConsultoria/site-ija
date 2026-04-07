@@ -166,7 +166,7 @@ export default function ArticlesListPage() {
                 >
                   <td className="px-5 py-4">
                     <Link
-                      href={`/acesso/artigos/${article.id}`}
+                      href={`/acesso/artigos/editar?id=${article.id}`}
                       className="block"
                     >
                       <p className="font-medium text-white hover:text-accent transition-colors">
@@ -230,7 +230,7 @@ export default function ArticlesListPage() {
                         />
                         <div className="absolute right-5 top-full z-20 w-44 rounded-lg border border-white/10 bg-navy-900 py-1 shadow-xl">
                           <Link
-                            href={`/acesso/artigos/${article.id}`}
+                            href={`/acesso/artigos/editar?id=${article.id}`}
                             onClick={() => setMenuOpen(null)}
                             className="flex items-center gap-2 px-3 py-2 text-sm text-navy-300 hover:bg-white/5 hover:text-white"
                           >

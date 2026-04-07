@@ -16,7 +16,41 @@ export type Article = {
   updated_at: string;
   meta_title: string | null;
   meta_description: string | null;
+  seo_canonical: string | null;
+  seo_keyword: string | null;
+  seo_og_image: string | null;
+  cta_enabled: boolean;
+  cta_title: string | null;
+  cta_description: string | null;
+  cta_button_text: string | null;
+  cta_button_url: string | null;
+  cta_image: string | null;
+  lead_magnet_id: string | null;
+  author_avatar: string | null;
 };
+
+export async function getArticleBySlug(slug: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+  if (error) throw error;
+  return data as Article | null;
+}
+
+export async function getPublishedArticles() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("status", "published")
+    .order("published_at", { ascending: false });
+  if (error) throw error;
+  return data as Article[];
+}
 
 export async function getArticles(status?: "draft" | "published") {
   const supabase = createClient();

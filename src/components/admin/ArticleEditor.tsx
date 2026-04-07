@@ -12,6 +12,7 @@ import {
   Trash2,
 } from "lucide-react";
 import TiptapEditor from "./TiptapEditor";
+import ImageUpload from "./ImageUpload";
 import { BLOG_CATEGORIES } from "@/lib/constants";
 import {
   createArticle,
@@ -50,6 +51,13 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
   const [metaDescription, setMetaDescription] = useState(
     article?.meta_description || ""
   );
+  const [ctaEnabled, setCtaEnabled] = useState(article?.cta_enabled || false);
+  const [ctaTitle, setCtaTitle] = useState(article?.cta_title || "");
+  const [ctaDescription, setCtaDescription] = useState(article?.cta_description || "");
+  const [ctaButtonText, setCtaButtonText] = useState(article?.cta_button_text || "");
+  const [ctaButtonUrl, setCtaButtonUrl] = useState(article?.cta_button_url || "");
+  const [ctaImage, setCtaImage] = useState<string | null>(article?.cta_image || null);
+  const [showCta, setShowCta] = useState(false);
   const [saving, setSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -96,6 +104,12 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
         author: "João Pedro Alves",
         meta_title: metaTitle.trim() || null,
         meta_description: metaDescription.trim() || null,
+        cta_enabled: ctaEnabled,
+        cta_title: ctaTitle.trim() || null,
+        cta_description: ctaDescription.trim() || null,
+        cta_button_text: ctaButtonText.trim() || null,
+        cta_button_url: ctaButtonUrl.trim() || null,
+        cta_image: ctaImage,
         ...(status === "published" && !article?.published_at
           ? { published_at: new Date().toISOString() }
           : {}),
@@ -284,22 +298,77 @@ export default function ArticleEditor({ article }: ArticleEditorProps) {
 
           {/* Cover */}
           <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-navy-400">
-              Imagem de capa
-            </label>
-            <input
-              type="text"
-              value={coverUrl}
-              onChange={(e) => setCoverUrl(e.target.value)}
-              placeholder="URL da imagem"
-              className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white placeholder-navy-500 focus:border-accent focus:outline-none"
+            <ImageUpload
+              value={coverUrl || null}
+              onChange={(url) => setCoverUrl(url || "")}
+              folder="articles"
+              label="Imagem de capa"
             />
-            {coverUrl && (
-              <div className="mt-2 overflow-hidden rounded-lg">
-                <img
-                  src={coverUrl}
-                  alt="Capa"
-                  className="h-32 w-full object-cover"
+          </div>
+
+          {/* CTA Banner */}
+          <div className="rounded-lg border border-white/10 bg-white/5">
+            <button
+              type="button"
+              onClick={() => setShowCta(!showCta)}
+              className="flex w-full items-center justify-between p-4 text-left"
+            >
+              <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-navy-400">
+                CTA Banner
+                {ctaEnabled && (
+                  <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-[9px] text-green-400">
+                    ON
+                  </span>
+                )}
+              </span>
+              <ChevronDown
+                size={14}
+                className={`text-navy-400 transition-transform ${showCta ? "rotate-180" : ""}`}
+              />
+            </button>
+            {showCta && (
+              <div className="space-y-3 border-t border-white/10 p-4">
+                <label className="flex items-center gap-2 text-xs text-white">
+                  <input
+                    type="checkbox"
+                    checked={ctaEnabled}
+                    onChange={(e) => setCtaEnabled(e.target.checked)}
+                  />
+                  Mostrar CTA neste artigo
+                </label>
+                <input
+                  type="text"
+                  value={ctaTitle}
+                  onChange={(e) => setCtaTitle(e.target.value)}
+                  placeholder="Título do CTA"
+                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                />
+                <textarea
+                  value={ctaDescription}
+                  onChange={(e) => setCtaDescription(e.target.value)}
+                  placeholder="Descrição"
+                  rows={2}
+                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                />
+                <input
+                  type="text"
+                  value={ctaButtonText}
+                  onChange={(e) => setCtaButtonText(e.target.value)}
+                  placeholder="Texto do botão"
+                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                />
+                <input
+                  type="text"
+                  value={ctaButtonUrl}
+                  onChange={(e) => setCtaButtonUrl(e.target.value)}
+                  placeholder="URL do botão"
+                  className="w-full rounded-lg border border-white/10 bg-navy-900 px-3 py-2 text-sm text-white"
+                />
+                <ImageUpload
+                  value={ctaImage}
+                  onChange={setCtaImage}
+                  folder="articles/cta"
+                  label="Imagem do CTA"
                 />
               </div>
             )}

@@ -7,7 +7,12 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FileText,
-  PenSquare,
+  MessageSquare,
+  Download,
+  Trophy,
+  Megaphone,
+  Mail,
+  Users,
   LogOut,
   Menu,
   X,
@@ -19,13 +24,20 @@ import { useRouter } from "next/navigation";
 const navItems = [
   { href: "/acesso/painel", label: "Painel", icon: LayoutDashboard },
   { href: "/acesso/artigos", label: "Artigos", icon: FileText },
-  { href: "/acesso/artigos/novo", label: "Novo Artigo", icon: PenSquare },
+  { href: "/acesso/comentarios", label: "Comentários", icon: MessageSquare },
+  { href: "/acesso/iscas", label: "Iscas Digitais", icon: Download },
+  { href: "/acesso/historias", label: "Histórias", icon: Trophy },
+  { href: "/acesso/banners", label: "Banners", icon: Megaphone },
+  { href: "/acesso/leads", label: "Email Marketing", icon: Mail },
+  { href: "/acesso/usuarios", label: "Usuários", icon: Users },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  if (pathname === "/acesso") return null;
 
   const handleLogout = async () => {
     const supabase = createClient();
