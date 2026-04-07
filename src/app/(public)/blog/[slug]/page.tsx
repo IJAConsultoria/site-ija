@@ -11,16 +11,17 @@ export async function generateStaticParams() {
   try {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    if (!url || !key) return [];
+    if (!url || !key) return [{ slug: "__placeholder__" }];
     const res = await fetch(
       `${url}/rest/v1/articles_ija?status=eq.published&select=slug`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: "force-cache" }
     );
-    if (!res.ok) return [];
+    if (!res.ok) return [{ slug: "__placeholder__" }];
     const data = (await res.json()) as { slug: string }[];
-    return data.map((a) => ({ slug: a.slug }));
+    // Next.js exige pelo menos 1 param com output: export
+    return data.length > 0 ? data.map((a) => ({ slug: a.slug })) : [{ slug: "__placeholder__" }];
   } catch {
-    return [];
+    return [{ slug: "__placeholder__" }];
   }
 }
 
