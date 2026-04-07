@@ -205,21 +205,22 @@ export default function MentoriaPage() {
       </section>
 
       {/* ===== O QUE ESTÁ INCLUSO ===== */}
-      <section className="bg-cream py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(166,133,35,0.08)_0%,_transparent_50%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-sm font-bold uppercase tracking-widest text-accent">
                 O que você recebe
               </p>
-              <h2 className="mt-3 text-3xl font-bold text-navy-950 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                 Tudo que você precisa para{" "}
                 <span className="serif-italic gradient-text">
                   transformar
                 </span>{" "}
                 seu negócio
               </h2>
-              <p className="mt-4 text-lg text-navy-600">
+              <p className="mt-4 text-lg text-navy-300">
                 Método prático e útil que gera resultados na hora. Sem
                 enrolação. De forma que qualquer empresário consegue colocar em
                 prática.
@@ -230,14 +231,14 @@ export default function MentoriaPage() {
           <StaggerContainer className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {inclusos.map((item) => (
               <StaggerItem key={item.title}>
-                <div className="h-full rounded-3xl border border-navy-100/50 bg-white p-8 transition-all hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-accent/10">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/15 text-accent">
                     <item.icon size={24} />
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-navy-950">
+                  <h3 className="mt-5 text-lg font-bold text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy-600">
+                  <p className="mt-2 text-sm leading-relaxed text-navy-300">
                     {item.desc}
                   </p>
                 </div>
@@ -325,20 +326,21 @@ export default function MentoriaPage() {
       </section>
 
       {/* ===== MENTORIA X CURSO X TERCEIRIZAÇÃO ===== */}
-      <section className="bg-cream-dark py-24 lg:py-32 dot-pattern">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-navy-900 py-24 lg:py-32 noise-overlay">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(166,133,35,0.08)_0%,_transparent_50%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-sm font-bold uppercase tracking-widest text-accent">
                 Por que mentoria?
               </p>
-              <h2 className="mt-3 text-3xl font-bold text-navy-950 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                 Mentoria{" "}
                 <span className="serif-italic gradient-text">vs</span> Curso{" "}
                 <span className="serif-italic gradient-text">vs</span>{" "}
                 Terceirização
               </h2>
-              <p className="mt-4 text-lg text-navy-600">
+              <p className="mt-4 text-lg text-navy-300">
                 Veja por que a mentoria é o caminho mais inteligente para levar
                 sua empresa do 0% ao 100%.
               </p>
@@ -346,11 +348,11 @@ export default function MentoriaPage() {
           </FadeInUp>
 
           <FadeInUp>
-            <div className="mt-16 overflow-hidden rounded-3xl border border-navy-100/50 bg-white shadow-xl shadow-navy-950/5">
+            <div className="mt-16 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm shadow-2xl shadow-black/40">
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>
-                    <tr className="bg-navy-950 text-white">
+                    <tr className="bg-black/40 text-white">
                       <th className="px-6 py-5 text-sm font-bold uppercase tracking-widest">
                         Critério
                       </th>
@@ -369,18 +371,18 @@ export default function MentoriaPage() {
                     {comparativo.map((row, i) => (
                       <tr
                         key={row.criterio}
-                        className={i % 2 === 0 ? "bg-cream/30" : "bg-white"}
+                        className={i % 2 === 0 ? "bg-white/[0.02]" : "bg-transparent"}
                       >
-                        <td className="border-t border-navy-100/30 px-6 py-5 text-sm font-bold text-navy-950">
+                        <td className="border-t border-white/10 px-6 py-5 text-sm font-bold text-white">
                           {row.criterio}
                         </td>
-                        <td className="border-t border-navy-100/30 px-6 py-5 text-sm text-navy-600">
+                        <td className="border-t border-white/10 px-6 py-5 text-sm text-navy-300">
                           {row.curso}
                         </td>
-                        <td className="border-t border-navy-100/30 bg-accent/5 px-6 py-5 text-sm font-medium text-navy-950">
+                        <td className="border-t border-white/10 bg-accent/10 px-6 py-5 text-sm font-medium text-white">
                           {row.mentoria}
                         </td>
-                        <td className="border-t border-navy-100/30 px-6 py-5 text-sm text-navy-600">
+                        <td className="border-t border-white/10 px-6 py-5 text-sm text-navy-300">
                           {row.terceirizacao}
                         </td>
                       </tr>
@@ -459,20 +461,21 @@ export default function MentoriaPage() {
       {/* ===== OFERTA ===== */}
       <section
         id="oferta"
-        className="bg-gradient-to-b from-cream to-cream-dark py-24 lg:py-32"
+        className="relative overflow-hidden bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950 py-24 lg:py-32 noise-overlay"
       >
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(166,133,35,0.15)_0%,_transparent_60%)]" />
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-5 py-2 text-sm font-bold uppercase tracking-widest text-red-600">
+              <div className="inline-flex items-center gap-2 rounded-full border border-red-400/30 bg-red-500/15 px-5 py-2 text-sm font-bold uppercase tracking-widest text-red-300">
                 <Zap size={16} />
                 Condição especial só para hoje
               </div>
-              <h2 className="mt-6 text-3xl font-bold text-navy-950 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                 Pílula vermelha ou{" "}
                 <span className="serif-italic gradient-text">pílula azul</span>?
               </h2>
-              <p className="mt-4 text-lg text-navy-600">
+              <p className="mt-4 text-lg text-navy-300">
                 Você pode continuar fazendo do jeito que sempre fez. Ou pode
                 tomar uma decisão hoje que muda o futuro do seu negócio.
               </p>
@@ -480,9 +483,9 @@ export default function MentoriaPage() {
           </FadeInUp>
 
           <FadeInUp>
-            <div className="mt-16 overflow-hidden rounded-3xl border-2 border-accent bg-white shadow-2xl shadow-navy-950/10">
+            <div className="mt-16 overflow-hidden rounded-3xl border-2 border-accent/60 bg-white/[0.03] backdrop-blur-md shadow-2xl shadow-accent/10">
               {/* Header */}
-              <div className="bg-navy-950 px-8 py-6 text-center lg:px-12">
+              <div className="bg-black/40 px-8 py-6 text-center lg:px-12 border-b border-accent/20">
                 <p className="text-sm font-bold uppercase tracking-widest text-accent">
                   Mentoria de Gestão Estratégica Financeira
                 </p>
@@ -495,7 +498,7 @@ export default function MentoriaPage() {
               <div className="px-8 py-12 text-center lg:px-12 lg:py-16">
                 {/* Preço cheio */}
                 <div className="mb-8">
-                  <p className="text-sm font-medium text-navy-500">
+                  <p className="text-sm font-medium text-navy-400">
                     De{" "}
                     <span className="line-through decoration-2">
                       R$ 4.800/mês
@@ -505,7 +508,7 @@ export default function MentoriaPage() {
 
                 {/* Preço live */}
                 <div className="mb-8">
-                  <p className="text-sm font-bold uppercase tracking-widest text-navy-600">
+                  <p className="text-sm font-bold uppercase tracking-widest text-navy-300">
                     Por hoje, na live, apenas
                   </p>
                   <p className="mt-2 text-2xl font-bold text-navy-400 line-through decoration-2">
@@ -514,21 +517,21 @@ export default function MentoriaPage() {
                 </div>
 
                 {/* Preço PIX */}
-                <div className="rounded-3xl border-2 border-accent bg-gradient-to-br from-accent/5 to-accent/10 p-8 lg:p-10">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white">
+                <div className="rounded-3xl border-2 border-accent bg-gradient-to-br from-accent/10 to-accent/[0.03] p-8 lg:p-10 shadow-inner shadow-accent/10">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-navy-950">
                     <Sparkles size={14} />
                     PIX agora · 20% OFF
                   </div>
-                  <p className="mt-5 text-sm font-medium text-navy-600">
+                  <p className="mt-5 text-sm font-medium text-navy-300">
                     Para quem fizer o PIX agora durante a live
                   </p>
-                  <p className="mt-3 text-6xl font-bold text-navy-950 sm:text-7xl">
+                  <p className="mt-3 text-6xl font-bold text-white sm:text-7xl">
                     R$ 1.990
-                    <span className="text-2xl font-medium text-navy-500">
+                    <span className="text-2xl font-medium text-navy-400">
                       /mês
                     </span>
                   </p>
-                  <p className="mt-3 text-sm text-navy-600">
+                  <p className="mt-3 text-sm text-navy-300">
                     Demais formas de pagamento: R$ 2.500/mês
                   </p>
 
@@ -536,12 +539,12 @@ export default function MentoriaPage() {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-accent px-10 py-5 text-lg font-bold text-white transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/30"
+                    className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-accent px-10 py-5 text-lg font-bold text-navy-950 transition-all hover:bg-accent-dark hover:scale-105 hover:shadow-2xl hover:shadow-accent/40"
                   >
                     Quero entrar agora
                     <ArrowRight size={22} />
                   </a>
-                  <p className="mt-4 text-xs text-navy-500">
+                  <p className="mt-4 text-xs text-navy-400">
                     Vagas limitadas · Atendimento direto via WhatsApp
                   </p>
                 </div>
@@ -551,10 +554,10 @@ export default function MentoriaPage() {
                   <div className="flex items-start gap-3">
                     <Clock size={20} className="mt-0.5 shrink-0 text-accent" />
                     <div>
-                      <p className="text-sm font-bold text-navy-950">
+                      <p className="text-sm font-bold text-white">
                         12 meses
                       </p>
-                      <p className="text-xs text-navy-600">
+                      <p className="text-xs text-navy-300">
                         Tempo para transformar sua empresa
                       </p>
                     </div>
@@ -562,10 +565,10 @@ export default function MentoriaPage() {
                   <div className="flex items-start gap-3">
                     <Calendar size={20} className="mt-0.5 shrink-0 text-accent" />
                     <div>
-                      <p className="text-sm font-bold text-navy-950">
+                      <p className="text-sm font-bold text-white">
                         4 meses mínimo
                       </p>
-                      <p className="text-xs text-navy-600">
+                      <p className="text-xs text-navy-300">
                         Depois é só avisar com 30 dias
                       </p>
                     </div>
@@ -573,10 +576,10 @@ export default function MentoriaPage() {
                   <div className="flex items-start gap-3">
                     <Shield size={20} className="mt-0.5 shrink-0 text-accent" />
                     <div>
-                      <p className="text-sm font-bold text-navy-950">
+                      <p className="text-sm font-bold text-white">
                         100% garantido
                       </p>
-                      <p className="text-xs text-navy-600">
+                      <p className="text-xs text-navy-300">
                         Devolvemos seu dinheiro
                       </p>
                     </div>
@@ -617,20 +620,21 @@ export default function MentoriaPage() {
       </section>
 
       {/* ===== PROVA SOCIAL ===== */}
-      <section className="bg-cream py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-32 noise-overlay">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(166,133,35,0.08)_0%,_transparent_50%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-sm font-bold uppercase tracking-widest text-accent">
                 Resultados reais
               </p>
-              <h2 className="mt-3 text-3xl font-bold text-navy-950 sm:text-4xl lg:text-5xl">
+              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                 +130 empresas{" "}
                 <span className="serif-italic gradient-text">
                   transformadas
                 </span>
               </h2>
-              <p className="mt-4 text-lg text-navy-600">
+              <p className="mt-4 text-lg text-navy-300">
                 Atendemos negócios em 4 estados do Brasil. Não é teoria, é
                 resultado real, testado e replicável.
               </p>
@@ -662,18 +666,18 @@ export default function MentoriaPage() {
               },
             ].map((c) => (
               <StaggerItem key={c.titulo}>
-                <div className="h-full rounded-3xl border border-navy-100/50 bg-white p-8 shadow-sm transition-all hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5">
+                <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-accent/10">
                   <p className="text-xs font-bold uppercase tracking-widest text-accent">
                     {c.segmento}
                   </p>
-                  <h3 className="mt-3 text-xl font-bold text-navy-950">
+                  <h3 className="mt-3 text-xl font-bold text-white">
                     {c.titulo}
                   </h3>
-                  <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                  <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-accent/15 px-3 py-1 text-xs font-bold text-accent">
                     <Trophy size={12} />
                     {c.resultado}
                   </p>
-                  <p className="mt-5 text-sm leading-relaxed text-navy-600 italic">
+                  <p className="mt-5 text-sm leading-relaxed text-navy-300 italic">
                     &ldquo;{c.quote}&rdquo;
                   </p>
                 </div>
