@@ -13,6 +13,7 @@ import {
   Megaphone,
   Mail,
   Users,
+  Shield,
   LogOut,
   Menu,
   X,
@@ -29,6 +30,7 @@ const navItems = [
   { href: "/acesso/historias", label: "Histórias", icon: Trophy },
   { href: "/acesso/banners", label: "Banners", icon: Megaphone },
   { href: "/acesso/leads", label: "Email Marketing", icon: Mail },
+  { href: "/acesso/ouvidoria", label: "Ouvidoria", icon: Shield },
   { href: "/acesso/usuarios", label: "Usuários", icon: Users },
 ];
 
