@@ -417,24 +417,46 @@ export default function MentoriaPage() {
             </div>
           </FadeInUp>
 
-          <StaggerContainer className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerContainer className="mx-auto mt-16 max-w-4xl space-y-5">
             {bonus.map((b, i) => (
               <StaggerItem key={b.title}>
-                <div className="group h-full rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all hover:border-accent/30 hover:bg-white/10">
-                  <div className="flex items-start justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 text-accent">
-                      <b.icon size={22} />
+                <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-accent/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-accent/10 sm:p-8">
+                  {/* Glow sutil no hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent/[0.03] via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
+                    {/* Ícone grande + número */}
+                    <div className="flex shrink-0 items-center gap-4 sm:flex-col sm:gap-2">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-accent/20 sm:h-20 sm:w-20">
+                        <b.icon size={28} />
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-accent/80">
+                        Bônus {String(i + 1).padStart(2, "0")}
+                      </span>
                     </div>
-                    <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
-                      {b.valor}
-                    </span>
+
+                    {/* Conteúdo */}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white sm:text-2xl">
+                        {b.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-navy-300 sm:text-base">
+                        {b.desc}
+                      </p>
+                    </div>
+
+                    {/* Valor */}
+                    <div className="shrink-0 self-start sm:self-center">
+                      <div className="rounded-2xl border border-accent/40 bg-accent/10 px-4 py-3 text-center">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-accent/70">
+                          Valor
+                        </p>
+                        <p className="mt-0.5 text-base font-bold text-accent sm:text-lg">
+                          {b.valor}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-white">
-                    Bônus {String(i + 1).padStart(2, "0")} — {b.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy-300">
-                    {b.desc}
-                  </p>
                 </div>
               </StaggerItem>
             ))}
