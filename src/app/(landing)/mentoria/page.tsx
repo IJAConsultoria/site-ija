@@ -194,20 +194,18 @@ export default function MentoriaPage() {
     <>
       {/* ===== HERO ===== */}
       <section className="relative overflow-hidden bg-navy-950 py-20 lg:py-32 noise-overlay">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(166,133,35,0.2)_0%,_transparent_60%)]" />
-        <AnimatedBlob className="absolute -top-40 -right-40 h-96 w-96 bg-accent/10" />
-        <AnimatedBlob className="absolute -bottom-40 -left-40 h-96 w-96 bg-accent/5" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(30,77,138,0.4)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(8,37,72,0.6)_0%,_transparent_60%)]" />
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <FadeInUp>
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-bold uppercase tracking-widest text-accent">
-              <Sparkles size={16} />
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.05] px-5 py-2 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-sm">
               Apresentação exclusiva
             </div>
 
             <h1 className="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
               Mentoria de{" "}
-              <span className="serif-italic gradient-text">
+              <span className="serif-italic">
                 Gestão Estratégica Financeira
               </span>
             </h1>
@@ -221,19 +219,19 @@ export default function MentoriaPage() {
 
             <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="text-3xl font-bold text-accent">100%</p>
+                <p className="text-3xl font-bold text-white">100%</p>
                 <p className="mt-1 text-sm text-navy-300">
                   dos clientes aumentaram o lucro
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="text-3xl font-bold text-accent">+R$ 40M</p>
+                <p className="text-3xl font-bold text-white">+R$ 40M</p>
                 <p className="mt-1 text-sm text-navy-300">
                   em lucratividade gerada
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="text-3xl font-bold text-accent">+130</p>
+                <p className="text-3xl font-bold text-white">+130</p>
                 <p className="mt-1 text-sm text-navy-300">clientes em 4 estados</p>
               </div>
             </div>
