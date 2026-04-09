@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_TAGLINE, SITE_URL } from "@/lib/constants";
+import RecoveryHashRedirect from "@/components/RecoveryHashRedirect";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -132,6 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <RecoveryHashRedirect />
         {children}
       </body>
     </html>
