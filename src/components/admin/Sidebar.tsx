@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -39,7 +39,38 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [ouvidoriaNovas, setOuvidoriaNovas] = useState(0);
   const { isAdmin, admin } = useCurrentAdmin();
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    const supabase = createClient();
+
+    const fetchCount = async () => {
+      const { count } = await supabase
+        .from("ouvidoria_mensagens_ija")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "novo");
+      setOuvidoriaNovas(count ?? 0);
+    };
+
+    fetchCount();
+    const interval = setInterval(fetchCount, 30000);
+
+    const channel = supabase
+      .channel("ouvidoria-novas")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "ouvidoria_mensagens_ija" },
+        fetchCount
+      )
+      .subscribe();
+
+    return () => {
+      clearInterval(interval);
+      supabase.removeChannel(channel);
+    };
+  }, [isAdmin]);
 
   if (pathname === "/acesso") return null;
 
@@ -103,7 +134,12 @@ export default function Sidebar() {
               }`}
             >
               <item.icon size={18} />
-              {item.label}
+              <span className="flex-1">{item.label}</span>
+              {item.href === "/acesso/ouvidoria" && ouvidoriaNovas > 0 && (
+                <span className="ml-auto inline-flex min-w-[20px] items-center justify-center rounded-full bg-red-500 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                  {ouvidoriaNovas}
+                </span>
+              )}
             </Link>
           ))}
 
