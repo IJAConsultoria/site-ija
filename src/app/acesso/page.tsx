@@ -10,8 +10,34 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
   const router = useRouter();
+
+  const handleForgotPassword = async () => {
+    setError("");
+    setInfo("");
+    if (!email) {
+      setError("Digite seu email acima e clique novamente em 'Esqueci minha senha'.");
+      return;
+    }
+    setResetLoading(true);
+    const supabase = createClient();
+    const redirectTo =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/acesso/redefinir`
+        : "https://www.ijaconsultoria.com.br/acesso/redefinir";
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo,
+    });
+    setResetLoading(false);
+    if (error) {
+      setError("Não foi possível enviar o email. Tente novamente.");
+      return;
+    }
+    setInfo("Enviamos um link de redefinição para o seu email.");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +86,12 @@ export default function LoginPage() {
             </div>
           )}
 
+          {info && (
+            <div className="rounded-lg bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+              {info}
+            </div>
+          )}
+
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-navy-300">
               Email
@@ -88,6 +120,17 @@ export default function LoginPage() {
               className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-navy-500 focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none"
               placeholder="••••••••"
             />
+          </div>
+
+          <div className="text-right">
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              disabled={resetLoading}
+              className="text-xs font-medium text-navy-300 hover:text-accent disabled:opacity-50"
+            >
+              {resetLoading ? "Enviando..." : "Esqueci minha senha"}
+            </button>
           </div>
 
           <button
