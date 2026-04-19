@@ -15,12 +15,12 @@ const EVENTS_MAP = {
   },
   "3-erros-crescimento": {
     title: "Os 3 Erros que Impedem seu Negócio de Crescer",
-    dateISO: "2026-05-02",
+    dateISO: "2026-05-05",
     duration: "75 min",
   },
   "lideranca-gerentes-donos": {
     title: "Liderança na Prática: Como Formar Gerentes que Pensam como Donos",
-    dateISO: "2026-05-27",
+    dateISO: "2026-05-19",
     duration: "90 min",
   },
 };
