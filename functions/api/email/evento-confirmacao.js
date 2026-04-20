@@ -7,12 +7,6 @@
 
 // Dados dos eventos (espelhado de constants.ts)
 const EVENTS_MAP = {
-  "lucro-real-30-minutos": {
-    title: "Como Descobrir seu Lucro Real em 30 Minutos",
-    meetUrl: "https://meet.google.com/fkm-hpec-kcv",
-    dateISO: "2026-04-07",
-    duration: "60 min",
-  },
   "3-erros-crescimento": {
     title: "Os 3 Erros que Impedem seu Negócio de Crescer",
     dateISO: "2026-05-05",

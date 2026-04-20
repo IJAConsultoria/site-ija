@@ -247,39 +247,6 @@ export const BLOG_CATEGORIES = [
 
 export const EVENTS = [
   {
-    slug: "lucro-real-30-minutos",
-    title: "Como Descobrir seu Lucro Real em 30 Minutos",
-    meetUrl: "https://meet.google.com/fkm-hpec-kcv",
-    meetPhone: "+55 31 3958-9568",
-    meetPin: "214 835 904#",
-    description:
-      "Live prática onde João Pedro Alves mostra como calcular o lucro real do seu negócio usando ferramentas simples. Você vai sair sabendo exatamente quanto sobra no final do mês.",
-    longDescription:
-      "A maioria dos donos de negócio não sabe quanto realmente lucra. Confundem faturamento com lucro, não separam custos fixos de variáveis, e tomam decisões financeiras no escuro. Nesta live 100% prática, João Pedro Alves — com 14 anos de experiência em consultoria empresarial — vai mostrar o passo a passo para você descobrir seu lucro real em menos de 30 minutos, usando ferramentas que você já tem.",
-    date: "7 de abril",
-    dateISO: "2026-04-07",
-    time: "19h",
-    duration: "60 min",
-    type: "Live" as const,
-    tags: ["Gestão Financeira", "CMV", "Lucro", "DRE"],
-    speaker: "João Pedro Alves",
-    speakerRole: "Fundador do IJA — 14 anos em consultoria empresarial",
-    topics: [
-      "Como separar custos fixos e variáveis do seu negócio",
-      "Cálculo do CMV real (não o que o contador diz)",
-      "A diferença entre faturamento, lucro bruto e lucro líquido",
-      "Planilha prática para acompanhar seu lucro semanalmente",
-      "Os 3 erros financeiros mais comuns em negócios",
-      "Como usar o DRE simplificado para tomar decisões",
-    ],
-    forWho: [
-      "Donos de negócio que não sabem o lucro real",
-      "Gestores que confundem faturamento com lucro",
-      "Empreendedores que querem controlar melhor as finanças",
-    ],
-    status: "past" as const,
-  },
-  {
     slug: "3-erros-crescimento",
     title: "Os 3 Erros que Impedem seu Negócio de Crescer",
     description:
