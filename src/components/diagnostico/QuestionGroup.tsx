@@ -18,7 +18,6 @@ export function QuestionGroup({
     return <div className="text-navy-500">Carregando perguntas...</div>;
   }
 
-  // Agrupa por subsection (se existir)
   const groups: { label: string | null; items: DiagnosticQuestion[] }[] = [];
   let currentSub: string | null | undefined = undefined;
 
@@ -32,16 +31,15 @@ export function QuestionGroup({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {groups.map((group, gi) => (
         <div key={gi}>
           {group.label && (
-            <div className="mb-5 flex items-center gap-3">
-              <div className="h-px flex-1 bg-navy-100" />
-              <h3 className="text-xs font-bold uppercase tracking-widest text-accent">
+            <div className="mb-4 flex items-center gap-4 px-1">
+              <span className="rounded-full bg-accent/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-accent">
                 {group.label}
-              </h3>
-              <div className="h-px flex-1 bg-navy-100" />
+              </span>
+              <div className="h-px flex-1 bg-gradient-to-r from-accent/20 to-transparent" />
             </div>
           )}
           <div className="space-y-2">
@@ -50,16 +48,22 @@ export function QuestionGroup({
               return (
                 <div
                   key={question.id}
-                  className={`group flex items-center justify-between gap-4 rounded-2xl border px-5 py-4 transition-all ${
+                  className={`flex items-center gap-4 rounded-2xl border px-4 py-3.5 transition-all sm:px-5 sm:py-4 ${
                     isAnswered
-                      ? "border-navy-100 bg-white"
-                      : "border-dashed border-navy-200 bg-cream"
+                      ? "border-transparent bg-white shadow-sm"
+                      : "border-navy-100 bg-white/60 hover:bg-white hover:shadow-sm"
                   }`}
                 >
-                  <p className="flex-1 text-sm leading-relaxed text-navy-800">
-                    <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-md bg-navy-50 text-[10px] font-bold text-navy-400">
-                      {question.order}
-                    </span>
+                  <span
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-[11px] font-bold transition-colors ${
+                      isAnswered
+                        ? "bg-navy-950 text-white"
+                        : "bg-navy-100 text-navy-400"
+                    }`}
+                  >
+                    {question.order}
+                  </span>
+                  <p className="min-w-0 flex-1 text-[13px] leading-relaxed text-navy-700 sm:text-sm">
                     {question.text}
                   </p>
                   <YesNoToggle

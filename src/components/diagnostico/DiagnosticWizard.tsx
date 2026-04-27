@@ -8,6 +8,7 @@ import {
   Loader2,
   Send,
   AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import {
   QUESTIONS_BY_SECTION,
@@ -42,20 +43,17 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(
     new Set()
   );
-  const mainRef = useRef<HTMLDivElement>(null);
 
   const totalSteps = DIAGNOSTIC_SECTIONS.length;
   const currentSection =
     QUESTIONS_BY_SECTION[currentStep] || QUESTIONS_BY_SECTION[0];
 
-  // Carregar progresso do localStorage
   useEffect(() => {
     const saved = loadDiagnosticProgress();
     if (saved && saved.session_id === sessionId) {
       setAnswers(saved.answers);
       const step = Math.min(saved.current_step, totalSteps - 1);
       setCurrentStep(step);
-
       const completed = new Set<number>();
       QUESTIONS_BY_SECTION.forEach((section, i) => {
         const allAnswered = section.questions.every(
@@ -67,9 +65,7 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
     }
   }, [sessionId, totalSteps]);
 
-  // Auto-save
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
-
   useEffect(() => {
     if (Object.keys(answers).length === 0) return;
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
@@ -101,21 +97,16 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
   };
 
   const answeredTotal = Object.keys(answers).length;
-
   const answersPerSection = DIAGNOSTIC_SECTIONS.map((_, i) =>
     answeredCountForSection(i)
   );
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const goToStep = (step: number) => {
     if (isSectionComplete(currentStep)) {
       setCompletedSteps((prev) => new Set([...prev, currentStep]));
     }
     setCurrentStep(step);
-    scrollToTop();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleNext = () => {
@@ -124,40 +115,35 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
     }
     if (currentStep < totalSteps - 1) {
       setCurrentStep((prev) => prev + 1);
-      scrollToTop();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handlePrev = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1);
-      scrollToTop();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const allComplete = DIAGNOSTIC_SECTIONS.every((_, i) =>
     isSectionComplete(i)
   );
-
   const unansweredCount = TOTAL_QUESTIONS - answeredTotal;
+  const currentAnswered = answeredCountForSection(currentStep);
+  const currentTotal = currentSection.questionCount;
+  const sectionComplete = isSectionComplete(currentStep);
 
   const handleSubmit = async () => {
     if (!allComplete || submitting) return;
     setSubmitting(true);
-
     try {
       const sectionResults = calculateSectionResults(ALL_QUESTIONS, answers);
-
       await Promise.all([
         saveAnswers(sessionId, answers),
         saveResults(sessionId, sectionResults),
-        updateSessionStatus(
-          sessionId,
-          "completed",
-          new Date().toISOString()
-        ),
+        updateSessionStatus(sessionId, "completed", new Date().toISOString()),
       ]);
-
       clearDiagnosticProgress();
       router.push(`/diagnostico-empresarial/resultado?session=${sessionId}`);
     } catch (err) {
@@ -166,25 +152,23 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
     }
   };
 
-  const currentAnswered = answeredCountForSection(currentStep);
-  const currentTotal = currentSection.questionCount;
-  const currentPct = Math.round((currentAnswered / currentTotal) * 100);
-
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      {/* Progress global */}
-      <div className="mb-6">
-        <ProgressBar
-          answeredCount={answeredTotal}
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-        />
-      </div>
+    <div className="flex min-h-screen">
+      {/* Sidebar — dark, fixed */}
+      <aside className="hidden w-[280px] shrink-0 lg:block">
+        <div className="fixed left-0 top-0 flex h-screen w-[280px] flex-col bg-navy-950 noise-overlay">
+          {/* Logo area */}
+          <div className="border-b border-white/5 px-5 py-5">
+            <p className="text-sm font-bold text-white">
+              Diagnóstico Empresarial
+            </p>
+            <p className="mt-0.5 text-[11px] text-navy-400">
+              Instituto João Alves
+            </p>
+          </div>
 
-      <div className="flex gap-8">
-        {/* Sidebar — desktop */}
-        <aside className="hidden w-72 shrink-0 lg:block">
-          <div className="sticky top-6">
+          {/* Sections */}
+          <div className="flex-1 overflow-y-auto px-2 py-4 scrollbar-thin">
             <SectionNav
               currentStep={currentStep}
               completedSteps={completedSteps}
@@ -192,16 +176,59 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
               onNavigate={goToStep}
             />
           </div>
-        </aside>
 
-        {/* Main */}
-        <main ref={mainRef} className="min-w-0 flex-1">
-          {/* Mobile nav */}
-          <div className="mb-4 lg:hidden">
+          {/* Footer stats */}
+          <div className="border-t border-white/5 px-5 py-4">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-navy-400">Progresso geral</span>
+              <span className="font-bold text-white">
+                {Math.round((answeredTotal / TOTAL_QUESTIONS) * 100)}%
+              </span>
+            </div>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-accent to-amber-400 transition-all duration-700"
+                style={{
+                  width: `${Math.round(
+                    (answeredTotal / TOTAL_QUESTIONS) * 100
+                  )}%`,
+                }}
+              />
+            </div>
+            <p className="mt-2 text-[10px] text-navy-500">
+              {answeredTotal} de {TOTAL_QUESTIONS} perguntas
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main */}
+      <main className="min-w-0 flex-1 bg-[#f5f3ee]">
+        {/* Top bar mobile */}
+        <div className="sticky top-0 z-10 border-b border-navy-100 bg-white/90 backdrop-blur-md lg:hidden">
+          <div className="px-4 py-3">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-bold text-navy-950">Diagnóstico</p>
+              <span className="text-xs font-medium text-navy-500">
+                {Math.round((answeredTotal / TOTAL_QUESTIONS) * 100)}%
+              </span>
+            </div>
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-navy-100">
+              <div
+                className="h-full rounded-full bg-accent transition-all"
+                style={{
+                  width: `${Math.round(
+                    (answeredTotal / TOTAL_QUESTIONS) * 100
+                  )}%`,
+                }}
+              />
+            </div>
+          </div>
+          <div className="px-4 pb-3">
             <select
               value={currentStep}
               onChange={(e) => goToStep(Number(e.target.value))}
-              className="w-full rounded-xl border border-navy-200 bg-white px-4 py-3 text-sm font-medium text-navy-800"
+              className="w-full rounded-lg border border-navy-200 bg-white px-3 py-2 text-sm text-navy-800"
             >
               {DIAGNOSTIC_SECTIONS.map((section, i) => (
                 <option key={section.key} value={i}>
@@ -211,40 +238,60 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
               ))}
             </select>
           </div>
+        </div>
 
-          {/* Section header */}
-          <div className="mb-6 rounded-2xl bg-navy-950 px-6 py-5 text-white">
-            <div className="flex items-center justify-between">
+        {/* Content */}
+        <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:py-10">
+          {/* Section header card */}
+          <div className="mb-8 overflow-hidden rounded-2xl bg-navy-950 p-6 text-white sm:p-8">
+            <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-lg bg-white/10 px-2.5 py-0.5 text-xs font-bold">
-                    {currentStep + 1}/{totalSteps}
+                  <span className="rounded-md bg-white/10 px-2 py-0.5 text-[11px] font-bold tabular-nums">
+                    Seção {currentStep + 1} de {totalSteps}
                   </span>
                   {currentSection.bloco === 2 && (
-                    <span className="rounded-lg bg-accent/20 px-2.5 py-0.5 text-xs font-bold text-accent">
-                      Bloco 2 — Performance
+                    <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[11px] font-bold text-accent">
+                      Performance
                     </span>
                   )}
                 </div>
-                <h2 className="mt-2 text-xl font-bold sm:text-2xl">
+                <h2 className="mt-3 text-xl font-bold sm:text-2xl">
                   {currentSection.title}
                 </h2>
+                <p className="mt-1 text-sm text-navy-300">
+                  {currentTotal} perguntas nesta seção
+                </p>
               </div>
               <div className="hidden text-right sm:block">
-                <p className="text-2xl font-bold">
-                  {currentAnswered}
-                  <span className="text-sm font-normal text-navy-300">
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold tabular-nums">
+                    {currentAnswered}
+                  </span>
+                  <span className="text-sm text-navy-400">
                     /{currentTotal}
                   </span>
-                </p>
-                <p className="text-xs text-navy-300">respondidas</p>
+                </div>
+                {sectionComplete && (
+                  <div className="mt-1 flex items-center justify-end gap-1 text-emerald-400">
+                    <CheckCircle2 size={12} />
+                    <span className="text-xs font-medium">Completa</span>
+                  </div>
+                )}
               </div>
             </div>
-            {/* Section progress */}
-            <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/10">
               <div
-                className="h-full rounded-full bg-accent transition-all duration-500"
-                style={{ width: `${currentPct}%` }}
+                className={`h-full rounded-full transition-all duration-700 ${
+                  sectionComplete
+                    ? "bg-emerald-400"
+                    : "bg-gradient-to-r from-accent to-amber-400"
+                }`}
+                style={{
+                  width: `${Math.round(
+                    (currentAnswered / currentTotal) * 100
+                  )}%`,
+                }}
               />
             </div>
           </div>
@@ -257,24 +304,25 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
           />
 
           {/* Navigation */}
-          <div className="mt-8 flex items-center justify-between border-t border-navy-100 pt-6 pb-8">
+          <div className="mt-10 flex items-center justify-between pb-10">
             <button
               type="button"
               onClick={handlePrev}
               disabled={currentStep === 0}
-              className="flex items-center gap-2 rounded-xl border border-navy-200 px-5 py-3 text-sm font-medium text-navy-700 transition-colors hover:bg-navy-50 disabled:cursor-not-allowed disabled:opacity-30"
+              className="flex items-center gap-2 rounded-xl border border-navy-200 bg-white px-5 py-3 text-sm font-medium text-navy-700 shadow-sm transition-all hover:bg-navy-50 disabled:cursor-not-allowed disabled:opacity-30"
             >
               <ChevronLeft size={16} />
-              Anterior
+              <span className="hidden sm:inline">Anterior</span>
             </button>
 
             {currentStep < totalSteps - 1 ? (
               <button
                 type="button"
                 onClick={handleNext}
-                className="flex items-center gap-2 rounded-xl bg-navy-950 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-navy-800"
+                className="flex items-center gap-2 rounded-xl bg-navy-950 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-navy-950/20 transition-all hover:bg-navy-800"
               >
-                Próxima Seção
+                <span className="hidden sm:inline">Próxima Seção</span>
+                <span className="sm:hidden">Próxima</span>
                 <ChevronRight size={16} />
               </button>
             ) : allComplete ? (
@@ -282,12 +330,12 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
                 type="button"
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="flex items-center gap-2 rounded-xl bg-accent px-8 py-3.5 text-sm font-bold text-navy-950 shadow-lg shadow-accent/25 transition-all hover:bg-accent/90 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent to-amber-500 px-8 py-3.5 text-sm font-bold text-navy-950 shadow-lg shadow-accent/30 transition-all hover:shadow-xl hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {submitting ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    Calculando resultado...
+                    Calculando...
                   </>
                 ) : (
                   <>
@@ -297,14 +345,14 @@ export function DiagnosticWizard({ sessionId }: DiagnosticWizardProps) {
                 )}
               </button>
             ) : (
-              <div className="flex items-center gap-2 text-sm text-navy-400">
+              <div className="flex items-center gap-2 rounded-xl bg-navy-50 px-4 py-3 text-sm text-navy-400">
                 <AlertCircle size={14} />
                 Faltam {unansweredCount} perguntas
               </div>
             )}
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

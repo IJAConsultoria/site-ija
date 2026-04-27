@@ -16,20 +16,20 @@ export function ProgressBar({
   const pct = Math.round((answeredCount / TOTAL_QUESTIONS) * 100);
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between text-sm">
-        <span className="font-medium text-navy-700">
-          Seção {currentStep + 1} de {totalSteps}
-        </span>
-        <span className="text-navy-500">
-          {answeredCount}/{TOTAL_QUESTIONS} perguntas ({pct}%)
-        </span>
+    <div className="flex items-center gap-4">
+      <div className="min-w-0 flex-1">
+        <div className="h-2 overflow-hidden rounded-full bg-navy-100">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-accent to-amber-400 transition-all duration-700"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
       </div>
-      <div className="h-2.5 w-full overflow-hidden rounded-full bg-navy-100">
-        <div
-          className="h-full rounded-full bg-accent transition-all duration-500"
-          style={{ width: `${pct}%` }}
-        />
+      <div className="flex shrink-0 items-baseline gap-1">
+        <span className="text-lg font-bold text-navy-950">{pct}%</span>
+        <span className="text-xs text-navy-400">
+          ({answeredCount}/{TOTAL_QUESTIONS})
+        </span>
       </div>
     </div>
   );
