@@ -119,7 +119,7 @@ export default function OuvidoriaPage() {
               <div className="relative" style={{ paddingBottom: "56.25%" }}>
                 <iframe
                   className="absolute inset-0 h-full w-full"
-                  src="https://www.youtube.com/embed/mKJxXv2PL4o"
+                  src="https://www.youtube.com/embed/mKJxXv2PL4o?autoplay=1&mute=1"
                   title="Canal de Ouvidoria IJA"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen

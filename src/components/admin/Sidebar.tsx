@@ -18,6 +18,7 @@ import {
   Menu,
   X,
   ExternalLink,
+  BarChart3,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -31,6 +32,7 @@ const navItems = [
   { href: "/acesso/historias", label: "Histórias", icon: Trophy, adminOnly: false },
   { href: "/acesso/banners", label: "Banners", icon: Megaphone, adminOnly: false },
   { href: "/acesso/leads", label: "Email Marketing", icon: Mail, adminOnly: false },
+  { href: "/acesso/diagnosticos", label: "Diagnósticos", icon: BarChart3, adminOnly: false },
   { href: "/acesso/ouvidoria", label: "Ouvidoria", icon: Shield, adminOnly: true },
   { href: "/acesso/usuarios", label: "Usuários", icon: Users, adminOnly: true },
 ];
