@@ -136,7 +136,7 @@ function ResultadoContent() {
       {/* Actions */}
       <div className="mx-auto flex max-w-4xl justify-end px-4 pt-8 sm:px-6">
         <PDFDownloadButton
-          elementId="diagnostico-resultado"
+          results={results}
           businessName={businessName}
         />
       </div>

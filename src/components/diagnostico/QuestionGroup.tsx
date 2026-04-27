@@ -36,25 +36,29 @@ export function QuestionGroup({
       {groups.map((group, gi) => (
         <div key={gi}>
           {group.label && (
-            <h3 className="mb-4 border-b border-navy-100 pb-2 text-sm font-semibold uppercase tracking-wide text-accent">
-              {group.label}
-            </h3>
+            <div className="mb-5 flex items-center gap-3">
+              <div className="h-px flex-1 bg-navy-100" />
+              <h3 className="text-xs font-bold uppercase tracking-widest text-accent">
+                {group.label}
+              </h3>
+              <div className="h-px flex-1 bg-navy-100" />
+            </div>
           )}
-          <div className="space-y-3">
-            {group.items.map((question, qi) => {
+          <div className="space-y-2">
+            {group.items.map((question) => {
               const isAnswered = answers[question.id] !== undefined;
               return (
                 <div
                   key={question.id}
-                  className={`flex items-center justify-between gap-4 rounded-xl border px-5 py-4 transition-all ${
+                  className={`group flex items-center justify-between gap-4 rounded-2xl border px-5 py-4 transition-all ${
                     isAnswered
                       ? "border-navy-100 bg-white"
-                      : "border-navy-200 bg-navy-50/50"
+                      : "border-dashed border-navy-200 bg-cream"
                   }`}
                 >
                   <p className="flex-1 text-sm leading-relaxed text-navy-800">
-                    <span className="mr-2 font-medium text-navy-400">
-                      {question.order}.
+                    <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-md bg-navy-50 text-[10px] font-bold text-navy-400">
+                      {question.order}
                     </span>
                     {question.text}
                   </p>

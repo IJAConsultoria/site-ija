@@ -3,14 +3,15 @@
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
 import { generateDiagnosticPDF } from "@/lib/diagnostico/pdf";
+import type { DiagnosticResults } from "@/lib/diagnostico/types";
 
 interface PDFDownloadButtonProps {
-  elementId: string;
+  results: DiagnosticResults;
   businessName: string;
 }
 
 export function PDFDownloadButton({
-  elementId,
+  results,
   businessName,
 }: PDFDownloadButtonProps) {
   const [generating, setGenerating] = useState(false);
@@ -19,7 +20,7 @@ export function PDFDownloadButton({
     if (generating) return;
     setGenerating(true);
     try {
-      await generateDiagnosticPDF(elementId, businessName);
+      await generateDiagnosticPDF(results, businessName);
     } catch (err) {
       console.error("Erro ao gerar PDF:", err);
     } finally {
