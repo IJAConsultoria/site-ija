@@ -14,9 +14,13 @@ export function QuestionGroup({
   answers,
   onAnswer,
 }: QuestionGroupProps) {
+  if (!questions || questions.length === 0) {
+    return <div className="text-navy-500">Carregando perguntas...</div>;
+  }
+
   // Agrupa por subsection (se existir)
   const groups: { label: string | null; items: DiagnosticQuestion[] }[] = [];
-  let currentSub: string | null = null;
+  let currentSub: string | null | undefined = undefined;
 
   for (const q of questions) {
     const sub = q.subsection || null;
