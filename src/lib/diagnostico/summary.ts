@@ -1,5 +1,4 @@
-import type { SolutionResult } from "./types";
-import { CLASSIFICATION_CONFIG } from "./scoring";
+import type { Classification, SolutionResult } from "./types";
 
 export interface DiagnosticSummary {
   headline: string;
@@ -7,7 +6,7 @@ export interface DiagnosticSummary {
   priorities: {
     solution: string;
     label: string;
-    classification: string;
+    classification: Classification;
     action: string;
   }[];
 }
@@ -73,7 +72,7 @@ export function generateSummary(
     .map((s) => ({
       solution: s.solution,
       label: s.label,
-      classification: CLASSIFICATION_CONFIG[s.classification].label,
+      classification: s.classification,
       action:
         SOLUTION_ACTIONS[s.solution]?.[s.classification] ||
         "Avaliação personalizada necessária.",

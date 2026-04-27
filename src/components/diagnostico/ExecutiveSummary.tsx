@@ -3,7 +3,6 @@
 import type { SolutionResult } from "@/lib/diagnostico/types";
 import { generateSummary } from "@/lib/diagnostico/summary";
 import { ClassificationBadge } from "./ClassificationBadge";
-import type { Classification } from "@/lib/diagnostico/types";
 
 interface ExecutiveSummaryProps {
   solutions: SolutionResult[];
@@ -37,7 +36,7 @@ export function ExecutiveSummary({ solutions }: ExecutiveSummaryProps) {
               <div className="flex items-center gap-2">
                 <span className="font-medium text-navy-950">{p.label}</span>
                 <ClassificationBadge
-                  classification={p.classification.toLowerCase() as Classification}
+                  classification={p.classification}
                   size="sm"
                 />
               </div>
